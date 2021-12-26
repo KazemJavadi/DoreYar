@@ -3,7 +3,8 @@
     public class Card
     {
         public long Id { get; set; }
-        public Question Question { get; set; }
-        public Answer Answer { get; set; }
+        public string Question { get; set; }
+        public string Answer { get; set; }
+        public DateTime NextReviewDate { get; set; }
     }
 }
