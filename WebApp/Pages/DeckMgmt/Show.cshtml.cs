@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WebApp.Pages.Deck
+namespace WebApp.Pages.DeckMgmt
 {
-    public class DeleteModel : PageModel
+    public class ShowModel : PageModel
     {
         public void OnGet()
         {

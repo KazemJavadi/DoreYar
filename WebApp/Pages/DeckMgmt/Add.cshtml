@@ -1,0 +1,13 @@
+﻿@page
+@model WebApp.Pages.DeckMgmt.AddModel
+@{
+}
+
+<form method="post">
+    
+    <label asp-for="@Model.Deck.Name"></label>
+    <input asp-for="@Model.Deck.Name" />
+    <br />
+
+    <button type="submit">Save</button>
+</form>

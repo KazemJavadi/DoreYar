@@ -1,5 +1,6 @@
 using DataAccess;
 using Microsoft.EntityFrameworkCore;
+using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +11,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options
     .UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 }, ServiceLifetime.Scoped);
-
+builder.Services.AddScoped<DeckSerivce, DeckSerivce>();
+builder.Services.AddScoped<AppDbContext, AppDbContext>();   
 
 
 var app = builder.Build();

@@ -17,5 +17,28 @@ namespace Services
             context.Add(deck);
             return context.SaveChanges();
         }
+
+        public int Delete(Deck deck)
+        {
+            context.Remove(deck);
+            return context.SaveChanges();
+        }
+
+        public int Delete(int deckId)
+        {
+            Deck deck = Get(deckId);
+            return Delete(deck);
+        }
+
+        public Deck Get(long id)
+        {
+            return context.Find<Deck>(id);
+        }
+
+        public ICollection<Deck> GetAll()
+        {
+            return context.Decks.ToList();
+        }
+
     }
 }
