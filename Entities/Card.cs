@@ -1,4 +1,4 @@
-﻿namespace DataAccess
+﻿namespace Entities
 {
     public class Card
     {
