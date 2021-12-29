@@ -1,0 +1,52 @@
+﻿@page
+@model WebApp.Pages.DeckMgmt.DetailModel
+@{
+}
+
+<h1>Details of <a asp-page="@nameof(Pages.DeckMgmt.DetailModel.Page)">@Model.Deck.Name</a></h1>
+<hr />
+
+<h2>Add new card</h2>
+<form asp-page="@CardMgmt.AddModel.Path">
+    <input id = "Card_DeckId" name = "Card.DeckId" value="@Model.Deck.Id" hidden/>
+    <label for="Card_Question">Question</label>
+    <input type="text" id = "Card_Question" name = "Card.Question" />
+    <br />
+    <label for="Card_Answer">Answer</label>
+    <input type = "tex" id = "Card_Answer" name = "Card.Answer" />
+    <br />
+    <button type = "submit">Save card</button>
+</form>
+<hr />
+<h2>Deck details</h2>
+@if(@Model.Deck.Cards?.Count <= 0)
+{
+    <p>No cards found for this deck.</p>
+}
+else
+{
+    <table>
+        <thead>
+            <th>@nameof(Card.Question)</th>
+            <th>@nameof(Card.Answer)</th>
+        </thead>
+        <tbody>
+            @foreach(Card card in Model.Deck.Cards)
+            {
+                <tr>
+                    <td>@card.Question</td>
+                    <td>@card.Answer</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<hr />
+<h3>Pages:</h3>
+@for(int i = 1; i< Model.NumberOfPages;i++)
+{
+    <a asp-page="@DeckMgmt.DetailModel.Path" asp-route-deckId="@Model.Deck.Id" asp-route-pageNumber="@i">@i</a>
+}
+
+<a asp-page="@Pages.IndexModel.Path">Back</a>

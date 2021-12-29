@@ -7,3 +7,35 @@
 <div class="text-center">
     <h1>Home</h1>
 </div>
+
+
+<h2>Add new deck</h2>
+
+<form asp-page="/DeckMgmt/Add" method="post">
+    
+    <label for="Deck_Name">Name </label>
+    <input type="text" id="Deck_Name" name = "Deck.Name" />
+    <button type="submit">Save</button>
+</form>
+
+<hr />
+
+<h2>My decks</h2>
+
+@if(@Model.Decks == null || @Model.Decks.Count <= 0)
+{
+    <div>
+        <p>Not deck found</p>
+    </div>
+}
+else
+{
+    foreach(Deck deck in Model.Decks)
+    {
+        <div>
+            <a asp-page="@DeckMgmt.DetailModel.Path" asp-route-deckId="@deck.Id" asp-route-pageNumber="1">@deck.Name</a>
+            <a asp-page="/DeckMgmt/Edit"  asp-route-id="@deck.Id">Edit</a>
+            <a asp-page=  asp-route-id="@deck.Id">Delete</a>
+        </div>
+    }
+}

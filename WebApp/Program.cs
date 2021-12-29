@@ -12,8 +12,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     .UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 }, ServiceLifetime.Scoped);
 builder.Services.AddScoped<DeckSerivce, DeckSerivce>();
+builder.Services.AddScoped<CardService, CardService>();
 builder.Services.AddScoped<AppDbContext, AppDbContext>();   
-
 
 var app = builder.Build();
 

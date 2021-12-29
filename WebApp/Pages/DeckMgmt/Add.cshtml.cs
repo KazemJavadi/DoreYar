@@ -17,18 +17,21 @@ namespace WebApp.Pages.DeckMgmt
         [BindProperty]
         public Deck Deck { get; set; }
 
-        public void OnGet()
+        private const string DefaultRedirectToPageAddress = "/Index";
+
+        public RedirectToPageResult OnGet()
         {
+            return RedirectToPage(DefaultRedirectToPageAddress);
         }
 
-        public void OnPost()
+        public RedirectToPageResult OnPost()
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && !string.IsNullOrWhiteSpace(Deck.Name))
             {
                 deckSerivce.Add(Deck);
             }
 
-            RedirectToPage("All");
+            return RedirectToPage(DefaultRedirectToPageAddress);
         }
     }
 }

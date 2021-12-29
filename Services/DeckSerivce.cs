@@ -1,5 +1,6 @@
 ﻿using DataAccess;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Services
 {
@@ -30,15 +31,28 @@ namespace Services
             return Delete(deck);
         }
 
-        public Deck Get(long id)
+        public Deck Get(long deckId, bool loadCards = false, DeckCardsOptions options = null)
         {
-            return context.Find<Deck>(id);
+
+            if (loadCards)
+            {
+                int total = context.Set<Card>().Where(c => c.DeckId == deckId).Count();
+                options.NumberOfPages = (total / options.PageSize) + (total % options.PageSize == 0 ? 0 : 1);
+
+
+                return context.Decks.Include(deck =>
+                   deck.Cards
+                   .Skip(options.PageNumber * options.PageSize)
+                   .Take(options.PageSize)
+                    ).Single(d => d.Id == deckId);
+            }
+            else
+                return context.Find<Deck>(deckId);
         }
 
         public ICollection<Deck> GetAll()
         {
             return context.Decks.ToList();
         }
-
     }
 }

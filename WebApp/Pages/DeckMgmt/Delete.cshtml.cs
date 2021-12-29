@@ -13,6 +13,8 @@ namespace WebApp.Pages.DeckMgmt
             this.deckSerivce = deckSerivce;
         }
 
+        private const string DefaultRedirectToPageAddress = "/Index";
+
         public RedirectToPageResult OnGet(int Id)
         {
             if (ModelState.IsValid)
@@ -20,7 +22,7 @@ namespace WebApp.Pages.DeckMgmt
                 deckSerivce.Delete(Id);
             }
 
-            return RedirectToPage("All");
+            return RedirectToPage(DefaultRedirectToPageAddress);
         }
     }
 }
