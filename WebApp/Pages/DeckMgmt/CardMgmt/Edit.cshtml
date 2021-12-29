@@ -1,0 +1,32 @@
+﻿@page
+@model WebApp.Pages.DeckMgmt.CardMgmt.EditModel
+@{
+}
+
+<h1>Edit card</h1>
+<hr />
+
+<form method="post" asp-route-pageNumber="@Model.PageNumber">
+    <input asp-for="@Model.Card.Id" hidden />
+    <input asp-for="@Model.Card.DeckId" hidden/>
+    <label asp-for="@Model.Card.Question"></label>
+    <input asp-for="@Model.Card.Question" />
+    <br />
+    <label asp-for="@Model.Card.Answer"></label>
+    <input asp-for="@Model.Card.Answer" />
+    <br />
+    <button type="submit">Save changes</button>
+
+    @if (Model.IsEdited is true)
+    {
+        <p style="color:green">Edited</p>
+    }
+    else if(Model.IsEdited is false)
+    {
+        <p style="color:red">Is not edited</p>
+    }
+
+</form>
+
+<hr />
+<a asp-page="@Pages.DeckMgmt.DetailModel.Path" asp-route-deckId="@Model.Card.DeckId" asp-route-pageNumber="@Model.PageNumber">Back</a>

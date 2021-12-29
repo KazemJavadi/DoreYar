@@ -39,10 +39,14 @@ namespace Services
                 int total = context.Set<Card>().Where(c => c.DeckId == deckId).Count();
                 options.NumberOfPages = (total / options.PageSize) + (total % options.PageSize == 0 ? 0 : 1);
 
+                if (options.PageNumber > options.NumberOfPages)
+                    options.PageNumber = options.NumberOfPages;
+                else if (options.PageNumber <= 0)
+                    options.PageNumber = 1;
 
                 return context.Decks.Include(deck =>
                    deck.Cards
-                   .Skip(options.PageNumber * options.PageSize)
+                   .Skip((options.PageNumber - 1) * options.PageSize)
                    .Take(options.PageSize)
                     ).Single(d => d.Id == deckId);
             }

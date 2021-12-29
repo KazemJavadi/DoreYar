@@ -24,7 +24,7 @@ namespace WebApp.Pages.DeckMgmt.CardMgmt
                 cardService.Add(card);
             }
 
-            return RedirectToPage(DeckMgmt.DetailModel.Path, new { card.DeckId});
+            return RedirectToPage(DeckMgmt.DetailModel.Path, new { card.DeckId, pageNumber = 1});
         }
     }
 }

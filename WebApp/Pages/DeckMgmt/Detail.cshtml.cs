@@ -16,16 +16,22 @@ namespace WebApp.Pages.DeckMgmt
         }
 
         public Deck Deck { get; set; }
-        public int NumberOfPages { get; set; }
+        public int NumberOfPages { get; private set; }
+        public int CurrentPageNmber { get; private set; }
 
-        public void OnGet(int deckId, int pageNumber)
+        public IActionResult OnGet([Bind]int deckId, [Bind]int pageNumber)
         {
-            if (ModelState.IsValid)
+
+            if (ModelState.IsValid && deckId > 0)
             {
-                DeckCardsOptions options = new() {PageSize = 5, PageNumber = pageNumber - 1 };
+                DeckCardsOptions options = new() { PageSize = 5, PageNumber = pageNumber };
                 Deck = deckSerivce.Get(deckId, true, options);
                 NumberOfPages = options.NumberOfPages;
+                CurrentPageNmber = options.PageNumber;
+                return Page();
             }
+            
+            return RedirectToPage(Pages.IndexModel.Path);
         }
     }
 }

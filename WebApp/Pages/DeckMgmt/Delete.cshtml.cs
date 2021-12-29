@@ -6,6 +6,8 @@ namespace WebApp.Pages.DeckMgmt
 {
     public class DeleteModel : PageModel
     {
+        public static readonly string Path = $"/{nameof(DeckMgmt)}/{nameof(DeleteModel).Replace("Model", "")}";
+
         private readonly DeckSerivce deckSerivce;
 
         public DeleteModel(DeckSerivce deckSerivce)
