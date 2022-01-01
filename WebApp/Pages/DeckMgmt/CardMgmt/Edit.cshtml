@@ -6,7 +6,7 @@
 <h1>Edit card</h1>
 <hr />
 
-<form method="post" asp-route-pageNumber="@Model.PageNumber">
+<form method="post" asp-route-MainReferer = "@Model.MainReferer">
     <input asp-for="@Model.Card.Id" hidden />
     <input asp-for="@Model.Card.DeckId" hidden/>
     <label asp-for="@Model.Card.Question"></label>
@@ -29,4 +29,5 @@
 </form>
 
 <hr />
-<a asp-page="@Pages.DeckMgmt.DetailModel.Path" asp-route-deckId="@Model.Card.DeckId" asp-route-pageNumber="@Model.PageNumber">Back</a>
+
+<a href="@Model.MainReferer">Back</a>

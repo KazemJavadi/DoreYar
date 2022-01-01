@@ -11,7 +11,7 @@
 
 <h2>Add new deck</h2>
 
-<form asp-page="/DeckMgmt/Add" method="post">
+<form method="post" asp-controller="Deck" asp-action="Add">
     
     <label for="Deck_Name">Name </label>
     <input type="text" id="Deck_Name" name = "Deck.Name" />
@@ -35,7 +35,7 @@ else
         <div>
             <a asp-page="@DeckMgmt.DetailModel.Path" asp-route-deckId="@deck.Id" asp-route-pageNumber="1">@deck.Name</a>
             <a asp-page="/DeckMgmt/Edit"  asp-route-id="@deck.Id">Edit</a>
-            <a asp-page="@DeckMgmt.DeleteModel.Path"  asp-route-id="@deck.Id">Delete</a>
+            <a asp-controller = "Deck" asp-action="Delete"  asp-route-id="@deck.Id">Delete</a>
         </div>
     }
 }

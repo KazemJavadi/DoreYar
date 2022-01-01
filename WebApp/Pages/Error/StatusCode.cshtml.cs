@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WebApp.Pages.DeckMgmt
+namespace WebApp.Pages.Error.StatusCode
 {
-    public class EditModel : PageModel
+    public class StatusCodeModel : PageModel
     {
         public void OnGet()
         {
+            var request = Request;
         }
     }
 }

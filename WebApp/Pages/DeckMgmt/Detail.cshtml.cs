@@ -19,7 +19,7 @@ namespace WebApp.Pages.DeckMgmt
         public int NumberOfPages { get; private set; }
         public int CurrentPageNmber { get; private set; }
 
-        public IActionResult OnGet([Bind]int deckId, [Bind]int pageNumber)
+        public IActionResult OnGet(int deckId, int pageNumber)
         {
 
             if (ModelState.IsValid && deckId > 0)

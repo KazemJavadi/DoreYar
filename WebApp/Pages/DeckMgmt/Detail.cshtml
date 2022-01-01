@@ -7,7 +7,7 @@
 <hr />
 
 <h2>Add new card</h2>
-<form asp-page="@CardMgmt.AddModel.Path">
+<form method="post" asp-controller="Card" asp-action="Add">
     <input id="Card_DeckId" name="Card.DeckId" value="@Model.Deck.Id" hidden />
     <label for="Card_Question">Question</label>
     <input type="text" id="Card_Question" name="Card.Question" />
@@ -43,9 +43,9 @@ else
                 <tr>
                     <td>@card.Question</td>
                     <td>@card.Answer</td>
-                    <td><a asp-page="@DeckMgmt.CardMgmt.EditModel.Path" asp-route-CardId="@card.Id" asp-route-PageNumber="@Model.CurrentPageNmber">Edit</a></td>
+                    <td><a asp-page="@DeckMgmt.CardMgmt.EditModel.Path" asp-route-CardId="@card.Id">Edit</a></td>
                     <td>
-                        <a style="color:red" asp-page="@CardMgmt.DeleteModel.Path" asp-route-CardId="@card.Id" asp-route-DeckId="@Model.Deck.Id" asp-route-PageNumber="@Model.CurrentPageNmber">
+                        <a style="color:red" asp-controller="Card" asp-action="Delete" asp-route-CardId="@card.Id">
                             Delete
                         </a>
                     </td>

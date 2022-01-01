@@ -1,8 +1,9 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WebApp.Pages.Error
+namespace WebApp.Pages.DeckMgmt
 {
-    public class _404Model : PageModel
+    public class SettingModel : PageModel
     {
         public void OnGet()
         {

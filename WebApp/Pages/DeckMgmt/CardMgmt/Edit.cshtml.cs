@@ -17,28 +17,31 @@ namespace WebApp.Pages.DeckMgmt.CardMgmt
 
         [BindProperty]
         public Card Card { get; set; }
-        public int PageNumber { get; set; }
+        //public int PageNumber { get; set; }
+
+
+        public string MainReferer { get; set; }
 
         public bool? IsEdited { get; set; }
 
-        public void OnGet(long cardId, int pageNumber)
+
+        public void OnGet(long cardId)
         {
             if (ModelState.IsValid)
             {
-                string referer = Request.Headers["Referer"].ToString();
                 Card = cardService.Get(cardId);
-                PageNumber = pageNumber;
+                MainReferer = Request.Headers["Referer"].ToString();
             }
         }
 
-        public void OnPost(int pageNumber)
+        public void OnPost(string mainReferer)
         {
             if (ModelState.IsValid)
             {
-                string referer = Request.Headers["Referer"].ToString();
                 cardService.Edit(Card);
+
                 IsEdited = true;
-                PageNumber = pageNumber;
+                MainReferer = mainReferer;
             }
             else
                 IsEdited = false;
