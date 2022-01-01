@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WebApp.Pages.Error.StatusCode
+namespace WebApp.Pages.Error
 {
     public class StatusCodeModel : PageModel
     {
-        public void OnGet()
+        public int? HttpStatusCode { get; set; }
+        public void OnGet(int? statusCode = null)
         {
-            var request = Request;
+            HttpStatusCode = statusCode;
         }
     }
 }

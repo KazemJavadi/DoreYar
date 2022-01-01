@@ -35,11 +35,11 @@ namespace WebApp.Controllers
 
         //Delete
         [HttpGet]
-        public RedirectToPageResult Delete(int id)
+        public RedirectToPageResult Delete(int deckId)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && deckId > 0)
             {
-                deckSerivce.Delete(id);
+                deckSerivce.Delete(deckId);
             }
 
             return RedirectToPage(DefaultRedirectToPageAddress);

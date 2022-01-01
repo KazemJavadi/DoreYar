@@ -1,4 +1,7 @@
 ﻿@page
-@model WebApp.Pages.Error.StatusCode.StatusCodeModel
+@model WebApp.Pages.Error.StatusCodeModel
 @{
 }
+
+<h1>@Model.HttpStatusCode Error!</h1>
+<a asp-page="/Index">Back to home page</a>

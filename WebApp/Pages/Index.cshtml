@@ -33,9 +33,9 @@ else
     foreach(Deck deck in Model.Decks)
     {
         <div>
-            <a asp-page="@DeckMgmt.DetailModel.Path" asp-route-deckId="@deck.Id" asp-route-pageNumber="1">@deck.Name</a>
-            <a asp-page="/DeckMgmt/Edit"  asp-route-id="@deck.Id">Edit</a>
-            <a asp-controller = "Deck" asp-action="Delete"  asp-route-id="@deck.Id">Delete</a>
+            <a asp-page="@DeckMgmt.DetailModel.Path" asp-route-DeckId="@deck.Id" asp-route-pageNumber="1">@deck.Name</a>
+            <a asp-page="/DeckMgmt/Edit"  asp-route-DeckId="@deck.Id">Edit</a>
+            <a asp-controller = "Deck" asp-action="Delete"  asp-route-DeckId="@deck.Id">Delete</a>
         </div>
     }
 }

@@ -20,11 +20,12 @@ builder.Services.AddScoped<AppDbContext, AppDbContext>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.UseStatusCodePagesWithReExecute("/Error/StatusCode/{0}");
+//app.UseStatusCodePagesWithReExecute("/Error/StatusCode/{0}");
+app.UseStatusCodePagesWithReExecute("/Error/StatusCode", "?statusCode={0}");
 
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error/Exception/Error");
+    app.UseExceptionHandler("/Error/Exception");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }

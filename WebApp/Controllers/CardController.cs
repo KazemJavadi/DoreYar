@@ -30,12 +30,15 @@ namespace WebApp.Controllers
 
         //Delete
         [HttpGet]
-        public RedirectResult Delete(int cardId)
+        public IActionResult Delete(int cardId)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && cardId > 0)
             {
                 cardService.Delete(cardId);
             }
+
+            if (cardId <= 0)
+                return NotFound();
 
             return RedirectToReferer();
         }
