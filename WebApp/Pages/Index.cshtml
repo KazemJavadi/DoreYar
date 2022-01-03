@@ -1,4 +1,4 @@
-﻿@page
+﻿@page 
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -8,6 +8,7 @@
     <h1>Home</h1>
 </div>
 
+<h1>@this.GetType().BaseType</h1>
 
 <h2>Add new deck</h2>
 
@@ -33,8 +34,8 @@ else
     foreach(Deck deck in Model.Decks)
     {
         <div>
-            <a asp-page="@DeckMgmt.DetailModel.Path" asp-route-DeckId="@deck.Id" asp-route-pageNumber="1">@deck.Name</a>
-            <a asp-page="/DeckMgmt/Edit"  asp-route-DeckId="@deck.Id">Edit</a>
+            <a asp-page="@DeckManagment.DetailModel.AbsolutePath" asp-route-DeckId="@deck.Id" asp-route-PageNumber="1">@deck.Name</a>
+            <a asp-page="@DeckManagment.SettingModel.AbsolutePath"  asp-route-DeckId="@deck.Id">Edit</a>
             <a asp-controller = "Deck" asp-action="Delete"  asp-route-DeckId="@deck.Id">Delete</a>
         </div>
     }

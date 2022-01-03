@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services;
 
@@ -21,6 +22,9 @@ namespace WebApp.Pages
 
         public void OnGet()
         {
+            string realFilePath = Url.Page("/DeckManagment/Detail", new { DeckId = 2, PaqeNmber = 1 });
+            string physicalPath =
+                $"/{realFilePath.Remove(0, realFilePath.IndexOf("Pages") + 1 + "Pages".Length).Replace('.', '/').Replace("Model", string.Empty)}";
             Decks = deckSerivce.GetAll();
         }
 

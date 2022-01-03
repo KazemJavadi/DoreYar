@@ -1,9 +1,9 @@
-﻿@page
-@model WebApp.Pages.DeckMgmt.DetailModel
+﻿@page "/Deck/Detail"
+@model WebApp.Pages.DeckManagment.DetailModel
 @{
 }
 
-<h1>Details of <a asp-page="@nameof(Pages.DeckMgmt.DetailModel.Page)">@Model.Deck.Name</a></h1>
+<h1>Details of <a asp-page="@nameof(Pages.DeckManagment.DetailModel.Page)">@Model.Deck.Name</a></h1>
 <hr />
 
 <h2>Add new card</h2>
@@ -43,7 +43,7 @@ else
                 <tr>
                     <td>@card.Question</td>
                     <td>@card.Answer</td>
-                    <td><a asp-page="@DeckMgmt.CardMgmt.EditModel.Path" asp-route-CardId="@card.Id">Edit</a></td>
+                    <td><a asp-page="@CardManagment.EditModel.AbsolutePath" asp-route-CardId="@card.Id">Edit</a></td>
                     <td>
                         <a style="color:red" asp-controller="Card" asp-action="Delete" asp-route-CardId="@card.Id">
                             Delete
@@ -63,7 +63,7 @@ else
     string style = string.Empty;
     if(isCurrentPageNumber) style = "color:green;font-weight:900;";
 
-    <a style=@style asp-page="@DeckMgmt.DetailModel.Path" asp-route-deckId="@Model.Deck.Id" asp-route-pageNumber="@i">@i</a>
+    <a style=@style asp-page="@DeckManagment.DetailModel.AbsolutePath" asp-route-DeckId="@Model.Deck.Id" asp-route-PageNumber="@i">@i</a>
 }
 
 <hr />

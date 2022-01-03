@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Diagnostics;
+using WebApp.Helpers;
 
 namespace WebApp.Pages.Error
 {
@@ -8,6 +9,8 @@ namespace WebApp.Pages.Error
     [IgnoreAntiforgeryToken]
     public class ExceptionModel : PageModel
     {
+        public static string AbsolutePath => RazorPageHelper.GetMyAbsolutePath();
+
         public string RequestId { get; set; }
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);

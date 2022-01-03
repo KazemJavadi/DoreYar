@@ -2,18 +2,21 @@ using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services;
+using WebApp.Helpers;
 
-namespace WebApp.Pages.DeckMgmt
+namespace WebApp.Pages.DeckManagment
 {
     public class DetailModel : PageModel
     {
-        public static readonly string Path = $"/{nameof(DeckMgmt)}/{nameof(DetailModel).Replace("Model", string.Empty)}";
+        public static string AbsolutePath => RazorPageHelper.GetMyAbsolutePath();
+
         private readonly DeckSerivce deckSerivce;
 
         public DetailModel(DeckSerivce deckSerivce)
         {
             this.deckSerivce = deckSerivce;
         }
+
 
         public Deck Deck { get; set; }
         public int NumberOfPages { get; private set; }

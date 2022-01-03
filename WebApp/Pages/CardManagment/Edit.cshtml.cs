@@ -2,12 +2,14 @@ using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services;
+using WebApp.Helpers;
 
-namespace WebApp.Pages.DeckMgmt.CardMgmt
+namespace WebApp.Pages.CardManagment
 {
     public class EditModel : PageModel
     {
-        public static readonly string Path = $"/{nameof(DeckMgmt)}/{nameof(CardMgmt)}/{nameof(EditModel).Replace("Model", "")}";
+        public static string AbsolutePath => RazorPageHelper.GetMyAbsolutePath();
+
         private readonly CardService cardService;
 
         public EditModel(CardService cardService)
