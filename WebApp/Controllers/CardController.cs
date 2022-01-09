@@ -6,11 +6,11 @@ namespace WebApp.Controllers
 {
     public class CardController : Controller
     {
-        private readonly CardService cardService;
+        private readonly CardService _cardService;
 
         public CardController(CardService cardService)
         {
-            this.cardService = cardService;
+            this._cardService = cardService;
         }
 
         //Add
@@ -21,7 +21,7 @@ namespace WebApp.Controllers
                 && !string.IsNullOrWhiteSpace(card.Question)
                 && !string.IsNullOrWhiteSpace(card.Answer))
             {
-                cardService.Add(card);
+                _cardService.Add(card);
             }
 
             return RedirectToReferer();
@@ -34,7 +34,7 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid && cardId > 0)
             {
-                cardService.Delete(cardId);
+                _cardService.Delete(cardId);
             }
 
             if (cardId <= 0)

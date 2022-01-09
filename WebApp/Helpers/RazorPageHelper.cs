@@ -13,8 +13,8 @@ namespace WebApp.Helpers
                 .Remove(0, fullPath.IndexOf("Pages") + 1 + "Pages".Length)
                 .Replace('\\', '/')
                 .Replace('\\', '/')
-                .Insert(0, "/")
-                .Replace(".cshtml.cs", string.Empty);
+                .Replace(".cshtml.cs", string.Empty)
+                .Insert(0, "/");
 
             return relativePath;
         }
