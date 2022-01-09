@@ -7,28 +7,31 @@
 <hr />
 
 <form method="post" asp-route-MainReferer = "@Model.MainReferer">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
     <input asp-for="@Model.Card.Id" hidden />
     <input asp-for="@Model.Card.DeckId" hidden/>
 
     <label asp-for="@Model.Card.Question"></label>
-    <input asp-for="@Model.Card.Question" />
-    <span asp-validation-for="@Model.Card.Question"></span>
-
+    <input asp-for="@Model.Card.Question" class="form-control" />
+    <span asp-validation-for="@Model.Card.Question" class="text-danger"></span>
     <br />
+
     <label asp-for="@Model.Card.Answer"></label>
-    <input asp-for="@Model.Card.Answer" />
-    <span asp-validation-for="@Model.Card.Answer"></span>
+    <input asp-for="@Model.Card.Answer" class="form-control" />
+    <span asp-validation-for="@Model.Card.Answer" class="text-danger"></span>
     <br />
 
-    <button type="submit">Save changes</button>
-
+    <button type="submit" class="btn btn-primary">Save changes</button>
+    
     @if (Model.IsEdited is true)
     {
-        <p style="color:green">Edited</p>
+        <div class="alert alert-success">Your card edited successfuly</div>
     }
     else if(Model.IsEdited is false)
     {
-        <p style="color:red">Is not edited</p>
+        <div class="alert alert-danger">You card is not edited</div>
     }
 
 </form>

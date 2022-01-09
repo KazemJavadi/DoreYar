@@ -9,12 +9,12 @@ namespace Entities
 
         public long DeckId { get; set; }
 
-        [Required(ErrorMessage = "باید پرسش را بنویسید")]
+        [Required(ErrorMessage = "You must enter your qeustion")]
         [MaxLength(1000)]
         [StringLength(1000)]
         public string Question { get; set; }
 
-        [Required(ErrorMessage = "باید پاسخ را بنویسید")]
+        [Required(ErrorMessage = "You must enter your answer")]
         [Column(TypeName = "nvarchar(max)")]
         [StringLength(int.MaxValue)]
         public string Answer { get; set; }

@@ -20,7 +20,7 @@
 <hr />
 <h2>Deck details</h2>
 @*<label asp-for="@Model.NumberOfPages">Number of cards in page </label>
-<input asp-for="@Model.NumberOfPages" />*@
+    <input asp-for="@Model.NumberOfPages" />*@
 
 @if (@Model.Deck.Cards?.Count <= 0)
 {
@@ -61,7 +61,7 @@ else
 {
     bool isCurrentPageNumber = i == Model.CurrentPageNmber;
     string style = string.Empty;
-    if(isCurrentPageNumber) style = "color:green;font-weight:900;";
+    if (isCurrentPageNumber) style = "color:green;font-weight:900;";
 
     <a style=@style asp-page="@DeckManagment.DetailModel.AbsolutePath" asp-route-DeckId="@Model.Deck.Id" asp-route-PageNumber="@i">@i</a>
 }
