@@ -13,7 +13,7 @@ namespace Entities
     {
         public long Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "باید نام دسته را بنویسید")]
         [StringLength(200)]
         public string Name { get; set; }
 

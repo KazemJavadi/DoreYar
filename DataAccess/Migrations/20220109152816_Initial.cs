@@ -15,7 +15,8 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -28,10 +29,11 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Question = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Answer = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NextReviewDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeckId = table.Column<long>(type: "bigint", nullable: true)
+                    DeckId = table.Column<long>(type: "bigint", nullable: false),
+                    Question = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Answer = table.Column<string>(type: "nvarchar(max)", maxLength: 100, nullable: true),
+                    PreviousReviewDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NextReviewDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,7 +42,8 @@ namespace DataAccess.Migrations
                         name: "FK_Card_Deck_DeckId",
                         column: x => x.DeckId,
                         principalTable: "Deck",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

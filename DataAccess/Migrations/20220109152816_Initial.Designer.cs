@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211228160140_Initial")]
+    [Migration("20220109152816_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,16 +33,22 @@ namespace DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<string>("Answer")
+                        .HasMaxLength(100)
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("DeckId")
+                    b.Property<long>("DeckId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("NextReviewDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("PreviousReviewDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Question")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -59,8 +65,14 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
+                    b.Property<string>("Description")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -71,7 +83,9 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("Entities.Deck", null)
                         .WithMany("Cards")
-                        .HasForeignKey("DeckId");
+                        .HasForeignKey("DeckId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Entities.Deck", b =>

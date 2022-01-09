@@ -9,12 +9,17 @@
 <form method="post" asp-route-MainReferer = "@Model.MainReferer">
     <input asp-for="@Model.Card.Id" hidden />
     <input asp-for="@Model.Card.DeckId" hidden/>
+
     <label asp-for="@Model.Card.Question"></label>
     <input asp-for="@Model.Card.Question" />
+    <span asp-validation-for="@Model.Card.Question"></span>
+
     <br />
     <label asp-for="@Model.Card.Answer"></label>
     <input asp-for="@Model.Card.Answer" />
+    <span asp-validation-for="@Model.Card.Answer"></span>
     <br />
+
     <button type="submit">Save changes</button>
 
     @if (Model.IsEdited is true)

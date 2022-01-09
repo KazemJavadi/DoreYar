@@ -31,6 +31,8 @@ namespace DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<string>("Answer")
+                        .IsRequired()
+                        .HasMaxLength(100)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("DeckId")
@@ -39,8 +41,13 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("NextReviewDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("PreviousReviewDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Question")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -57,8 +64,14 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
+                    b.Property<string>("Description")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
