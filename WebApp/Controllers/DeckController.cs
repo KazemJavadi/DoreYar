@@ -25,7 +25,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public RedirectToPageResult Add(Deck deck)
         {
-            if (ModelState.IsValid && !string.IsNullOrWhiteSpace(deck.Name))
+            if (ModelState.IsValid)
             {
                 deckSerivce.Add(deck);
             }

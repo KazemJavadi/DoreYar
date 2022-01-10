@@ -3,68 +3,78 @@
 @{
 }
 
-<h1>Details of <a asp-page="@nameof(Pages.DeckManagment.DetailModel.Page)">@Model.Deck.Name</a></h1>
-<hr />
+@*
+    <h1>Details of <a asp-page="@nameof(Pages.DeckManagment.DetailModel.Page)">@Model.Deck.Name</a></h1>
+    <hr />
+*@
 
-<h2>Add new card</h2>
-<form method="post" asp-controller="Card" asp-action="Add">
-    <input id="Card_DeckId" name="Card.DeckId" value="@Model.Deck.Id" hidden />
-    <label for="Card_Question">Question</label>
-    <input type="text" id="Card_Question" name="Card.Question" />
-    <br />
-    <label for="Card_Answer">Answer</label>
-    <input type="text" id="Card_Answer" name="Card.Answer" />
-    <br />
-    <button type="submit">Save card</button>
-</form>
-<hr />
-<h2>Deck details</h2>
-@*<label asp-for="@Model.NumberOfPages">Number of cards in page </label>
-    <input asp-for="@Model.NumberOfPages" />*@
+<div class="border border-dark rounded p-4 pt-2 mb-4 mt-4 shadow">
+    <h2 class="display-6">Add new card</h2>
+    <form method="post" asp-controller="Card" asp-action="Add">
+        <input id="Card_DeckId" name="Card.DeckId" value="@Model.Deck.Id" hidden />
+        @*<label for="Card_Question">Question</label>*@
+        <input type="text" id="Card_Question" name="Card.Question" placeholder="Question" class="form-control" />
+        <br />
+        @*<label for="Card_Answer">Answer</label>*@
+        <textarea type="text" multiple id="Card_Answer" name="Card.Answer" placeholder="Answer" class="form-control"></textarea>
+        <br />
+        <button type="submit" class="btn btn-primary">Save card</button>
+    </form>
+</div>
 
-@if (@Model.Deck.Cards?.Count <= 0)
-{
-    <p>No cards found for this deck.</p>
-}
-else
-{
-    <table>
-        <thead>
-            <tr>
-                <th>@nameof(Card.Question)</th>
-                <th>@nameof(Card.Answer)</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (Card card in Model.Deck.Cards)
-            {
+<div class="border border-dark rounded p-4 pt-2 mb-4 mt-4 shadow">
+    <h2 class="display-6">Deck details</h2>
+    @*<label asp-for="@Model.NumberOfPages">Number of cards in page </label>
+        <input asp-for="@Model.NumberOfPages" />*@
+
+    @if (@Model.Deck.Cards?.Count <= 0)
+    {
+        <p>No cards found for this deck.</p>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>@card.Question</td>
-                    <td>@card.Answer</td>
-                    <td><a asp-page="@CardManagment.EditModel.AbsolutePath" asp-route-CardId="@card.Id">Edit</a></td>
-                    <td>
-                        <a style="color:red" asp-controller="Card" asp-action="Delete" asp-route-CardId="@card.Id">
-                            Delete
-                        </a>
-                    </td>
+                    <th>@nameof(Card.Question)</th>
+                    <th>@nameof(Card.Answer)</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-}
+            </thead>
+            <tbody>
+                @foreach (Card card in Model.Deck.Cards)
+                {
+                    int maxAnswerLength = 20;
+                    string answer = $"{card.Answer.Substring(0, card.Answer.Length > maxAnswerLength ? maxAnswerLength : card.Answer.Length)} ...";
 
-<hr />
-<h4>Pages</h4>
-@for (int i = 1; i <= Model.NumberOfPages; i++)
-{
-    bool isCurrentPageNumber = i == Model.CurrentPageNmber;
-    string style = string.Empty;
-    if (isCurrentPageNumber) style = "color:green;font-weight:900;";
+                    <tr>
+                        <td>@card.Question</td>
+                        <td>@answer</td>
+                        <td><a asp-page="@CardManagment.EditModel.AbsolutePath" asp-route-CardId="@card.Id">Edit</a></td>
+                        <td>
+                            <a style="color:red" asp-controller="Card" asp-action="Delete" asp-route-CardId="@card.Id">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 
-    <a style=@style asp-page="@DeckManagment.DetailModel.AbsolutePath" asp-route-DeckId="@Model.Deck.Id" asp-route-PageNumber="@i">@i</a>
-}
+    <hr />
 
-<hr />
-<a asp-page="@Pages.IndexModel.Path">Back</a>
+    @for (int i = 1; i <= Model.NumberOfPages; i++)
+    {
+        bool isCurrentPageNumber = i == Model.CurrentPageNmber;
+        string style = string.Empty;
+        if (isCurrentPageNumber) style = "color:green;font-weight:900;";
+
+        <a style=@style asp-page="@DeckManagment.DetailModel.AbsolutePath" asp-route-DeckId="@Model.Deck.Id" asp-route-PageNumber="@i">@i</a>
+    }
+
+</div>
+
+
+<a asp-page="@Pages.IndexModel.Path" class="btn btn-outline-primary shadow">Back</a>

@@ -1,0 +1,23 @@
+﻿@page "/Deck/Edit"
+@model WebApp.Pages.DeckManagment.EditModel
+@{
+}
+
+<div class="border border-dark rounded p-4 pt-2 mb-4 mt-4 shadow">
+    <h1 class="display-6 mb-4">Setting of deck</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input hidden asp-for="@Model.Deck.Id" />
+
+        <input asp-for="@Model.Deck.Name" placeholder="Deck name" class="form-control" />
+        <span asp-validation-for="@Model.Deck.Name" class="text-danger"></span>
+        <br />
+
+        <input asp-for="@Model.Deck.Description" placeholder="Description..." class="form-control" />
+        <br />
+
+        <input asp-for="@Model.DeckHeaderImage"/>
+        <br />
+
+        <button type="submit" class="btn btn-primary mt-4">Save changes</button>
+    </form>
+</div>

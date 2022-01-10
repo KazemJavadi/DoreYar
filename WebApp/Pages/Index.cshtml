@@ -4,56 +4,59 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
+@*<div class="text-center">
     <h1>Home</h1>
+    </div>*@
+
+
+<div class="border border-dark rounded p-4 pt-2 mb-4 mt-4 shadow">
+   @* <div class="d-inline-flex">
+        <i class="far fa-plus-square"  style="font-size:45px;color:black; margin-right:4px;"></i>*@
+        <h2 class="display-6">Add new deck</h2>
+    @*</div>*@
+    <form method="post" asp-controller="Deck" asp-action="Add" class="">
+
+        <div class="input-group input-group-lg">
+            <input type="text" id="Deck_Name" name="Deck.Name" placeholder="Deck name" class="form-control" />
+            <button type="submit" class="btn btn-primary">Save deck</button>
+        </div>
+    </form>
 </div>
 
-<h2>Add new deck</h2>
+<div class="border border-dark rounded p-4 pt-2 shadow">
+    <h2 class="display-6 pb-4">My decks</h2>
 
-<form method="post" asp-controller="Deck" asp-action="Add">
+    @if (@Model.Decks == null || @Model.Decks.Count <= 0)
+    {
+        <div>
+            <p>Not deck found</p>
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
+            @foreach (Deck deck in Model.Decks)
+            {
+                string imagePath = string.Empty;
+                if (string.IsNullOrWhiteSpace(deck.DeckHeaderImageName))
+                    imagePath = "/img/default-deck-header-2560-1440.jpg";
+                else
+                    imagePath = $"/upload/deck-header/{deck.DeckHeaderImageName}";
 
-    <label for="Deck_Name">Name</label>
-    <input type="text" id="Deck_Name" name="Deck.Name" class="form-control" />
-
-    @*<label for="Deck_Description">Description</label>
-        <input type="text" id="Deck_Description" name="Deck.Description" class="form-control" />*@
-
-    <button type="submit" class="btn btn-primary">Save</button>
-</form>
-
-<hr />
-
-<h2>My decks</h2>
-
-@if (@Model.Decks == null || @Model.Decks.Count <= 0)
-{
-    <div>
-        <p>Not deck found</p>
-    </div>
-}
-else
-{
-    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
-        @foreach (Deck deck in Model.Decks)
-        {
-            string imagePath = string.Empty;
-            if (string.IsNullOrWhiteSpace(deck.DeckHeaderImageName))
-                imagePath = "/img/default-deck-header-2560-1440.jpg";
-            else
-                imagePath = $"/upload/deck-header/{deck.DeckHeaderImageName}";
-
-            <div class="col mb-4">
-                <div class="card shadow rounded-3">
-                    <img class="card-img-top" src="@imagePath" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">@deck.Name</h5>
-                        <p class="card-text">@deck.Description</p>
-                        <a asp-page="@DeckManagment.DetailModel.AbsolutePath" asp-route-DeckId="@deck.Id" asp-route-PageNumber="1" class="btn btn-primary">Show</a>
-                        <a asp-page="@DeckManagment.SettingModel.AbsolutePath" asp-route-DeckId="@deck.Id" class="btn btn-primary">Edit</a>
-                        <a asp-controller="Deck" asp-action="Delete" asp-route-DeckId="@deck.Id" class="btn btn-danger">Delete</a>
+                <div class="col mb-4">
+                    <div class="card shadow-sm rounded-3">
+                        <img class="card-img-top" src="@imagePath" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">@deck.Name</h5>
+                            <p class="card-text">@deck.Description</p>
+                            <a asp-page="@DeckManagment.DetailModel.AbsolutePath" asp-route-DeckId="@deck.Id" asp-route-PageNumber="1" class="btn btn-primary">Show</a>
+                            <a asp-page="@DeckManagment.EditModel.AbsolutePath" asp-route-DeckId="@deck.Id" class="btn btn-primary">Edit</a>
+                            <a asp-controller="Deck" asp-action="Delete" asp-route-DeckId="@deck.Id" class="btn btn-danger">Delete</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
-    </div>
-}
+            }
+        </div>
+    }
+
+</div>

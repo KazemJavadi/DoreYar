@@ -3,39 +3,42 @@
 @{
 }
 
-<h1>Edit card</h1>
-<hr />
 
-<form method="post" asp-route-MainReferer = "@Model.MainReferer">
+<div class="border border-dark rounded p-4 pt-2 mt-4 shadow">
 
-    <div asp-validation-summary="All" class="text-danger"></div>
+    <h1 class="display-6">Edit card</h1>
+    <form method="post" asp-route-MainReferer="@Model.MainReferer">
 
-    <input asp-for="@Model.Card.Id" hidden />
-    <input asp-for="@Model.Card.DeckId" hidden/>
+        @*<div asp-validation-summary="All" class="text-danger"></div>*@
 
-    <label asp-for="@Model.Card.Question"></label>
-    <input asp-for="@Model.Card.Question" class="form-control" />
-    <span asp-validation-for="@Model.Card.Question" class="text-danger"></span>
-    <br />
+        <input asp-for="@Model.Card.Id" hidden />
+        <input asp-for="@Model.Card.DeckId" hidden />
 
-    <label asp-for="@Model.Card.Answer"></label>
-    <input asp-for="@Model.Card.Answer" class="form-control" />
-    <span asp-validation-for="@Model.Card.Answer" class="text-danger"></span>
-    <br />
+        @*<label asp-for="@Model.Card.Question"></label>*@
+        <input asp-for="@Model.Card.Question" placeholder = "Question" class="form-control" />
+        <span asp-validation-for="@Model.Card.Question" class="text-danger"></span>
+        <br />
 
-    <button type="submit" class="btn btn-primary">Save changes</button>
-    
-    @if (Model.IsEdited is true)
-    {
-        <div class="alert alert-success">Your card edited successfuly</div>
-    }
-    else if(Model.IsEdited is false)
-    {
-        <div class="alert alert-danger">You card is not edited</div>
-    }
+        @* <label asp-for="@Model.Card.Answer"></label>*@
+        <textarea asp-for="@Model.Card.Answer" placeholder="Answer" class="form-control" ></textarea>
+        <span asp-validation-for="@Model.Card.Answer" class="text-danger"></span>
+        <br />
 
-</form>
+        <button type="submit" class="btn btn-primary">Save changes</button>
 
-<hr />
+       
 
-<a href="@Model.MainReferer">Back</a>
+    </form>
+</div>
+
+
+ @if (Model.IsEdited is true)
+        {
+            <div class="alert alert-success mt-4 shadow">Your card edited successfuly</div>
+        }
+        else if (Model.IsEdited is false)
+        {
+            <div class="alert alert-danger mt-4">You card is not edited</div>
+        }
+
+<a href="@Model.MainReferer" class="btn btn-outline-primary mt-4 shadow">Back</a>
