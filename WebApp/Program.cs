@@ -1,6 +1,7 @@
 using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Services;
+using WebApp.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<DeckSerivce, DeckSerivce>();
 builder.Services.AddScoped<CardService, CardService>();
 builder.Services.AddScoped<AppDbContext, AppDbContext>();   
+builder.Services.AddScoped<FileHelper, FileHelper>();
 
 var app = builder.Build();
 

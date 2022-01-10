@@ -1,0 +1,58 @@
+﻿@page "/Deck/Setting"
+@model WebApp.Pages.DeckManagment.SettingModel
+@{
+}
+
+<div class="border border-dark rounded p-4 pt-2 mb-4 mt-4 shadow">
+    <h1 class="display-6 mb-4">Setting of deck</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input hidden asp-for="@Model.Deck.Id" />
+
+        <input asp-for="@Model.Deck.Name" placeholder="Deck name" class="form-control" />
+        <span asp-validation-for="@Model.Deck.Name" class="text-danger"></span>
+        <br />
+
+        <input asp-for="@Model.Deck.Description" placeholder="Description..." class="form-control" />
+        <br />
+
+        <input asp-for="@Model.DeckHeaderImage" class="form-control" />
+        <br />
+
+        <button type="submit" class="btn btn-primary mt-4"><i class="fas fa-save"></i> Save changes</button>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-danger mt-4 fa-pull-right" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="fas fa-trash-alt"></i> Delete this deck
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog @*modal-dialog-centered*@">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete deck</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure for deleteing <strong>@Model.Deck.Name</strong>?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a asp-controller="Deck" asp-action="Delete" asp-route-DeckId="@Model.Deck.Id" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Yes, delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@if (Model.IsEdited is true)
+{
+    <div class="alert alert-success mt-4 shadow">Your deck edited successfuly</div>
+}
+else if (Model.IsEdited is false)
+{
+    <div class="alert alert-danger mt-4">You deck is not edited</div>
+}
+
+<a asp-page="/" class="btn btn-outline-primary shadow"><i class="fas fa-chevron-left"></i> Back</a>

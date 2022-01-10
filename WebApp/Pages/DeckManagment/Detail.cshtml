@@ -18,7 +18,7 @@
         @*<label for="Card_Answer">Answer</label>*@
         <textarea type="text" multiple id="Card_Answer" name="Card.Answer" placeholder="Answer" class="form-control"></textarea>
         <br />
-        <button type="submit" class="btn btn-primary">Save card</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save card</button>
     </form>
 </div>
 
@@ -51,10 +51,10 @@
                     <tr>
                         <td>@card.Question</td>
                         <td>@answer</td>
-                        <td><a asp-page="@CardManagment.EditModel.AbsolutePath" asp-route-CardId="@card.Id">Edit</a></td>
+                        <td><a asp-page="@CardManagment.EditModel.AbsolutePath" asp-route-CardId="@card.Id"><i class="fas fa-edit"></i> Edit</a></td>
                         <td>
                             <a style="color:red" asp-controller="Card" asp-action="Delete" asp-route-CardId="@card.Id">
-                                Delete
+                                <i class="fas fa-trash-alt"></i> Delete
                             </a>
                         </td>
                     </tr>
@@ -65,16 +65,20 @@
 
     <hr />
 
-    @for (int i = 1; i <= Model.NumberOfPages; i++)
-    {
-        bool isCurrentPageNumber = i == Model.CurrentPageNmber;
-        string style = string.Empty;
-        if (isCurrentPageNumber) style = "color:green;font-weight:900;";
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group me-2" role="group" aria-label="First group">
+            @for (int i = 1; i <= Model.NumberOfPages; i++)
+            {
+                bool isCurrentPageNumber = i == Model.CurrentPageNmber;
+                string style = "btn-light";
+                if (isCurrentPageNumber) style = "btn-dark";
 
-        <a style=@style asp-page="@DeckManagment.DetailModel.AbsolutePath" asp-route-DeckId="@Model.Deck.Id" asp-route-PageNumber="@i">@i</a>
-    }
+                <a style=@style asp-page="@DeckManagment.DetailModel.AbsolutePath" asp-route-DeckId="@Model.Deck.Id" asp-route-PageNumber="@i" class="btn @style"><strong>@i</strong></a>
+            }
+        </div>
+    </div>
 
 </div>
 
 
-<a asp-page="@Pages.IndexModel.Path" class="btn btn-outline-primary shadow">Back</a>
+<a asp-page="@Pages.IndexModel.Path" class="btn btn-outline-primary shadow"><i class="fas fa-chevron-left"></i> Back</a>

@@ -6,15 +6,17 @@ using WebApp.Helpers;
 
 namespace WebApp.Pages.DeckManagment
 {
-    public class EditModel : PageModel
+    public class SettingModel : PageModel
     {
         private readonly DeckSerivce _deckSerivces;
+        private readonly FileHelper _fileHelper;
 
         public static string AbsolutePath => RazorPageHelper.GetMyAbsolutePath();
 
-        public EditModel(DeckSerivce deckSerivces)
+        public SettingModel(DeckSerivce deckSerivces, FileHelper fileHelper)
         {
             this._deckSerivces = deckSerivces;
+            this._fileHelper = fileHelper;
         }
 
         [BindProperty]
@@ -22,6 +24,8 @@ namespace WebApp.Pages.DeckManagment
 
         [BindProperty]
         public IFormFile DeckHeaderImage { get; set; }
+
+        public bool? IsEdited { get; private set; }
 
         public void OnGet(int deckId)
         {
@@ -35,9 +39,17 @@ namespace WebApp.Pages.DeckManagment
         {
             if (ModelState.IsValid)
             {
-                string uniqueFileName = 
-                    $"deck-header-{Deck.Id}{TimeHelper.GetTimeStampNow()}{Path.GetExtension(DeckHeaderImage.FileName)}";
+                if (DeckHeaderImage != null)
+                {
+                    Deck.DeckHeaderImageName =
+                        _fileHelper.SaveDeckHeader(DeckHeaderImage);
+                }
+
+                _deckSerivces.Update(Deck);
+                IsEdited = true;
             }
+            else
+                IsEdited = false;
 
             return Page();
         }

@@ -58,5 +58,11 @@ namespace Services
         {
             return context.Decks.ToList();
         }
+
+        public void Update(Deck deck)
+        {
+            context.Update(deck);
+            context.SaveChanges();
+        }
     }
 }

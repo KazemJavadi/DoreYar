@@ -6,11 +6,11 @@ namespace WebApp.Controllers
 {
     public class DeckController : Controller
     {
-        private readonly DeckSerivce deckSerivce;
+        private readonly DeckSerivce _deckSerivce;
 
         public DeckController(DeckSerivce deckSerivce)
         {
-            this.deckSerivce = deckSerivce;
+            this._deckSerivce = deckSerivce;
         }
 
         private const string DefaultRedirectToPageAddress = "/Index";
@@ -27,7 +27,7 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                deckSerivce.Add(deck);
+                _deckSerivce.Add(deck);
             }
 
             return RedirectToPage(DefaultRedirectToPageAddress);
@@ -39,7 +39,7 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid && deckId > 0)
             {
-                deckSerivce.Delete(deckId);
+                _deckSerivce.Delete(deckId);
             }
 
             return RedirectToPage(DefaultRedirectToPageAddress);
