@@ -20,10 +20,7 @@ namespace WebApp.Pages.DeckManagment
         }
 
         [BindProperty]
-        public Deck Deck { get; set; }
-
-        [BindProperty]
-        public IFormFile DeckHeaderImage { get; set; }
+        public InputModel Input { get; set; } = new();
 
         public bool? IsEdited { get; private set; }
 
@@ -31,7 +28,7 @@ namespace WebApp.Pages.DeckManagment
         {
             if (ModelState.IsValid)
             {
-                Deck = _deckSerivces.Get(deckId);
+                Input.Deck = _deckSerivces.Get(deckId);
             }
         }
 
@@ -39,19 +36,25 @@ namespace WebApp.Pages.DeckManagment
         {
             if (ModelState.IsValid)
             {
-                if (DeckHeaderImage != null)
+                if (Input.DeckHeaderImage != null)
                 {
-                    Deck.DeckHeaderImageName =
-                        _fileHelper.SaveDeckHeader(DeckHeaderImage);
+                    Input.Deck.DeckHeaderImageName =
+                        _fileHelper.SaveDeckHeader(Input.DeckHeaderImage);
                 }
 
-                _deckSerivces.Update(Deck);
+                _deckSerivces.Update(Input.Deck);
                 IsEdited = true;
             }
             else
                 IsEdited = false;
 
             return Page();
+        }
+
+        public class InputModel
+        {
+            public Deck Deck { get; set; }
+            public IFormFile DeckHeaderImage { get; set; }
         }
     }
 }

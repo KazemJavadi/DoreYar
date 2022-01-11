@@ -6,16 +6,17 @@
 <div class="border border-dark rounded p-4 pt-2 mb-4 mt-4 shadow">
     <h1 class="display-6 mb-4">Setting of deck</h1>
     <form method="post" enctype="multipart/form-data">
-        <input hidden asp-for="@Model.Deck.Id" />
+        <input hidden asp-for="@Model.Input.Deck.Id" />
+        <input hidden asp-for="@Model.Input.Deck.DeckHeaderImageName" />
 
-        <input asp-for="@Model.Deck.Name" placeholder="Deck name" class="form-control" />
-        <span asp-validation-for="@Model.Deck.Name" class="text-danger"></span>
+        <input asp-for="@Model.Input.Deck.Name" placeholder="Deck name" class="form-control" />
+        <span asp-validation-for="@Model.Input.Deck.Name" class="text-danger"></span>
         <br />
 
-        <input asp-for="@Model.Deck.Description" placeholder="Description..." class="form-control" />
+        <textarea asp-for="@Model.Input.Deck.Description" placeholder="Description..." class="form-control" ></textarea>
         <br />
 
-        <input asp-for="@Model.DeckHeaderImage" class="form-control" />
+        <input asp-for="@Model.Input.DeckHeaderImage" class="form-control" />
         <br />
 
         <button type="submit" class="btn btn-primary mt-4"><i class="fas fa-save"></i> Save changes</button>
@@ -34,11 +35,11 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Are you sure for deleteing <strong>@Model.Deck.Name</strong>?
+                        Are you sure for deleteing <strong>@Model.Input.Deck.Name</strong>?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a asp-controller="Deck" asp-action="Delete" asp-route-DeckId="@Model.Deck.Id" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Yes, delete</a>
+                        <a asp-controller="Deck" asp-action="Delete" asp-route-DeckId="@Model.Input.Deck.Id" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Yes, delete</a>
                     </div>
                 </div>
             </div>
@@ -55,4 +56,4 @@ else if (Model.IsEdited is false)
     <div class="alert alert-danger mt-4">You deck is not edited</div>
 }
 
-<a asp-page="/" class="btn btn-outline-primary shadow"><i class="fas fa-chevron-left"></i> Back</a>
+<a asp-page="/Index" class="btn btn-outline-primary shadow"><i class="fas fa-chevron-left"></i> Back</a>
