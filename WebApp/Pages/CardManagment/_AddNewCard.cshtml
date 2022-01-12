@@ -2,14 +2,13 @@
 @{
 }
 
-
-    <form method="post" asp-controller="Card" asp-action="Add">
-        <input hidden id="Card_DeckId" name="Card.DeckId" value="@Model"/>
-        @*<label for="Card_Question">Question</label>*@
-        <input type="text" id="Card_Question" name="Card.Question" placeholder="Question" class="form-control" />
-        <br />
-        @*<label for="Card_Answer">Answer</label>*@
-        <textarea type="text" multiple id="Card_Answer" name="Card.Answer" placeholder="Answer" class="form-control"></textarea>
-        <br />
-        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save card</button>
-    </form>
+<form method="post" asp-controller="Card" asp-action="Add">
+    <input hidden id="Card_DeckId" name="Card.DeckId" value="@Model" />
+    @*<label for="Card_Question">Question</label>*@
+    <input type="text" id="Card_Question" name="Card.Question" placeholder="Question" class="form-control" />
+    <br />
+    @*<label for="Card_Answer">Answer</label>*@
+    <textarea type="text" rows="4" id="Card_Answer" name="Card.Answer" placeholder="Answer" class="form-control"></textarea>
+    <br />
+    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save card</button>
+</form>
