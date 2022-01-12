@@ -4,7 +4,7 @@
 
 
     <form method="post" asp-controller="Card" asp-action="Add">
-        <input id="Card_DeckId" name="Card.DeckId" value="@Model" hidden />
+        <input hidden id="Card_DeckId" name="Card.DeckId" value="@Model"/>
         @*<label for="Card_Question">Question</label>*@
         <input type="text" id="Card_Question" name="Card.Question" placeholder="Question" class="form-control" />
         <br />
