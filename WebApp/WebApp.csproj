@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\upload\deck-header\" />
+    <Folder Include="wwwroot\Upload\deck-header\" />
   </ItemGroup>
 
 </Project>

@@ -5,6 +5,7 @@ namespace Entities
 {
     public class Card
     {
+        [Required]
         public long Id { get; set; }
 
         public long DeckId { get; set; }
