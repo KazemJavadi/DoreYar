@@ -33,7 +33,6 @@ namespace Services
 
         public Deck Get(long deckId, bool loadCards = false, DeckCardsOptions options = null)
         {
-
             if (loadCards)
             {
                 int total = context.Set<Card>().Where(c => c.DeckId == deckId).Count();

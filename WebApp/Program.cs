@@ -1,4 +1,5 @@
 using DataAccess;
+using Hellang.Middleware.ProblemDetails;
 using Microsoft.EntityFrameworkCore;
 using Services;
 using WebApp.Helpers;
@@ -21,8 +22,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<DeckSerivce, DeckSerivce>();
 builder.Services.AddScoped<CardService, CardService>();
-builder.Services.AddScoped<AppDbContext, AppDbContext>();   
+builder.Services.AddScoped<AppDbContext, AppDbContext>();
 builder.Services.AddScoped<FileHelper, FileHelper>();
+builder.Services.AddProblemDetails(options =>
+{
+    options.IsProblem = httpContext => new ProblemDetailsMiddlewareHelper().IsProblem(httpContext);
+});
 
 var app = builder.Build();
 
@@ -32,6 +37,7 @@ app.UseStatusCodePagesWithReExecute(WebApp.Pages.Error.StatusCodeModel.AbsoluteP
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler(WebApp.Pages.Error.ExceptionModel.AbsolutePath);
+    app.UseProblemDetails();
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
@@ -40,6 +46,7 @@ else
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
