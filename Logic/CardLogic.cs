@@ -4,27 +4,18 @@ namespace Logic
 {
     public class CardLogic
     {
-        private readonly ICardsService _cardService;
-        private readonly int _deckId;
-
-        public CardLogic(ICardsService cardsService, int deckId)
+        public List<Card> GetTodayReviewCards(ICollection<Card> cards)
         {
-            this._cardService = cardsService;
-            this._deckId = deckId;
-        }
-
-        public List<Card> GetTodayReviewCards()
-        {
-            var cards = _cardService.GetAll(_deckId);
             return cards.Where(card => IsForToday(card)).ToList();
         }
 
-        private bool IsForToday(Card card) => card.NextReviewDate <= DateTime.Now;
+        public bool IsForToday(Card card) => card.NextReviewDate <= DateTime.Now;
 
         public DateTime GetNextReviewDate(Card card)
         {
-            int dif = (card.NextReviewDate - card.PreviousReviewDate).Days;
-            var nextReviewDate  = card.NextReviewDate.AddDays(dif * 2);
+            int dif = 1;
+            if (card.PreviousReviewDate.HasValue) dif = (card.NextReviewDate - card.PreviousReviewDate.Value).Days;
+            var nextReviewDate = DateTime.Now.AddDays((dif == 0 ? 1 : dif) * 2);
             return nextReviewDate;
         }
     }

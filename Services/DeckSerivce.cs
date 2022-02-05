@@ -1,28 +1,29 @@
 ﻿using DataAccess;
 using Entities;
+using Logic;
 using Microsoft.EntityFrameworkCore;
 
 namespace Services
 {
     public class DeckSerivce
     {
-        private readonly AppDbContext context;
+        private readonly AppDbContext _context;
 
         public DeckSerivce(AppDbContext context)
         {
-            this.context = context;
+            this._context = context;
         }
 
         public int Add(Deck deck)
         {
-            context.Add(deck);
-            return context.SaveChanges();
+            _context.Add(deck);
+            return _context.SaveChanges();
         }
 
         public int Delete(Deck deck)
         {
-            context.Remove(deck);
-            return context.SaveChanges();
+            _context.Remove(deck);
+            return _context.SaveChanges();
         }
 
         public int Delete(int deckId)
@@ -35,7 +36,7 @@ namespace Services
         {
             if (loadCards)
             {
-                int total = context.Set<Card>().Where(c => c.DeckId == deckId).Count();
+                int total = _context.Set<Card>().Where(c => c.DeckId == deckId).Count();
                 options.NumberOfPages = (total / options.PageSize) + (total % options.PageSize == 0 ? 0 : 1);
 
                 if (options.PageNumber > options.NumberOfPages)
@@ -43,25 +44,25 @@ namespace Services
                 else if (options.PageNumber <= 0)
                     options.PageNumber = 1;
 
-                return context.Decks.Include(deck =>
+                return _context.Decks.Include(deck =>
                    deck.Cards
                    .Skip((options.PageNumber - 1) * options.PageSize)
                    .Take(options.PageSize)
                     ).Single(d => d.Id == deckId);
             }
             else
-                return context.Find<Deck>(deckId);
+                return _context.Find<Deck>(deckId);
         }
 
         public ICollection<Deck> GetAll()
         {
-            return context.Decks.ToList();
+            return _context.Decks.ToList();
         }
 
         public void Update(Deck deck)
         {
-            context.Update(deck);
-            context.SaveChanges();
+            _context.Update(deck);
+            _context.SaveChanges();
         }
     }
 }

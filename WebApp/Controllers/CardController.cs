@@ -15,9 +15,9 @@ namespace WebApp.Controllers
 
         //Add
         [HttpPost]
-         public RedirectResult Add(Card card)
+        public RedirectResult Add(Card card)
         {
-            if(ModelState.IsValid
+            if (ModelState.IsValid
                 && !string.IsNullOrWhiteSpace(card.Question)
                 && !string.IsNullOrWhiteSpace(card.Answer))
             {
@@ -44,5 +44,7 @@ namespace WebApp.Controllers
         }
 
         private RedirectResult RedirectToReferer() => Redirect(new Uri(Request.Headers["Referer"]).PathAndQuery);
+
+       
     }
 }

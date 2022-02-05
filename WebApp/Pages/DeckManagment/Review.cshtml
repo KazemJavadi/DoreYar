@@ -3,4 +3,67 @@
 @{
 }
 
-<h1>Review of deck with id of @Model.DeckId</h1>
+<div class="border border-dark rounded p-4 pt-2 mt-4 mb-4 shadow">
+
+    @if (Model.ReviewCard == null)
+    {
+        <h2 class="text-danger">No card exist for review</h2>
+    }
+    else
+    {
+        <h2 class="display-6">Question</h2>
+        @*<h2 class="text-info">DeckId: <strong>@Model.ReviewCard.DeckId</strong></h2>*@
+        @*<h2 class="text-info">RegDate: <strong>@Model.ReviewCard.RegDate</strong></h2>*@
+        <h2 class="text-info"><strong>@Model.ReviewCard.Question</strong></h2>
+        <div id="answerDiv" style="display:none">
+            <h2 class="display-6">Answer</h2>
+            <p class="text-info fs-2"><strong>@Model.ReviewCard.Answer</strong></p>
+        </div>
+        @*<h2 class="text-info">Previous Review Date: <strong>@Model.ReviewCard.PreviousReviewDate</strong></h2>*@
+        @*<h2 class="text-info">Next Review Date: <strong>@Model.ReviewCard.NextReviewDate</strong></h2>*@
+        <button id="showAnswer" class="btn btn-primary" onclick="myFunction()"><i class="fa fa-eye" aria-hidden="true"></i> Show answer</button>
+        <a id="correct" style="display:none" class="btn btn-success" asp-controller="Review" asp-action="Correct" asp-route-cardId="@Model.ReviewCard.Id"><i class="fa fa-check fa-lg" aria-hidden="true"></i> Correct</a>
+        <a id="incorrect" style="display:none" class="btn btn-danger"><i class="fa fa-times fa-lg" aria-hidden="true"></i> Incorrect</a>
+    }
+</div>
+<h1 id="txt"></h1>
+<a asp-page="@Pages.IndexModel.Path" class="btn btn-outline-primary shadow"><i class="fas fa-chevron-left"></i> Back</a>
+
+<script>
+
+    function myFunction() {
+
+      var a = document.getElementById("showAnswer");
+                var answer = document.getElementById("answerDiv");
+      var x = document.getElementById("incorrect");
+      var y = document.getElementById("correct");
+      //a.style.display= "none";
+      if(a.innerText.includes("Show"))
+      {
+      answer.style.display = "";
+
+       x.style.display = "";
+        y.style.display = "";
+        a.innerHTML = '<i class="fa fa-eye-slash" aria-hidden="true"></i> Hide answer';
+      }
+      else
+      {
+                answer.style.display = "none";
+
+       x.style.display = "none";
+        y.style.display = "none";
+          a.innerHTML = '<i class="fa fa-eye" aria-hidden="true"></i> Show answer';
+      }
+
+
+
+
+      //if (x.style.display === "none") {
+      //  x.style.display = "";
+      //  y.style.display = "";
+      //} else {
+      //  x.style.display = "none";
+      //  y.style.display = "none"
+      //}
+    }
+</script>

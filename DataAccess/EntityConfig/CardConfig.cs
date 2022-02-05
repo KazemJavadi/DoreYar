@@ -13,7 +13,8 @@ namespace DataAccess.EntityConfig
     {
         public void Configure(EntityTypeBuilder<Card> builder)
         {
-            
+            builder.Property(c => c.RegDate).IsRequired().HasDefaultValueSql("getdate()");
+            builder.Property(c => c.NextReviewDate).IsRequired().HasDefaultValueSql("getdate()");
         }
     }
 }

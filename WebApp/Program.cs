@@ -1,5 +1,6 @@
 using DataAccess;
 using Hellang.Middleware.ProblemDetails;
+using Logic;
 using Microsoft.EntityFrameworkCore;
 using Services;
 using WebApp.Helpers;
@@ -22,6 +23,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<DeckSerivce, DeckSerivce>();
 builder.Services.AddScoped<CardService, CardService>();
+builder.Services.AddScoped<CardLogic>();
 builder.Services.AddScoped<AppDbContext, AppDbContext>();
 builder.Services.AddScoped<FileHelper, FileHelper>();
 builder.Services.AddProblemDetails(options =>

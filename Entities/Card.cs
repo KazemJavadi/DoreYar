@@ -10,6 +10,10 @@ namespace Entities
 
         public long DeckId { get; set; }
 
+        private DateTime _regDate;
+
+        public DateTime RegDate => _regDate;
+
         [Required(ErrorMessage = "You must enter your qeustion")]
         [MaxLength(1000)]
         [StringLength(1000)]
@@ -20,10 +24,8 @@ namespace Entities
         [StringLength(int.MaxValue)]
         public string Answer { get; set; }
 
-        [Required]
-        public DateTime PreviousReviewDate { get; set; }
+        public DateTime? PreviousReviewDate { get; set; }
 
-        [Required]
         public DateTime NextReviewDate { get; set; }
     }
 }
