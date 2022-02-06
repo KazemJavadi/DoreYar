@@ -13,9 +13,9 @@ namespace WebApp.Controllers
             this._cardService = cardService;
         }
 
-        public RedirectToPageResult Correct(long cardId)
+        public RedirectToPageResult Correct(long cardId, int quality)
         {
-            var card = _cardService.UpdateNextReviewForCorrectAnswer(cardId);
+            var card = _cardService.UpdateNextReviewForCorrectAnswer(cardId, quality);
             return RedirectToPage(Pages.DeckManagment.ReviewModel.AbsolutePath, new { card.DeckId });
         }
     }

@@ -52,24 +52,102 @@ namespace Services
         public Card GetOneOfTodayReviewCards(long deckId)
         {
             var card = _context.Set<Card>()
-                .OrderBy(card => card.RegDate)
-                .OrderBy(card=>card.Id)
-                .FirstOrDefault(card => card.DeckId == deckId && card.NextReviewDate <= DateTime.Now);
+                .OrderBy(card => card.NextReviewDate)
+                .FirstOrDefault(card => card.DeckId == deckId /*&& card.NextReviewDate <= DateTime.Now*/);
             return card;
         }
 
-        public Card UpdateNextReviewForCorrectAnswer(long cardId)
+        public Card UpdateNextReviewForCorrectAnswer(long cardId, int quality)
         {
-            var card  = _context.Set<Card>()
+            var card = _context.Set<Card>()
                 .FirstOrDefault(card => card.Id == cardId);
-            if(card != null)
+            if (card != null)
             {
-                card.NextReviewDate = _cardLogic.GetNextReviewDate(card);
+                //card.NextReviewDate = _cardLogic.GetNextReviewDate(card);
+                var result = _cardLogic.calculateSuperMemo2Algorithm(card, quality);
+                card.NextReviewDate = result.NextReviewDate;
+                card.Repetitions = result.Repetitons;
+                card.EasinessFactor = result.Easiness;
+                card.Interval = result.Interval;
+
                 card.PreviousReviewDate = DateTime.Now;
                 _context.SaveChanges();
             }
 
             return card;
+        }
+
+        public
+            (
+            int IDontKnowInterval,
+            int VeryHardInterval,
+            int HardInterval,
+            int GoodInterval,
+            int EasyIntervral,
+            int VeryEasyIntervral
+            )
+            GetAnswerIntervals(Card card)
+        {
+            int idontknowInterval = _cardLogic.calculateSuperMemo2Algorithm(card, 0).Interval;
+            int veryHardInterval = _cardLogic.calculateSuperMemo2Algorithm(card, 1).Interval;
+            int hardInterval = _cardLogic.calculateSuperMemo2Algorithm(card, 2).Interval;
+            int goodInterval = _cardLogic.calculateSuperMemo2Algorithm(card, 3).Interval;
+            int easyIntervarl = _cardLogic.calculateSuperMemo2Algorithm(card, 4).Interval;
+            int veryEasyInterval = _cardLogic.calculateSuperMemo2Algorithm(card, 5).Interval;
+            return (idontknowInterval, veryHardInterval, hardInterval, goodInterval, easyIntervarl, veryEasyInterval);
+        }
+
+        public
+            (
+            int IDontKnowInterval,
+            int VeryHardInterval,
+            int HardInterval,
+            int GoodInterval,
+            int EasyIntervral,
+            int VeryEasyIntervral
+            )
+            GetAnswerIntervals(long cardId)
+        {
+            Card card = Get(cardId);
+            return GetAnswerIntervals(card);
+        }
+
+        public
+            (
+            string IDontKnowIntervalString,
+            string VeryHardIntervalString,
+            string HardIntervalString,
+            string GoodIntervalString,
+            string EasyIntervralString,
+            string VeryEasyIntervralString
+            )
+           GetAnswerIntervalStrings(Card card)
+        {
+            string ConvertDaysToAppropriateString(int days)
+            {
+                if (days < 30)
+                    return $"{days} {(days <= 1 ? "day" : "days")}";
+                if (days < 360)
+                {
+                    double numberOfMonths = (double)days / 30;
+                    return $"{numberOfMonths:0.00} {((int)numberOfMonths == 1 ? "month" : "months")}";
+                }
+
+                double numberOfyears = (double)days / 360;
+                return $"{(double)days / 360:0.00} {((int)numberOfyears == 1 ? "year" : "years")}";
+            }
+
+            var intervalsResult = GetAnswerIntervals(card);
+
+            return
+                (
+                    ConvertDaysToAppropriateString(intervalsResult.IDontKnowInterval),
+                    ConvertDaysToAppropriateString(intervalsResult.VeryHardInterval),
+                    ConvertDaysToAppropriateString(intervalsResult.HardInterval),
+                    ConvertDaysToAppropriateString(intervalsResult.GoodInterval),
+                    ConvertDaysToAppropriateString(intervalsResult.EasyIntervral),
+                    ConvertDaysToAppropriateString(intervalsResult.VeryEasyIntervral)
+                );
         }
     }
 }

@@ -23,9 +23,15 @@ namespace WebApp.Pages.DeckManagment
 
         public Card ReviewCard { get; set; }
 
+        public string IdontKnowIntervarlString { get; set; }
+        public string VeryHardIntervalString { get; set; }
+        public (string IDontKnow, string VeryHard, string Hard, string Good, string Easy, string VeryEasy) IntervalStrings { get; set; }
+
+
         public void OnGet()
         {
             ReviewCard = cardService.GetOneOfTodayReviewCards(DeckId);
+            IntervalStrings = cardService.GetAnswerIntervalStrings(ReviewCard);
         }
     }
 }

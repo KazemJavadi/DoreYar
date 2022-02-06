@@ -24,6 +24,10 @@ namespace Entities
         [StringLength(int.MaxValue)]
         public string Answer { get; set; }
 
+        public int Repetitions { get; set; }
+        public double EasinessFactor { get; set; }
+        public int Interval { get; set; }
+
         public DateTime? PreviousReviewDate { get; set; }
 
         public DateTime NextReviewDate { get; set; }
