@@ -21,19 +21,17 @@
     else
     {
         <div class="card border-primary mb-2">
-            <div class="card-header bg-primary text-white"><strong><i class="far fa-question-circle"></i> Question - @Model.ReviewCard.EasinessFactor</strong></div>
+            <div class="card-header bg-primary text-white"><strong><i class="far fa-question-circle"></i> Question - @Model.ReviewCard.EasinessFactor - @Model.ReviewCard.NextReviewDate - (@Model.ReviewCard.Repetitions)</strong></div>
             <div class="card-body bg-light">
                 <p class="card-text fs-2">@Model.ReviewCard.Question</p>
             </div>
         </div>
 
         <button id="showAnswer" class="btn btn-primary me-1" onclick="myFunction()"><i class="fa fa-eye fs-3" aria-hidden="true"></i><br /> Show</button>
-        <a id="againButton" style="display:none" class="btn btn-outline-danger" asp-controller="Review" asp-action="Correct" asp-route-cardId="@Model.ReviewCard.Id" asp-route-quality="0"><strong><i class="fa fs-3">🤪</i><br />I don't know</strong></a>
-        <a id="veryHardButton" style="display:none" class="btn btn-outline-danger" asp-controller="Review" asp-action="Correct" asp-route-cardId="@Model.ReviewCard.Id" asp-route-quality="1"><strong><i class="fa fs-3">🤨</i><br />Hard</strong></a>
-        @*<a id="hardButton" style="display:none" class="btn btn-outline-danger" asp-controller="Review" asp-action="Correct" asp-route-cardId="@Model.ReviewCard.Id" asp-route-quality="2"><strong><i class="fa fs-3">🧐</i><br />Hard</strong></a>*@
-        <a id="goodButton" style="display:none" class="btn btn-outline-success" asp-controller="Review" asp-action="Correct" asp-route-cardId="@Model.ReviewCard.Id" asp-route-quality="3"><strong><i class="fa fs-3">😏</i><br />Good</strong> <i>(@Model.IntervalStrings.Good)</i></a>
-        @*<a id="easyButton" style="display:none" class="btn btn-outline-success" asp-controller="Review" asp-action="Correct" asp-route-cardId="@Model.ReviewCard.Id" asp-route-quality="4"><strong><i class="fa fs-3">🥳</i><br />Easy</strong> <i>(@Model.IntervalStrings.Easy)</i></a>*@
-        <a id="veryEasyButton" style="display:none" class="btn btn-outline-success" asp-controller="Review" asp-action="Correct" asp-route-cardId="@Model.ReviewCard.Id" asp-route-quality="5"><strong><i class="fa fs-3">😎</i><br />Easy</strong> <i>(@Model.IntervalStrings.VeryEasy)</i></a>
+        <a id="againButton" style="display:none" class="btn btn-outline-danger" asp-controller="Review" asp-action="Correct" asp-route-cardId="@Model.ReviewCard.Id" asp-route-quality="0"><strong><i class="fa fs-3">🤪</i><br />I don't know</strong> <i>(@Model.IntervalStrings.IDontKnow)</i></a>
+        <a id="hardButton" style="display:none" class="btn btn-outline-danger" asp-controller="Review" asp-action="Correct" asp-route-cardId="@Model.ReviewCard.Id" asp-route-quality="1"><strong><i class="fa fs-3">🧐</i><br />Hard</strong> <i>(@Model.IntervalStrings.Hard)</i></a>
+        <a id="goodButton" style="display:none" class="btn btn-outline-success" asp-controller="Review" asp-action="Correct" asp-route-cardId="@Model.ReviewCard.Id" asp-route-quality="2"><strong><i class="fa fs-3">😏</i><br />Good</strong> <i>(@Model.IntervalStrings.Good)</i></a>
+        <a id="easyButton" style="display:none" class="btn btn-outline-success" asp-controller="Review" asp-action="Correct" asp-route-cardId="@Model.ReviewCard.Id" asp-route-quality="3"><strong><i class="fa fs-3">🥳</i><br />Easy</strong> <i>(@Model.IntervalStrings.Easy)</i></a>
 
         <a id="incorrect" style="display:none" class="btn btn-danger"><i class="fa fa-times fa-lg" aria-hidden="true"></i> Incorrect</a>
 
@@ -60,22 +58,18 @@
       var showAnswerButton = document.getElementById("showAnswer");
       var answerDiv = document.getElementById("answerDiv");
       var againButton = document.getElementById("againButton");
-      var veryHardButton = document.getElementById("veryHardButton");
-      //var hardButton = document.getElementById("hardButton");
+      var hardButton = document.getElementById("hardButton");
       var goodButton = document.getElementById("goodButton");
-      //var easyButton = document.getElementById("easyButton");
-      var veryEasyButton = document.getElementById("veryEasyButton");
+      var easyButton = document.getElementById("easyButton");
 
       //a.style.display= "none";
       if(showAnswerButton.innerHTML.includes('Show'))
       {
             answerDiv.style.display = "";
             againButton.style.display = "";
-            veryHardButton.style.display = "";
-            //hardButton.style.display = "";
+            hardButton.style.display = "";
             goodButton.style.display = "";
-            //easyButton.style.display = "";
-            veryEasyButton.style.display = "";
+            easyButton.style.display = "";
 
             showAnswerButton.innerHTML = '<i class="fa fa-eye-slash fs-3" aria-hidden="true"></i><br />Hide';
       }
@@ -83,11 +77,9 @@
       {
             answerDiv.style.display = "none";
             againButton.style.display = "none";
-            veryHardButton.style.display = "none";
-            //hardButton.style.display = "none";
+            hardButton.style.display = "none";
             goodButton.style.display = "none";
-            //easyButton.style.display = "none";
-            veryEasyButton.style.display = "none";
+            easyButton.style.display = "none";
             showAnswerButton.innerHTML = '<i class="fa fa-eye fs-3" aria-hidden="true"></i><br />Show';
       }
 

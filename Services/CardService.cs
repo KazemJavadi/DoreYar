@@ -67,7 +67,7 @@ namespace Services
                 var result = _cardLogic.calculateSuperMemo2Algorithm(card, quality);
                 card.NextReviewDate = result.NextReviewDate;
                 card.Repetitions = result.Repetitons;
-                card.EasinessFactor = result.Easiness;
+                card.EasinessFactor = result.EasinessFactor;
                 card.Interval = result.Interval;
 
                 card.PreviousReviewDate = DateTime.Now;
@@ -80,31 +80,25 @@ namespace Services
         public
             (
             int IDontKnowInterval,
-            int VeryHardInterval,
             int HardInterval,
             int GoodInterval,
-            int EasyIntervral,
-            int VeryEasyIntervral
+            int EasyIntervral
             )
             GetAnswerIntervals(Card card)
         {
             int idontknowInterval = _cardLogic.calculateSuperMemo2Algorithm(card, 0).Interval;
-            int veryHardInterval = _cardLogic.calculateSuperMemo2Algorithm(card, 1).Interval;
-            int hardInterval = _cardLogic.calculateSuperMemo2Algorithm(card, 2).Interval;
-            int goodInterval = _cardLogic.calculateSuperMemo2Algorithm(card, 3).Interval;
-            int easyIntervarl = _cardLogic.calculateSuperMemo2Algorithm(card, 4).Interval;
-            int veryEasyInterval = _cardLogic.calculateSuperMemo2Algorithm(card, 5).Interval;
-            return (idontknowInterval, veryHardInterval, hardInterval, goodInterval, easyIntervarl, veryEasyInterval);
+            int hardInterval = _cardLogic.calculateSuperMemo2Algorithm(card, 1).Interval;
+            int goodInterval = _cardLogic.calculateSuperMemo2Algorithm(card, 2).Interval;
+            int easyIntervarl = _cardLogic.calculateSuperMemo2Algorithm(card, 3).Interval;
+            return (idontknowInterval, hardInterval, goodInterval, easyIntervarl);
         }
 
         public
             (
             int IDontKnowInterval,
-            int VeryHardInterval,
             int HardInterval,
             int GoodInterval,
-            int EasyIntervral,
-            int VeryEasyIntervral
+            int EasyIntervral
             )
             GetAnswerIntervals(long cardId)
         {
@@ -115,18 +109,20 @@ namespace Services
         public
             (
             string IDontKnowIntervalString,
-            string VeryHardIntervalString,
             string HardIntervalString,
             string GoodIntervalString,
-            string EasyIntervralString,
-            string VeryEasyIntervralString
+            string EasyIntervralString
             )
            GetAnswerIntervalStrings(Card card)
         {
             string ConvertDaysToAppropriateString(int days)
             {
+                if (days == 0)
+                    return "today";
+
                 if (days < 30)
                     return $"{days} {(days <= 1 ? "day" : "days")}";
+
                 if (days < 360)
                 {
                     double numberOfMonths = (double)days / 30;
@@ -142,11 +138,9 @@ namespace Services
             return
                 (
                     ConvertDaysToAppropriateString(intervalsResult.IDontKnowInterval),
-                    ConvertDaysToAppropriateString(intervalsResult.VeryHardInterval),
                     ConvertDaysToAppropriateString(intervalsResult.HardInterval),
                     ConvertDaysToAppropriateString(intervalsResult.GoodInterval),
-                    ConvertDaysToAppropriateString(intervalsResult.EasyIntervral),
-                    ConvertDaysToAppropriateString(intervalsResult.VeryEasyIntervral)
+                    ConvertDaysToAppropriateString(intervalsResult.EasyIntervral)
                 );
         }
     }

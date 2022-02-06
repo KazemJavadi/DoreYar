@@ -25,7 +25,7 @@ namespace WebApp.Pages.DeckManagment
 
         public string IdontKnowIntervarlString { get; set; }
         public string VeryHardIntervalString { get; set; }
-        public (string IDontKnow, string VeryHard, string Hard, string Good, string Easy, string VeryEasy) IntervalStrings { get; set; }
+        public (string IDontKnow, string Hard, string Good, string Easy) IntervalStrings { get; set; }
 
 
         public void OnGet()
