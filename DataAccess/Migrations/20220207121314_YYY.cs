@@ -4,7 +4,7 @@
 
 namespace DataAccess.Migrations
 {
-    public partial class AddingCardImageEntity : Migration
+    public partial class YYY : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,9 +12,9 @@ namespace DataAccess.Migrations
                 name: "CardImage",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CardId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>

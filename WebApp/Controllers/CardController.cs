@@ -53,7 +53,14 @@ namespace WebApp.Controllers
             return RedirectToReferer();
         }
 
+
+        public IActionResult DeletCardImage(long imageId)
+        {
+
+        }
+
         private RedirectResult RedirectToReferer() => Redirect(new Uri(Request.Headers["Referer"]).PathAndQuery);
+
 
         public class InputModel
         {

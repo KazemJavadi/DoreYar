@@ -23,6 +23,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<DeckSerivce, DeckSerivce>();
 builder.Services.AddScoped<CardService, CardService>();
+builder.Services.AddScoped<CardImageService>();
 builder.Services.AddScoped<CardLogic>();
 builder.Services.AddScoped<AppDbContext, AppDbContext>();
 builder.Services.AddScoped<FileHelper, FileHelper>();

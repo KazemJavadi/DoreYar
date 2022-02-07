@@ -52,7 +52,8 @@ else if (Model.IsEdited is false)
                 string imagePath = $"{FileHelper.CardImagePath}/{image.FileName}";
 
                 <div class="col mb-4">
-                    <div class="card shadow-sm rounded-3">
+                    <div class="card shadow-sm rounded-3" style="position: relative;">
+                        <a asp-controller="Card" asp-action="DeletCardImage" asp-route-ImageId="@image.Id" class="btn btn-danger rounded shadow-lg border-2 border-dark" style="position:absolute; top:2pt; left:2pt; opacity:90%"><i class="fa fa-trash" aria-hidden="true"></i></a>
                         <a class="card-img-top" href="@imagePath" data-fancybox="gallery" data-caption="Caption Images 1">
                             <img class="card-img-top" src="@imagePath" alt="Image Gallery" asp-append-version="true">
                         </a>
@@ -70,5 +71,5 @@ else if (Model.IsEdited is false)
 
 @section Scripts
 {
-    <script src="~/lib/fancybox/jquery.fancybox.min.js" asp-append-version="true"></script>
+<script src="~/lib/fancybox/jquery.fancybox.min.js" asp-append-version="true"></script>
 }
