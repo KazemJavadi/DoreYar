@@ -1,0 +1,19 @@
+﻿@model AddNewEditCardPartialViewModel
+@{
+}
+
+@if (Model.IsEdit)
+{
+    <form method="post" asp-page="@Pages.CardManagment.EditModel.AbsolutePath" enctype="multipart/form-data">
+        <input hidden asp-for="Input.Card.DeckId" />
+        <partial name="_AddNewEditCardPartial.cshtml" model="Model" />
+    </form>
+}
+else
+{
+    <form method="post" asp-controller="Card" asp-action="Add" enctype="multipart/form-data">
+        <input hidden asp-for="Input.Card.DeckId" />
+        <partial name="_AddNewEditCardPartial.cshtml" model="Model" />
+    </form>
+}
+

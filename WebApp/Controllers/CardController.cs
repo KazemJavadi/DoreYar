@@ -8,11 +8,13 @@ namespace WebApp.Controllers
     public class CardController : Controller
     {
         private readonly CardService _cardService;
+        private readonly CardImageService _cardImageService;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public CardController(CardService cardService, IWebHostEnvironment webHostEnvironment)
+        public CardController(CardService cardService, CardImageService cardImageService, IWebHostEnvironment webHostEnvironment)
         {
             this._cardService = cardService;
+            this._cardImageService = cardImageService;
             this._webHostEnvironment = webHostEnvironment;
         }
 
@@ -24,11 +26,14 @@ namespace WebApp.Controllers
                 && !string.IsNullOrWhiteSpace(input.Card.Question)
                 && !string.IsNullOrWhiteSpace(input.Card.Answer))
             {
-                if (input.Image != null)
+                if (input.Images != null && input.Images.Length > 0)
                 {
-                    FileHelper fileHelper = new FileHelper(_webHostEnvironment);
-                    string ImageFileName = fileHelper.SaveCardImage(input.Image);
-                    input.Card.Images.Add(new() { FileName = ImageFileName });
+                    foreach (var image in input.Images)
+                    {
+                        FileHelper fileHelper = new FileHelper(_webHostEnvironment);
+                        string ImageFileName = fileHelper.SaveCardImage(image);
+                        input.Card.Images.Add(new() { FileName = ImageFileName });
+                    }
                 }
 
                 _cardService.Add(input.Card);
@@ -56,7 +61,12 @@ namespace WebApp.Controllers
 
         public IActionResult DeletCardImage(long imageId)
         {
+            if (ModelState.IsValid)
+            {
+                _cardImageService.Delete(imageId);
+            }
 
+            return RedirectToReferer();
         }
 
         private RedirectResult RedirectToReferer() => Redirect(new Uri(Request.Headers["Referer"]).PathAndQuery);
@@ -65,7 +75,7 @@ namespace WebApp.Controllers
         public class InputModel
         {
             public Card Card { get; set; }
-            public IFormFile Image { get; set; }
+            public IFormFile[] Images { get; set; }
         }
     }
 }

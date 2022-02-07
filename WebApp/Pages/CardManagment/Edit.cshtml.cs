@@ -38,11 +38,16 @@ namespace WebApp.Pages.CardManagment
         {
             if (ModelState.IsValid)
             {
-                if (Input.Image != null)
+                if (Input.Images != null && Input.Images.Length > 0)
                 {
-                    FileHelper fileHelper = new FileHelper(_webHostEnvironment);
-                    string ImageFileName = fileHelper.SaveCardImage(Input.Image);
-                    Input.Card.Images.Add(new() { FileName = ImageFileName });
+                    foreach (var image in Input.Images)
+                    {
+
+
+                        FileHelper fileHelper = new FileHelper(_webHostEnvironment);
+                        string ImageFileName = fileHelper.SaveCardImage(image);
+                        Input.Card.Images.Add(new() { FileName = ImageFileName });
+                    }
                 }
 
                 _cardService.Edit(Input.Card);
@@ -59,7 +64,7 @@ namespace WebApp.Pages.CardManagment
         public class InputModel
         {
             public Card Card { get; set; }
-            public IFormFile Image { get; set; }
+            public IFormFile[] Images { get; set; }
         }
     }
 }

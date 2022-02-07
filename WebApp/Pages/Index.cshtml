@@ -35,6 +35,10 @@
                 else
                     imagePath = $"{FileHelper.DeckHeaderImagePath}/{deck.DeckHeaderImageName}";
 
+                AddNewEditCardPartialViewModel addNewEditCardPartialViewModel = new();
+                addNewEditCardPartialViewModel.IsEdit = false;
+                addNewEditCardPartialViewModel.Input.Card.DeckId = deck.Id;
+
                 <div class="col mb-4">
                     <div class="card shadow-sm rounded-3">
                         <img class="card-img-top" src="@imagePath" alt="Card image cap" asp-append-version="true">
@@ -71,7 +75,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <partial name="/Pages/CardManagment/_AddNewCard.cshtml" model="@deck.Id" />
+                                <partial name="/Pages/CardManagment/Partials/_AddNewEditCardPartialTemplate.cshtml" model="@addNewEditCardPartialViewModel" />
                             </div>
                         </div>
                     </div>

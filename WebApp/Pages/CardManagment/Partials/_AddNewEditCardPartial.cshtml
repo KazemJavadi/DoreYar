@@ -1,0 +1,13 @@
+﻿@model AddNewEditCardPartialViewModel
+@{
+}
+
+<input asp-for="Input.Card.Question" class="form-control" placeholder="Your question"/>
+<br />
+<textarea asp-for="Input.Card.Answer" class="form-control" placeholder="Your answer to question"></textarea>
+<br />
+<input asp-for="Input.Images" class="form-control mb-4">
+<br />
+<button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save card</button>
+
+

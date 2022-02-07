@@ -30,20 +30,20 @@ else if (Model.IsEdited is false)
 
         @*<div asp-validation-summary="All" class="text-danger"></div>*@
 
-        <input asp-for="@Model.Input.Card.Id" hidden />
-        <input asp-for="@Model.Input.Card.DeckId" hidden />
+        <input asp-for="Input.Card.Id" hidden />
+        <input asp-for="Input.Card.DeckId" hidden />
 
         @*<label asp-for="@Model.Card.Question"></label>*@
-        <input asp-for="@Model.Input.Card.Question" placeholder="Question" class="form-control" />
-        <span asp-validation-for="@Model.Input.Card.Question" class="text-danger"></span>
+        <input asp-for="Input.Card.Question" placeholder="Question" class="form-control" />
+        <span asp-validation-for="Input.Card.Question" class="text-danger"></span>
         <br />
 
         @* <label asp-for="@Model.Card.Answer"></label>*@
-        <textarea asp-for="@Model.Input.Card.Answer" placeholder="Answer" class="form-control" rows="4"></textarea>
-        <span asp-validation-for="@Model.Input.Card.Answer" class="text-danger"></span>
+        <textarea asp-for="Input.Card.Answer" placeholder="Answer" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Input.Card.Answer" class="text-danger"></span>
         <br />
 
-        <input class="form-control mb-4" type="file" id="Input_Image" name="Input.Image">
+        <input asp-for="Input.Images" class="form-control mb-4">
         <br />
 
         <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-6">
