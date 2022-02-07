@@ -1,6 +1,7 @@
 ﻿using DataAccess;
 using Entities;
 using Logic;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,7 @@ namespace Services
 
         public Card Get(long cardId)
         {
-            return _context.Set<Card>().Find(cardId);
+            return _context.Set<Card>().Include(c => c.Images.OrderBy(i => i.Id)).Single(c => c.Id == cardId);
         }
 
         public int Edit(Card card)
@@ -52,6 +53,7 @@ namespace Services
         public Card GetOneOfTodayReviewCards(long deckId)
         {
             var card = _context.Set<Card>()
+                .Include(c => c.Images.OrderBy(i => i.Id))
                 .OrderBy(card => card.NextReviewDate)
                 .FirstOrDefault(card => card.DeckId == deckId /*&& card.NextReviewDate <= DateTime.Now*/);
             return card;

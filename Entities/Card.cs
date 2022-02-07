@@ -31,5 +31,8 @@ namespace Entities
         public DateTime? PreviousReviewDate { get; set; }
 
         public DateTime NextReviewDate { get; set; }
+
+        //Relationships
+        public ICollection<CardImage> Images { get; set; } = new HashSet<CardImage>();
     }
 }

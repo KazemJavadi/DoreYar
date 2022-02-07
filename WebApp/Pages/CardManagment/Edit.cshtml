@@ -3,42 +3,72 @@
 @{
 }
 
+@if (Model.IsEdited is true)
+{
+    <div class="alert alert-success alert-dismissible fade show mt-4 mb-0 shadow" role="alert">
+        <i class="fas fa-check-circle"></i>
+        Your card <strong>edited successfuly.</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+else if (Model.IsEdited is false)
+{
+    <div class="alert alert-danger alert-dismissible fade show mt-4 mb-0 shadow" role="alert">
+        <i class="fas fa-exclamation-circle"></i>
+        You card <strong>is not edited.</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+
+
 
 <div class="border border-dark rounded p-4 pt-2 mt-4 shadow">
 
     <h1 class="display-6">Edit card</h1>
-    <form method="post" asp-route-MainReferer="@Model.MainReferer">
+    <form method="post" enctype="multipart/form-data">
 
         @*<div asp-validation-summary="All" class="text-danger"></div>*@
 
-        <input asp-for="@Model.Card.Id" hidden />
-        <input asp-for="@Model.Card.DeckId" hidden />
+        <input asp-for="@Model.Input.Card.Id" hidden />
+        <input asp-for="@Model.Input.Card.DeckId" hidden />
 
         @*<label asp-for="@Model.Card.Question"></label>*@
-        <input asp-for="@Model.Card.Question" placeholder = "Question" class="form-control" />
-        <span asp-validation-for="@Model.Card.Question" class="text-danger"></span>
+        <input asp-for="@Model.Input.Card.Question" placeholder="Question" class="form-control" />
+        <span asp-validation-for="@Model.Input.Card.Question" class="text-danger"></span>
         <br />
 
         @* <label asp-for="@Model.Card.Answer"></label>*@
-        <textarea asp-for="@Model.Card.Answer" placeholder="Answer" class="form-control" rows="8" ></textarea>
-        <span asp-validation-for="@Model.Card.Answer" class="text-danger"></span>
+        <textarea asp-for="@Model.Input.Card.Answer" placeholder="Answer" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="@Model.Input.Card.Answer" class="text-danger"></span>
         <br />
 
-        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save changes</button>
+        <input class="form-control mb-4" type="file" id="Input_Image" name="Input.Image">
+        <br />
 
-       
+        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-6">
+            @foreach (CardImage image in Model.Input.Card.Images)
+            {
+                string imagePath = $"{FileHelper.CardImagePath}/{image.FileName}";
+
+                <div class="col mb-4">
+                    <div class="card shadow-sm rounded-3">
+                        <a class="card-img-top" href="@imagePath" data-fancybox="gallery" data-caption="Caption Images 1">
+                            <img class="card-img-top" src="@imagePath" alt="Image Gallery" asp-append-version="true">
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save changes</button>
 
     </form>
 </div>
 
+<a asp-page="@Pages.DeckManagment.DetailModel.AbsolutePath" asp-route-DeckId="@Model.Input.Card.DeckId" class="btn btn-outline-primary mt-4 shadow"><i class="fas fa-chevron-left"></i> Back</a>
 
- @if (Model.IsEdited is true)
-        {
-            <div class="alert alert-success mt-4 shadow">Your card edited successfuly</div>
-        }
-        else if (Model.IsEdited is false)
-        {
-            <div class="alert alert-danger mt-4">You card is not edited</div>
-        }
-
-<a href="@Model.MainReferer" class="btn btn-outline-primary mt-4 shadow"><i class="fas fa-chevron-left"></i> Back</a>
+@section Scripts
+{
+    <script src="~/lib/fancybox/jquery.fancybox.min.js" asp-append-version="true"></script>
+}

@@ -11,11 +11,23 @@ namespace WebApp.Helpers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public const string DeckHeaderPath = "/upload/deck-header";
+        public const string DeckHeaderImagePath = "/upload/deck-header-img";
+        public const string CardImagePath = "/upload/card-img";
 
         public string SaveDeckHeader(IFormFile formFile)
         {
-            string saveFolder = $"{_webHostEnvironment.WebRootPath}{DeckHeaderPath}";
+            string saveFolder = $"{_webHostEnvironment.WebRootPath}{DeckHeaderImagePath}";
+            return SaveFile(formFile, saveFolder);
+        }
+
+        public string SaveCardImage(IFormFile formFile)
+        {
+            string saveFolder = $"{_webHostEnvironment.WebRootPath}{CardImagePath}";
+            return SaveFile(formFile, saveFolder);
+        }
+
+        public string SaveFile(IFormFile formFile, string saveFolder)
+        {
             string uniqueFileName = GetUniqueFileName(formFile.FileName);
 
             MemoryStream ms = new();

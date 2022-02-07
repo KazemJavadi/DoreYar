@@ -168,13 +168,12 @@ namespace Logic
             long r = card.Repetitions;
             decimal ef = card.EasinessFactor;
             int i = card.Interval;
-
-            ef = ((ef * r) + ((q + 1) / 4.0M)) / (r + 1);
-
-            decimal eff = ((ef) + ((q + 1) / 4.0M)) / 2;
+            decimal eff = 0;
             int ceff = 2;
             int cef = 1;
 
+            ef = ((ef * r) + ((q + 1) / 4.0M)) / (r + 1);
+            eff = ((ef) + ((q + 1) / 4.0M)) / 2;
             ef = (ef * cef + eff * ceff) / (cef + ceff);
 
             if (i == 0) i = 1;

@@ -10,19 +10,18 @@ namespace WebApp.Pages.CardManagment
     {
         public static string AbsolutePath => RazorPageHelper.GetMyAbsolutePath();
 
-        private readonly CardService cardService;
+        private readonly CardService _cardService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public EditModel(CardService cardService)
+        public EditModel(CardService cardService, IWebHostEnvironment webHostEnvironment)
         {
-            this.cardService = cardService;
+            this._cardService = cardService;
+            this._webHostEnvironment = webHostEnvironment;
         }
 
         [BindProperty]
-        public Card Card { get; set; }
+        public InputModel Input { get; set; } = new();
         //public int PageNumber { get; set; }
-
-
-        public string MainReferer { get; set; }
 
         public bool? IsEdited { get; set; }
 
@@ -31,22 +30,36 @@ namespace WebApp.Pages.CardManagment
         {
             if (ModelState.IsValid)
             {
-                Card = cardService.Get(cardId);
-                MainReferer = Request.Headers["Referer"].ToString();
+                Input.Card = _cardService.Get(cardId);
             }
         }
 
-        public void OnPost(string mainReferer)
+        public void OnPost()
         {
             if (ModelState.IsValid)
             {
-                cardService.Edit(Card);
+                if (Input.Image != null)
+                {
+                    FileHelper fileHelper = new FileHelper(_webHostEnvironment);
+                    string ImageFileName = fileHelper.SaveCardImage(Input.Image);
+                    Input.Card.Images.Add(new() { FileName = ImageFileName });
+                }
+
+                _cardService.Edit(Input.Card);
+
+                Input.Card = _cardService.Get(Input.Card.Id);
 
                 IsEdited = true;
-                MainReferer = mainReferer;
             }
             else
                 IsEdited = false;
+        }
+
+
+        public class InputModel
+        {
+            public Card Card { get; set; }
+            public IFormFile Image { get; set; }
         }
     }
 }

@@ -39,6 +39,24 @@
             <div class="card-header bg-success text-white"><strong><i class="far fa-lightbulb"></i> Answer</strong></div>
             <div class="card-body bg-light">
                 <p class="card-text fs-2">@Model.ReviewCard.Answer</p>
+
+                <hr />
+
+                <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-6">
+                    @foreach (CardImage image in Model.ReviewCard.Images)
+                    {
+                        string imagePath = $"{FileHelper.CardImagePath}/{image.FileName}";
+
+                        <div class="col mb-4">
+                            <div class="card shadow-sm rounded-3">
+                                <a class="card-img-top" href="@imagePath" data-fancybox="gallery" data-caption="Caption Images 1">
+                                    <img class="card-img-top" src="@imagePath" alt="Image Gallery" asp-append-version="true">
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+
             </div>
         </div>
 
@@ -49,8 +67,12 @@
 
 <a asp-page="@Pages.IndexModel.Path" class="btn btn-outline-primary shadow"><i class="fas fa-chevron-left"></i> Back</a>
 
+
 @section Scripts
 {
+<script src="~/lib/fancybox/jquery.fancybox.min.js" asp-append-version="true"></script>
+
+
 <script>
 
     function myFunction() {

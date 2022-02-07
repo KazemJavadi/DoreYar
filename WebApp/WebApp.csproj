@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Upload\deck-header\" />
+    <Folder Include="wwwroot\upload\card-img\" />
   </ItemGroup>
 
 </Project>
