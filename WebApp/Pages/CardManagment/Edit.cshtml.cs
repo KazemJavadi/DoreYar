@@ -38,17 +38,9 @@ namespace WebApp.Pages.CardManagment
         {
             if (ModelState.IsValid)
             {
-                if (Input.Images != null && Input.Images.Length > 0)
-                {
-                    foreach (var image in Input.Images)
-                    {
-
-
-                        FileHelper fileHelper = new FileHelper(_webHostEnvironment);
-                        string ImageFileName = fileHelper.SaveCardImage(image);
-                        Input.Card.Images.Add(new() { FileName = ImageFileName });
-                    }
-                }
+                Input.Card.Images
+                    .AddRange(new FileHelper(_webHostEnvironment)
+                    .SaveCardImages(Input.Images).Select(fn => new CardImage() { FileName = fn }));
 
                 _cardService.Edit(Input.Card);
 

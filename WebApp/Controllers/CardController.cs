@@ -26,15 +26,9 @@ namespace WebApp.Controllers
                 && !string.IsNullOrWhiteSpace(input.Card.Question)
                 && !string.IsNullOrWhiteSpace(input.Card.Answer))
             {
-                if (input.Images != null && input.Images.Length > 0)
-                {
-                    foreach (var image in input.Images)
-                    {
-                        FileHelper fileHelper = new FileHelper(_webHostEnvironment);
-                        string ImageFileName = fileHelper.SaveCardImage(image);
-                        input.Card.Images.Add(new() { FileName = ImageFileName });
-                    }
-                }
+                input.Card.Images
+                      .AddRange(new FileHelper(_webHostEnvironment)
+                      .SaveCardImages(input.Images).Select(fn => new CardImage() { FileName = fn }));
 
                 _cardService.Add(input.Card);
             }

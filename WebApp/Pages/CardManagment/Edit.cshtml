@@ -1,30 +1,34 @@
 ﻿@page "/Card/Edit"
 @model WebApp.Pages.CardManagment.EditModel
 @{
+    //Message
+    SuccessErrorPartialViewModel message = null;
+
+    if (Model.IsEdited is true)
+    {
+        message = new() {Message = "Your card is <strong>edited succssfully</strong>", MessageType = MessageType.Success };
+    }
+    else
+    {
+        message = new() { Message = "Your card <strong>is not edited!</strong>", MessageType = MessageType.Error };
+    }
+
+    //Show image
+    ShowImagesPartialViewModel showImagesPartialViewModel = new()
+            {
+                IsForEdit = true,
+                Images = Model.Input.Card.Images
+            };
 }
 
 @if (Model.IsEdited is true)
 {
-    SuccessErrorPartialViewModel message = new()
-    {
-        Message = "Your card is <strong>edited succssfully</strong>",
-        MessageType = MessageType.Success
-    };
-
     <partial name="_SuccessErrorMessagePartial" model="message" />
 }
 else if (Model.IsEdited is false)
 {
-    SuccessErrorPartialViewModel message = new()
-    {
-        Message = "Your card <strong>is not edited!</strong>",
-        MessageType = MessageType.Error
-    };
-
     <partial name="_SuccessErrorMessagePartial" model="message" />
 }
-
-
 
 
 <div class="border border-dark rounded p-4 pt-2 mt-4 shadow">
@@ -50,21 +54,8 @@ else if (Model.IsEdited is false)
         <input asp-for="Input.Images" class="form-control mb-4">
         <br />
 
-        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-6">
-            @foreach (CardImage image in Model.Input.Card.Images)
-            {
-                string imagePath = $"{FileHelper.CardImagePath}/{image.FileName}";
 
-                <div class="col mb-4">
-                    <div class="card shadow-sm rounded-3" style="position: relative;">
-                        <a asp-controller="Card" asp-action="DeletCardImage" asp-route-ImageId="@image.Id" class="btn btn-danger rounded shadow-lg border-2 border-dark" style="position:absolute; top:2pt; left:2pt; opacity:90%"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                        <a class="card-img-top" href="@imagePath" data-fancybox="gallery" data-caption="Caption Images 1">
-                            <img class="card-img-top" src="@imagePath" alt="Image Gallery" asp-append-version="true">
-                        </a>
-                    </div>
-                </div>
-            }
-        </div>
+        <partial name="/Pages/CardManagment/Partials/_ShowImagesPartial.cshtml" model="@showImagesPartialViewModel" />
 
         <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save changes</button>
 

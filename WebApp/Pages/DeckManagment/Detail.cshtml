@@ -4,7 +4,7 @@
     ViewData["Title"] = $"Deck Detial - {Model.Deck.Name}";
 
     AddNewEditCardPartialViewModel addNewEditCardPartialViewModel = new();
-    addNewEditCardPartialViewModel.IsEdit = false;
+    addNewEditCardPartialViewModel.IsForEdit = false;
     addNewEditCardPartialViewModel.Input.Card.DeckId = Model.Deck.Id;
 }
 

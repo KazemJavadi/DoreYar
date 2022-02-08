@@ -1,6 +1,12 @@
 ﻿@page "/Review"
 @model WebApp.Pages.DeckManagment.ReviewModel
 @{
+    //Show image
+    ShowImagesPartialViewModel showImagesPartialViewModel = new()
+            {
+                IsForEdit = false,
+                Images = Model.ReviewCard?.Images
+            };
 }
 
 @*<div class="border border-dark rounded p-1 ps-4 mt-4 mb-4 shadow">
@@ -45,20 +51,7 @@
                     <hr />
                 }
 
-                <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-6">
-                    @foreach (CardImage image in Model.ReviewCard.Images)
-                    {
-                        string imagePath = $"{FileHelper.CardImagePath}/{image.FileName}";
-
-                        <div class="col mb-4">
-                            <div class="card shadow-sm rounded-3">
-                                <a class="card-img-top" href="@imagePath" data-fancybox="gallery" data-caption="Caption Images 1">
-                                    <img class="card-img-top" src="@imagePath" alt="Image Gallery" asp-append-version="true">
-                                </a>
-                            </div>
-                        </div>
-                    }
-                </div>
+                <partial name="/Pages/CardManagment/Partials/_ShowImagesPartial.cshtml" model="@showImagesPartialViewModel" />
 
             </div>
         </div>

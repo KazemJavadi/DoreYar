@@ -31,7 +31,10 @@ namespace WebApp.Pages.DeckManagment
         public void OnGet()
         {
             ReviewCard = cardService.GetOneOfTodayReviewCards(DeckId);
-            IntervalStrings = cardService.GetAnswerIntervalStrings(ReviewCard);
+            if (ReviewCard != null)
+            {
+                IntervalStrings = cardService.GetAnswerIntervalStrings(ReviewCard);
+            }
         }
     }
 }

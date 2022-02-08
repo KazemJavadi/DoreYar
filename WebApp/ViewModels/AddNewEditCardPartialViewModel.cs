@@ -4,7 +4,7 @@ namespace WebApp.ViewModels
 {
     public class AddNewEditCardPartialViewModel
     {
-        public bool IsEdit { get; set; }
+        public bool IsForEdit { get; set; }
         public InputModel Input { get; set; } = new ();
 
         public class InputModel

@@ -33,6 +33,6 @@ namespace Entities
         public DateTime NextReviewDate { get; set; }
 
         //Relationships
-        public ICollection<CardImage> Images { get; set; } = new HashSet<CardImage>();
+        public List<CardImage> Images { get; set; } = new();
     }
 }

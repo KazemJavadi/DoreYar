@@ -20,10 +20,14 @@ namespace WebApp.Helpers
             return SaveFile(formFile, saveFolder);
         }
 
-        public string SaveCardImage(IFormFile formFile)
+        public IEnumerable<string> SaveCardImages(IFormFile[] images)
         {
-            string saveFolder = $"{_webHostEnvironment.WebRootPath}{CardImagePath}";
-            return SaveFile(formFile, saveFolder);
+            if (images != null && images.Length > 0)
+                foreach (var image in images)
+                {
+                    string saveFolder = $"{_webHostEnvironment.WebRootPath}{CardImagePath}";
+                    yield return SaveFile(image, saveFolder);
+                }
         }
 
         public string SaveFile(IFormFile formFile, string saveFolder)
@@ -40,7 +44,7 @@ namespace WebApp.Helpers
 
         private string GetUniqueFileName(string fileName)
         {
-            string uniqueFileName = 
+            string uniqueFileName =
                 $"{GetStandardAlphanumericFileName(Path.GetFileNameWithoutExtension(fileName))}{TimeHelper.GetTimeStampNow()}{random.Next()}{Path.GetExtension(fileName)}";
             return uniqueFileName;
         }
@@ -48,7 +52,7 @@ namespace WebApp.Helpers
         private string GetStandardAlphanumericFileName(string fileName)
         {
             string alphFileName = GetAlphanumericFileName(fileName);
-            if(alphFileName.Length > 20)
+            if (alphFileName.Length > 20)
                 return alphFileName.Substring(0, 20);
 
             return alphFileName;
@@ -56,9 +60,9 @@ namespace WebApp.Helpers
 
         private string GetAlphanumericFileName(string fileName)
         {
-            return 
+            return
                 new string(fileName
-                .Where(c=>Char.IsLetter(c) || Char.IsDigit(c)).ToArray()).ToLower();  
+                .Where(c => Char.IsLetter(c) || Char.IsDigit(c)).ToArray()).ToLower();
         }
 
         private static Random random = new Random();

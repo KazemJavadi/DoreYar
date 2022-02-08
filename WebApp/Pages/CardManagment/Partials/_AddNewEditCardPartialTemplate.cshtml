@@ -2,7 +2,7 @@
 @{
 }
 
-@if (Model.IsEdit)
+@if (Model.IsForEdit)
 {
     <form method="post" asp-page="@Pages.CardManagment.EditModel.AbsolutePath" enctype="multipart/form-data">
         <input hidden asp-for="Input.Card.DeckId" />

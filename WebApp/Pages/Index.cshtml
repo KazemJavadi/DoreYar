@@ -36,7 +36,7 @@
                     imagePath = $"{FileHelper.DeckHeaderImagePath}/{deck.DeckHeaderImageName}";
 
                 AddNewEditCardPartialViewModel addNewEditCardPartialViewModel = new();
-                addNewEditCardPartialViewModel.IsEdit = false;
+                addNewEditCardPartialViewModel.IsForEdit = false;
                 addNewEditCardPartialViewModel.Input.Card.DeckId = deck.Id;
 
                 <div class="col mb-4">
