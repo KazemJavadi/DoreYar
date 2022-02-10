@@ -8,22 +8,11 @@
     addNewEditCardPartialViewModel.Input.Card.DeckId = Model.Deck.Id;
 }
 
-@*
-    <h1>Details of <a asp-page="@nameof(Pages.DeckManagment.DetailModel.Page)">@Model.Deck.Name</a></h1>
-    <hr />
-*@
+<div class="border border-dark rounded p-4 mb-4 mt-4 shadow">
+    <a asp-page="@Pages.IndexModel.Path" class="btn btn-outline-primary"><i class="fas fa-chevron-left"></i> Back</a>
+    <a asp-page="@DeckManagment.ReviewModel.AbsolutePath" asp-route-DeckId="@Model.Deck.Id" class="btn btn-outline-primary "><i class="fas fa-book-reader"></i> Today review</a>
+</div>
 
-@*<div class="border border-dark rounded p-4 pt-2 mb-4 mt-4 shadow">
-    <h2 class="display-6">Add new card</h2>
-    <form method="post" asp-controller="Card" asp-action="Add">
-    <input id="Card_DeckId" name="Card.DeckId" value="@Model.Deck.Id" hidden />
-    <input type="text" id="Card_Question" name="Card.Question" placeholder="Question" class="form-control" />
-    <br />
-    <textarea type="text" multiple id="Card_Answer" name="Card.Answer" placeholder="Answer" class="form-control"></textarea>
-    <br />
-    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save card</button>
-    </form>
-    </div>*@
 <div class="border border-dark rounded p-4 pt-2 mb-4 mt-4 shadow">
     <h2 class="display-6">Add new card</h2>
     <partial name="/Pages/CardManagment/Partials/_AddNewEditCardPartialTemplate.cshtml" model="@addNewEditCardPartialViewModel" />
@@ -31,8 +20,6 @@
 
 <div class="border border-dark rounded p-4 pt-2 mb-4 mt-4 shadow">
     <h2 class="display-6">Deck details</h2>
-    @*<label asp-for="@Model.NumberOfPages">Number of cards in page </label>
-        <input asp-for="@Model.NumberOfPages" />*@
 
     @if (@Model.Deck.Cards?.Count <= 0)
     {
@@ -53,7 +40,8 @@
                 @foreach (Card card in Model.Deck.Cards)
                 {
                     int maxAnswerLength = 20;
-                    string answer = $"{card.Answer.Substring(0, card.Answer.Length > maxAnswerLength ? maxAnswerLength : card.Answer.Length)} ...";
+                    string cleanAnsewerText = TextHelper.StripHTML(card.Answer);
+                    string answer = $"{cleanAnsewerText.Substring(0, cleanAnsewerText.Length > maxAnswerLength ? maxAnswerLength : cleanAnsewerText.Length)} ...";
 
                     <tr>
                         <td>@card.Question</td>
@@ -86,11 +74,3 @@
     </div>
 
 </div>
-
-
-<a asp-page="@Pages.IndexModel.Path" class="btn btn-outline-primary shadow"><i class="fas fa-chevron-left"></i> Back</a>
-
-@section Scripts
-{
-<script src="~/lib/fancybox/jquery.fancybox.min.js" asp-append-version="true"></script>
-}

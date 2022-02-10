@@ -2,12 +2,39 @@
 @{
 }
 
-<input asp-for="Input.Card.Question" class="form-control" placeholder="Your question"/>
+<input asp-for="Input.Card.Question" class="form-control" placeholder="Your question" />
 <br />
-<textarea asp-for="Input.Card.Answer" class="form-control" placeholder="Your answer to question"></textarea>
+@*<div id="Input_Card_Answer2" name="Input.Card.Answer2" class="border border-dark rounded"></div>
+*@
+
+<div id="editor" class="form-control border rounded-2"></div>
+
+<textarea hidden asp-for="Input.Card.Answer" class="form-control" rows="4" placeholder="Your answer to question"></textarea>
 <br />
 <input asp-for="Input.Images" class="form-control mb-4">
 <br />
-<button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save card</button>
+<button id="submit" type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save card</button>
 
 
+
+
+@*<script>
+    document.getElementById('Input_Card_Answer').hidden = true;
+    //let editor;
+
+  //BalloonEditor
+  //  .create( document.querySelector( '#editor' ) )
+  //  .then( editor => {
+  //      console.log( 'Editor was initialized', editor );
+  //  } )
+  //  .catch( error => {
+  //      console.error( error.stack );
+  //  } );
+
+        //document.querySelector( '#submit' ).addEventListener( 'click', () =>
+        //{
+        //    //alert(document.getElementById('editor').innerHTML);
+        //    document.getElementById('Input_Card_Answer').value =  document.getElementById('editor').innerHTML;
+        //}
+        //);
+</script>*@

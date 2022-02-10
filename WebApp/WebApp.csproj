@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\js\NewFolder\**" />
+    <Compile Remove="wwwroot\lib\ckeditor5\**" />
+    <Content Remove="wwwroot\js\NewFolder\**" />
+    <Content Remove="wwwroot\lib\ckeditor5\**" />
+    <EmbeddedResource Remove="wwwroot\js\NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\lib\ckeditor5\**" />
+    <None Remove="wwwroot\js\NewFolder\**" />
+    <None Remove="wwwroot\lib\ckeditor5\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Hellang.Middleware.ProblemDetails" Version="6.4.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.1">
