@@ -6,12 +6,18 @@
 
     if (Model.IsEdited is true)
     {
-        message = new() {Message = "Your card is <strong>edited succssfully</strong>", MessageType = MessageType.Success };
+        message = new() { Message = "Your card is <strong>edited succssfully</strong>", MessageType = MessageType.Success };
     }
     else
     {
         message = new() { Message = "Your card <strong>is not edited!</strong>", MessageType = MessageType.Error };
     }
+
+    AddNewEditCardPartialViewModel addNewEditCardPartialViewModel = new()
+            {
+                IsForEdit = true,
+                Input = new() { Card = Model.Input.Card, Images = Model.Input.Images }
+            };
 
     //Show image
     ShowImagesPartialViewModel showImagesPartialViewModel = new()
@@ -37,22 +43,25 @@ else if (Model.IsEdited is false)
     <form method="post" enctype="multipart/form-data">
 
         @*<div asp-validation-summary="All" class="text-danger"></div>*@
-
-        <input asp-for="Input.Card.Id" hidden />
-        <input asp-for="Input.Card.DeckId" hidden />
+        @*
+            <input asp-for="Input.Card.Id" hidden />
+            <input asp-for="Input.Card.DeckId" hidden />*@
 
         @*<label asp-for="@Model.Card.Question"></label>*@
-        <input asp-for="Input.Card.Question" placeholder="Question" class="form-control" />
-        <span asp-validation-for="Input.Card.Question" class="text-danger"></span>
-        <br />
+        @*        <input asp-for="Input.Card.Question" placeholder="Question" class="form-control" />
+            <span asp-validation-for="Input.Card.Question" class="text-danger"></span>
+            <br />*@
 
         @* <label asp-for="@Model.Card.Answer"></label>*@
-        <textarea asp-for="Input.Card.Answer" placeholder="Answer" class="form-control" rows="4"></textarea>
-        <span asp-validation-for="Input.Card.Answer" class="text-danger"></span>
-        <br />
+        @*        <textarea asp-for="Input.Card.Answer" placeholder="Answer" class="form-control" rows="4"></textarea>
+            <span asp-validation-for="Input.Card.Answer" class="text-danger"></span>
+            <br />
 
-        <input asp-for="Input.Images" class="form-control mb-4">
-        <br />
+            <input asp-for="Input.Images" class="form-control mb-4">
+            <br />
+        *@
+
+        <partial name="/Pages/CardManagment/Partials/_AddNewEditCardPartialTemplate.cshtml" model="@addNewEditCardPartialViewModel" />
 
 
         <partial name="/Pages/CardManagment/Partials/_ShowImagesPartial.cshtml" model="@showImagesPartialViewModel" />

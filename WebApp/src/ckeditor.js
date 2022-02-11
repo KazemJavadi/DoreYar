@@ -10,7 +10,7 @@ import ItalicPlugin from '@ckeditor/ckeditor5-basic-styles/src/italic';
 import BlockQuotePlugin from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import HeadingPlugin from '@ckeditor/ckeditor5-heading/src/heading';
 import ParagraphPlugin from '@ckeditor/ckeditor5-paragraph/src/paragraph';
-import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';     // <--- ADDED
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment'; 
 import List from '@ckeditor/ckeditor5-list/src/list';
 import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
 import Highlight from '@ckeditor/ckeditor5-highlight/src/highlight';
@@ -23,8 +23,13 @@ import Code from '@ckeditor/ckeditor5-basic-styles/src/code';
 import Subscript from '@ckeditor/ckeditor5-basic-styles/src/subscript';
 import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
 
+import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
+import Clipboard from '@ckeditor/ckeditor5-clipboard/src/clipboard';
+import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
+
 BalloonEditor
     .create(document.querySelector('#editor'), {
+        placeholder: 'Your answer',
         // The plugins are now passed directly to .create().
         plugins: [
             EssentialsPlugin,
@@ -39,7 +44,10 @@ BalloonEditor
             List,
             HorizontalLine,
             Highlight,
-            Bold, Italic, Underline, Strikethrough, Code, Subscript, Superscript
+            Bold, Italic, Underline, Strikethrough, Code, Subscript, Superscript,
+            CodeBlock,
+            Clipboard,
+            PasteFromOffice
         ],
 
         // So is the rest of the default configuration.
@@ -55,7 +63,11 @@ BalloonEditor
             'redo',
             `alignment`,
             'horizontalLine',
-            'highlight'
+            '|',
+            'highlight:yellowMarker', 'highlight:greenMarker', 'highlight:pinkMarker',
+            'highlight:greenPen', 'highlight:redPen', 'removeHighlight',
+            '|',
+            'codeBlock'
         ],
         image: {
             toolbar: [
@@ -65,6 +77,49 @@ BalloonEditor
                 '|',
                 'toggleImageCaption',
                 'imageTextAlternative'
+            ]
+        },
+        codeBlock: {
+            languages: [
+                { language: 'plaintext', label: 'Plain text' }, // The default language.
+                { language: 'c', label: 'C' },
+                { language: 'cs', label: 'C#' },
+                { language: 'cpp', label: 'C++' },
+                { language: 'css', label: 'CSS' },
+                { language: 'diff', label: 'Diff' },
+                { language: 'html', label: 'HTML' },
+                { language: 'java', label: 'Java' },
+                { language: 'javascript', label: 'JavaScript' },
+                { language: 'php', label: 'PHP' },
+                { language: 'python', label: 'Python' },
+                { language: 'ruby', label: 'Ruby' },
+                { language: 'typescript', label: 'TypeScript' },
+                { language: 'xml', label: 'XML' }
+            ]
+        },
+        highlight: {
+            options: [
+                {
+                    model: 'greenMarker',
+                    class: 'marker-green',
+                    title: 'Green marker',
+                    color: 'rgb(25, 156, 25)',
+                    type: 'marker'
+                },
+                {
+                    model: 'yellowMarker',
+                    class: 'marker-yellow',
+                    title: 'Yellow marker',
+                    color: '#cac407',
+                    type: 'marker'
+                },
+                {
+                    model: 'redPen',
+                    class: 'pen-red',
+                    title: 'Red pen',
+                    color: 'hsl(343, 82%, 58%)',
+                    type: 'pen'
+                }
             ]
         }
     })
@@ -86,7 +141,6 @@ BalloonEditor
     //});
 
 document.querySelector('#submit').addEventListener('click', () => {
-    alert(document.getElementById('editor').innerHTML);
     document.getElementById('Input_Card_Answer').value = document.getElementById('editor').innerHTML;
 }
 );

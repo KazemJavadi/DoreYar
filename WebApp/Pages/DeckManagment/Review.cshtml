@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <button id="showAnswer" class="btn btn-primary me-1" onclick="myFunction()"><i class="fa fa-eye fs-3" aria-hidden="true"></i><br /> Show</button>
+        <button id="showAnswer" class="btn btn-primary me-1" onclick="showHideFunc()"><i class="fa fa-eye fs-3" aria-hidden="true"></i><br /> Show</button>
         <a id="againButton" style="display:none" class="btn btn-outline-danger" asp-controller="Review" asp-action="Correct" asp-route-cardId="@Model.ReviewCard.Id" asp-route-quality="0"><strong><i class="fa fs-3">🤪</i><br />I don't know</strong> <i>(@Model.IntervalStrings.IDontKnow)</i></a>
         <a id="hardButton" style="display:none" class="btn btn-outline-danger" asp-controller="Review" asp-action="Correct" asp-route-cardId="@Model.ReviewCard.Id" asp-route-quality="1"><strong><i class="fa fs-3">🧐</i><br />Hard</strong> <i>(@Model.IntervalStrings.Hard)</i></a>
         <a id="goodButton" style="display:none" class="btn btn-outline-success" asp-controller="Review" asp-action="Correct" asp-route-cardId="@Model.ReviewCard.Id" asp-route-quality="2"><strong><i class="fa fs-3">😏</i><br />Good</strong> <i>(@Model.IntervalStrings.Good)</i></a>
@@ -43,9 +43,11 @@
 
         <div id="answerDiv" style="display:none" class="card border-success mt-2">
             <div class="card-header bg-success text-white"><strong><i class="far fa-lightbulb"></i> Answer</strong></div>
-            <div class="card-body bg-light">
+            <div class="card-body">
 
-                @Html.Raw(Model.ReviewCard.Answer)
+                <p>
+                    @Html.Raw(Model.ReviewCard.Answer)
+                </p>
 
                 @if (Model.ReviewCard.Images.Count > 0)
                 {
@@ -68,22 +70,18 @@
 @section Scripts
 {
 <script src="~/lib/fancybox/jquery.fancybox.min.js" asp-append-version="true"></script>
-
-
 <script>
+        function showHideFunc() {
 
-    function myFunction() {
+        var showAnswerButton = document.getElementById("showAnswer");
+        var answerDiv = document.getElementById("answerDiv");
+        var againButton = document.getElementById("againButton");
+        var hardButton = document.getElementById("hardButton");
+        var goodButton = document.getElementById("goodButton");
+        var easyButton = document.getElementById("easyButton");
 
-      var showAnswerButton = document.getElementById("showAnswer");
-      var answerDiv = document.getElementById("answerDiv");
-      var againButton = document.getElementById("againButton");
-      var hardButton = document.getElementById("hardButton");
-      var goodButton = document.getElementById("goodButton");
-      var easyButton = document.getElementById("easyButton");
-
-      //a.style.display= "none";
-      if(showAnswerButton.innerHTML.includes('Show'))
-      {
+        //a.style.display= "none";
+        if (showAnswerButton.innerHTML.includes('Show')) {
             answerDiv.style.display = "";
             againButton.style.display = "";
             hardButton.style.display = "";
@@ -91,27 +89,15 @@
             easyButton.style.display = "";
 
             showAnswerButton.innerHTML = '<i class="fa fa-eye-slash fs-3" aria-hidden="true"></i><br />Hide';
-      }
-      else
-      {
+        }
+        else {
             answerDiv.style.display = "none";
             againButton.style.display = "none";
             hardButton.style.display = "none";
             goodButton.style.display = "none";
             easyButton.style.display = "none";
             showAnswerButton.innerHTML = '<i class="fa fa-eye fs-3" aria-hidden="true"></i><br />Show';
-      }
-
-
-
-
-      //if (x.style.display === "none") {
-      //  x.style.display = "";
-      //  y.style.display = "";
-      //} else {
-      //  x.style.display = "none";
-      //  y.style.display = "none"
-      //}
+        }
     }
 </script>
 }
