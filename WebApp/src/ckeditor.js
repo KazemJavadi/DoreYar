@@ -12,7 +12,7 @@ import HeadingPlugin from '@ckeditor/ckeditor5-heading/src/heading';
 import ParagraphPlugin from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment'; 
 import List from '@ckeditor/ckeditor5-list/src/list';
-import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
+//import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
 import Highlight from '@ckeditor/ckeditor5-highlight/src/highlight';
 
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
@@ -31,10 +31,9 @@ import Indent from '@ckeditor/ckeditor5-indent/src/indent';
 import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
 
 
-
 BalloonEditor
     .create(document.querySelector('#editor'), {
-        placeholder: 'Your answer',
+        placeholder: 'پاسخ را اینجا بنویسید ...',
         // The plugins are now passed directly to .create().
         plugins: [
             EssentialsPlugin,
@@ -47,7 +46,7 @@ BalloonEditor
             UploadAdapterPlugin,
             Alignment,
             List,
-            HorizontalLine,
+            //HorizontalLine,
             Highlight,
             Bold, Italic, Underline, Strikethrough, Code, Subscript, Superscript,
             CodeBlock,
@@ -58,6 +57,7 @@ BalloonEditor
 
         // So is the rest of the default configuration.
         toolbar: [
+            'textPartLanguage',
             'heading',
             'bold',
             'italic',
@@ -116,10 +116,10 @@ BalloonEditor
         },
         language: {
             // The UI will be English.
-            ui: 'en',
+            ui: 'fa',
 
             // But the content will be edited in Arabic.
-            content: 'fa'
+            content: 'fa',
         }
     })
     .then(editor => {

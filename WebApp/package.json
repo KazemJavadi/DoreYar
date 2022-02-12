@@ -18,7 +18,6 @@
     "@ckeditor/ckeditor5-dev-utils": "^11.0.2",
     "@ckeditor/ckeditor5-dev-webpack-plugin": "^28.0.2",
     "@ckeditor/ckeditor5-highlight": "^32.0.0",
-    "@ckeditor/ckeditor5-horizontal-line": "^32.0.0",
     "@ckeditor/ckeditor5-indent": "^32.0.0",
     "@ckeditor/ckeditor5-list": "^32.0.0",
     "@ckeditor/ckeditor5-paste-from-office": "^32.0.0",
