@@ -1,4 +1,4 @@
-﻿using Entities;
+﻿using DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
@@ -16,7 +16,7 @@ namespace WebApp.Controllers.WebAPI
         }
 
         [HttpGet("[Action]")]
-        public ICollection<Deck> All()
+        public ICollection<DeckDto> All()
         {
             return _deckService.GetAll();
         }

@@ -1,4 +1,4 @@
-﻿using Entities;
+﻿using DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services;
@@ -7,7 +7,7 @@ namespace WebApp.Pages
 {
     public class IndexModel : PageModel
     {
-        public static readonly string Path = $"/{nameof(IndexModel).Replace("Model", "")}";
+        public static readonly string AbsolutePath = $"/{nameof(IndexModel).Replace("Model", "")}";
         private readonly ILogger<IndexModel> _logger;
         private readonly DeckSerivce deckSerivce;
 
@@ -17,12 +17,12 @@ namespace WebApp.Pages
             this.deckSerivce = deckSerivce;
         }
 
-        public ICollection<Deck> Decks { get; private set; }
+        public ICollection<DeckDto> Decks { get; private set; }
 
 
         public void OnGet()
         {
-           
+
 
             string realFilePath = Url.Page("/DeckManagment/Detail", new { DeckId = 2, PaqeNmber = 1 });
             string physicalPath =

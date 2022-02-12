@@ -1,7 +1,8 @@
-using Entities;
+using DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services;
+using System.ComponentModel.DataAnnotations;
 using WebApp.Helpers;
 
 namespace WebApp.Pages.CardManagment
@@ -26,7 +27,7 @@ namespace WebApp.Pages.CardManagment
         public bool? IsEdited { get; set; }
 
 
-        public void OnGet(long cardId)
+        public void OnGet([Required]long cardId)
         {
             if (ModelState.IsValid)
             {
@@ -40,9 +41,9 @@ namespace WebApp.Pages.CardManagment
             {
                 Input.Card.Images
                     .AddRange(new FileHelper(_webHostEnvironment)
-                    .SaveCardImages(Input.Images).Select(fn => new CardImage() { FileName = fn }));
+                    .SaveCardImages(Input.Images).Select(fn => new CardImageDto() { FileName = fn }));
 
-                _cardService.Edit(Input.Card);
+                _cardService.Update(Input.Card);
 
                 Input.Card = _cardService.Get(Input.Card.Id);
 
@@ -55,7 +56,7 @@ namespace WebApp.Pages.CardManagment
 
         public class InputModel
         {
-            public Card Card { get; set; }
+            public CardDto Card { get; set; }
             public IFormFile[] Images { get; set; }
         }
     }

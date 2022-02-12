@@ -1,4 +1,4 @@
-﻿using Entities;
+﻿using DTOs;
 
 namespace WebApp.ViewModels
 {
@@ -6,6 +6,6 @@ namespace WebApp.ViewModels
     {
         public bool IsForEdit { get; set; }
 
-        public ICollection<CardImage> Images { get; set; }
+        public ICollection<CardImageDto> Images { get; set; }
     }
 }

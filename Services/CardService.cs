@@ -1,12 +1,9 @@
-﻿using DataAccess;
+﻿using AutoMapper;
+using DataAccess;
+using DTOs;
 using Entities;
 using Logic;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services
 {
@@ -14,55 +11,63 @@ namespace Services
     {
         private readonly AppDbContext _context;
         private readonly CardLogic _cardLogic;
+        private readonly IMapper _mapper;
 
-        public CardService(AppDbContext context, CardLogic cardLogic)
+        public CardService(AppDbContext context, CardLogic cardLogic, IMapper mapper)
         {
             this._context = context;
             this._cardLogic = cardLogic;
+            this._mapper = mapper;
         }
 
-        public int Add(Card card)
+        public int Add(CardDto cardDto)
         {
+            var card = _mapper.Map<Card>(cardDto);
             _context.Add(card);
             return _context.SaveChanges();
         }
 
-        public void Delete(int cardId)
+        public CardDto Delete(long cardId)
         {
-            Card card = Get(cardId);
-            Delete(card);
-        }
-
-        public void Delete(Card card)
-        {
+            Card card = GetCard(cardId);
             _context.Remove(card);
             _context.SaveChanges();
+            return _mapper.Map<CardDto>(card);
         }
 
-        public Card Get(long cardId)
-        {
-            return _context.Set<Card>().Include(c => c.Images.OrderBy(i => i.Id)).Single(c => c.Id == cardId);
-        }
+        public void Delete(CardDto cardDto) => Delete(cardDto.Id);
 
-        public int Edit(Card card)
+        //private main get 
+        private Card GetCard(long cardId) =>
+            _context.Set<Card>().Include(c => c.Images.OrderBy(i => i.Id)).Single(c => c.Id == cardId);
+
+        public CardDto Get(long cardId) => _mapper.Map<CardDto>(GetCard(cardId));
+
+
+        public int Update(CardDto cardDto)
         {
-            _context.Update(card);
+            var dbCard = GetCard(cardDto.Id);
+            dbCard.Answer = cardDto.Answer;
+            dbCard.Question = cardDto.Question;
+            dbCard.Images.AddRange(cardDto.Images.Select(i => _mapper.Map<CardImage>(i)));
+
             return _context.SaveChanges();
         }
 
-        public Card GetOneOfTodayReviewCards(long deckId)
+        public CardDto GetOneOfTodayReviewCards(long deckId)
         {
             var card = _context.Set<Card>()
                 .Include(c => c.Images.OrderBy(i => i.Id))
                 .OrderBy(card => card.NextReviewDate)
                 .FirstOrDefault(card => card.DeckId == deckId /*&& card.NextReviewDate <= DateTime.Now*/);
-            return card;
+            return _mapper.Map<CardDto>(card);
         }
 
-        public Card UpdateNextReviewForCorrectAnswer(long cardId, int quality)
+        public CardDto UpdateNextReviewForCorrectAnswer(long cardId, int quality)
         {
             var card = _context.Set<Card>()
                 .FirstOrDefault(card => card.Id == cardId);
+
             if (card != null)
             {
                 //card.NextReviewDate = _cardLogic.GetNextReviewDate(card);
@@ -76,7 +81,7 @@ namespace Services
                 _context.SaveChanges();
             }
 
-            return card;
+            return _mapper.Map<CardDto>(card);
         }
 
         public
@@ -86,14 +91,7 @@ namespace Services
             int GoodInterval,
             int EasyIntervral
             )
-            GetAnswerIntervals(Card card)
-        {
-            int idontknowInterval = _cardLogic.calculateSuperMemo2Algorithm(card, 0).Interval;
-            int hardInterval = _cardLogic.calculateSuperMemo2Algorithm(card, 1).Interval;
-            int goodInterval = _cardLogic.calculateSuperMemo2Algorithm(card, 2).Interval;
-            int easyIntervarl = _cardLogic.calculateSuperMemo2Algorithm(card, 3).Interval;
-            return (idontknowInterval, hardInterval, goodInterval, easyIntervarl);
-        }
+            GetAnswerIntervals(CardDto cardDto) => GetAnswerIntervals(cardDto.Id);
 
         public
             (
@@ -104,9 +102,14 @@ namespace Services
             )
             GetAnswerIntervals(long cardId)
         {
-            Card card = Get(cardId);
-            return GetAnswerIntervals(card);
+            Card card = GetCard(cardId);
+            int idontknowInterval = _cardLogic.calculateSuperMemo2Algorithm(card, 0).Interval;
+            int hardInterval = _cardLogic.calculateSuperMemo2Algorithm(card, 1).Interval;
+            int goodInterval = _cardLogic.calculateSuperMemo2Algorithm(card, 2).Interval;
+            int easyIntervarl = _cardLogic.calculateSuperMemo2Algorithm(card, 3).Interval;
+            return (idontknowInterval, hardInterval, goodInterval, easyIntervarl);
         }
+
 
         public
             (
@@ -115,8 +118,19 @@ namespace Services
             string GoodIntervalString,
             string EasyIntervralString
             )
-           GetAnswerIntervalStrings(Card card)
+           GetAnswerIntervalStrings(CardDto cardDto) => GetAnswerIntervalStrings(cardDto.Id);
+
+        public
+            (
+            string IDontKnowIntervalString,
+            string HardIntervalString,
+            string GoodIntervalString,
+            string EasyIntervralString
+            )
+           GetAnswerIntervalStrings(long cardId)
         {
+            Card card = GetCard(cardId);
+
             string ConvertDaysToAppropriateString(int days)
             {
                 if (days == 0)
@@ -135,7 +149,7 @@ namespace Services
                 return $"{(double)days / 360:0.00} {((int)numberOfyears == 1 ? "year" : "years")}";
             }
 
-            var intervalsResult = GetAnswerIntervals(card);
+            var intervalsResult = GetAnswerIntervals(card.Id);
 
             return
                 (

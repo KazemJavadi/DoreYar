@@ -1,15 +1,15 @@
-﻿using Entities;
+﻿using DTOs;
 
 namespace WebApp.ViewModels
 {
     public class AddNewEditCardPartialViewModel
     {
         public bool IsForEdit { get; set; }
-        public InputModel Input { get; set; } = new ();
+        public InputModel Input { get; set; } = new();
 
         public class InputModel
         {
-            public Card Card { get; set; } = new ();
+            public CardDto Card { get; set; } = new();
             public IFormFile[] Images { get; set; }
         }
     }

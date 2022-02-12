@@ -1,8 +1,14 @@
 ﻿@model SuccessErrorPartialViewModel
 @{
+    string alertType = Model.MessageType switch
+    {
+        MessageType.Success => "alert-success",
+        MessageType.Error => "alert-danger",
+        _ => ""
+    };
 }
 
-<div class="alert alert-success alert-dismissible fade show mt-4 mb-0 shadow" role="alert">
+<div class="alert @alertType alert-dismissible fade show mt-4 mb-0 shadow" role="alert">
     @switch (@Model.MessageType)
     {
         case MessageType.Success:

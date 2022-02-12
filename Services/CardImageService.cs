@@ -1,39 +1,33 @@
-﻿using DataAccess;
+﻿using AutoMapper;
+using DataAccess;
+using DTOs;
 using Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services
 {
     public class CardImageService
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public CardImageService(AppDbContext context)
+        public CardImageService(AppDbContext context, IMapper mapper)
         {
             this._context = context;
+            this._mapper = mapper;
         }
 
-        public CardImage Get(long id)
-        {
-            return _context.Set<CardImage>().Find(id);
-        }
+        private CardImage GetCardImage(long id) => _context.Set<CardImage>().Find(id);
 
-        public CardImage Delete(long imageId)
-        {
-            CardImage cardImage = Get(imageId);
-            return Delete(cardImage);   
-        }
+        public CardImageDto Get(long id) => _mapper.Map<CardImageDto>(GetCardImage(id));
 
-
-        public CardImage Delete(CardImage cardImage)
+        public CardImageDto Delete(long imageId)
         {
+            CardImage cardImage = GetCardImage(imageId);
             _context.Remove(cardImage);
             _context.SaveChanges();
-            return cardImage;   
+            return _mapper.Map<CardImageDto>(cardImage);
         }
+
+        public CardImageDto Delete(CardImageDto cardImageDto) => Delete(cardImageDto.Id);
     }
 }

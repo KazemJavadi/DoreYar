@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.Text.RegularExpressions;
-
-namespace WebApp.Helpers
+﻿namespace WebApp.Helpers
 {
     public class FileHelper
     {

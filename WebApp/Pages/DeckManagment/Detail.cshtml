@@ -9,7 +9,7 @@
 }
 
 <div class="border border-dark rounded p-4 mb-4 mt-4 shadow">
-    <a asp-page="@Pages.IndexModel.Path" class="btn btn-outline-primary"><i class="fas fa-chevron-left"></i> Back</a>
+    <a asp-page="@Pages.IndexModel.AbsolutePath" class="btn btn-outline-primary"><i class="fas fa-chevron-left"></i> Back</a>
     <a asp-page="@DeckManagment.ReviewModel.AbsolutePath" asp-route-DeckId="@Model.Deck.Id" class="btn btn-outline-primary "><i class="fas fa-book-reader"></i> Today review</a>
 </div>
 
@@ -30,14 +30,14 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>@nameof(Card.Question)</th>
-                    <th>@nameof(Card.Answer)</th>
+                    <th>Question</th>
+                    <th>Answer</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (Card card in Model.Deck.Cards)
+                @foreach (CardDto card in Model.Deck.Cards)
                 {
                     int maxAnswerLength = 20;
                     string cleanAnsewerText = TextHelper.StripHTML(card.Answer);

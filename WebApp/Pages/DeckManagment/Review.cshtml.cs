@@ -1,5 +1,4 @@
-using Entities;
-using Logic;
+using DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services;
@@ -21,7 +20,7 @@ namespace WebApp.Pages.DeckManagment
         [BindProperty(SupportsGet = true)]
         public long DeckId { get; set; }
 
-        public Card ReviewCard { get; set; }
+        public CardDto ReviewCard { get; set; }
 
         public string IdontKnowIntervarlString { get; set; }
         public string VeryHardIntervalString { get; set; }

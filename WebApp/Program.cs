@@ -1,8 +1,10 @@
+using AutoMapper;
 using DataAccess;
 using Hellang.Middleware.ProblemDetails;
 using Logic;
 using Microsoft.EntityFrameworkCore;
 using Services;
+using System.Reflection;
 using WebApp.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +29,7 @@ builder.Services.AddScoped<CardImageService>();
 builder.Services.AddScoped<CardLogic>();
 builder.Services.AddScoped<AppDbContext, AppDbContext>();
 builder.Services.AddScoped<FileHelper, FileHelper>();
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(DeckSerivce)));
 builder.Services.AddProblemDetails(options =>
 {
     options.IsProblem = httpContext => new ProblemDetailsMiddlewareHelper().IsProblem(httpContext);

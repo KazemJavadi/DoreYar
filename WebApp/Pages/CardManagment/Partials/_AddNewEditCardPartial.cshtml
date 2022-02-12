@@ -6,15 +6,15 @@
 }
 
 <input asp-for="Input.Card.Question" class="form-control" placeholder="Your question" />
+<span asp-validation-for="Input.Card.Question" class="text-danger"></span>
 <br />
-@*<div id="Input_Card_Answer2" name="Input.Card.Answer2" class="border border-dark rounded"></div>
-*@
 
 <div id="editor" class="form-control border rounded-2">
     @Html.Raw(Model.Input.Card.Answer)
 </div>
 
 <textarea hidden asp-for="Input.Card.Answer" class="form-control" rows="4" placeholder="Your answer to question"></textarea>
+<span asp-validation-for="Input.Card.Answer"></span>
 
 <br />
 <input asp-for="Input.Images" class="form-control mb-4">

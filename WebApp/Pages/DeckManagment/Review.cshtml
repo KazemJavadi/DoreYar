@@ -9,15 +9,6 @@
             };
 }
 
-@*<div class="border border-dark rounded p-1 ps-4 mt-4 mb-4 shadow">
-    <h1 class="h1 display-6 text-muted">Review</h1>
-    </div>*@
-@*<div class="border border-dark rounded p-4 mt-4 mb-4 shadow">
-    <div class="progress" style="height: 1pt;">
-    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-    </div>
-    </div>*@
-
 <div class="border border-dark rounded p-4 mt-4 mb-4 shadow">
 
     @if (Model.ReviewCard == null)
@@ -27,7 +18,7 @@
     else
     {
         <div class="card border-primary mb-2">
-            <div class="card-header bg-primary text-white"><strong><i class="far fa-question-circle"></i> Question - @Model.ReviewCard.EasinessFactor - @Model.ReviewCard.NextReviewDate - (@Model.ReviewCard.Repetitions)</strong></div>
+            <div class="card-header bg-primary text-white"><strong><i class="far fa-question-circle"></i> Question @*- @Model.ReviewCard.EasinessFactor - @Model.ReviewCard.NextReviewDate - (@Model.ReviewCard.Repetitions)*@</strong></div>
             <div class="card-body bg-light">
                 <p class="card-text fs-2">@Model.ReviewCard.Question</p>
             </div>
@@ -64,7 +55,7 @@
 </div>
 
 
-<a asp-page="@Pages.IndexModel.Path" class="btn btn-outline-primary shadow"><i class="fas fa-chevron-left"></i> Back</a>
+<a asp-page="@Pages.IndexModel.AbsolutePath" class="btn btn-outline-primary shadow"><i class="fas fa-chevron-left"></i> Back</a>
 
 
 @section Scripts

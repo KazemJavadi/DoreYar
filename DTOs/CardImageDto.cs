@@ -1,6 +1,6 @@
-﻿namespace Entities
+﻿namespace DTOs
 {
-    public class CardImage
+    public class CardImageDto
     {
         public long Id { get; set; }
         public string FileName { get; set; }

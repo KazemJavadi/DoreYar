@@ -1,7 +1,5 @@
-﻿using Entities;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Services;
-using WebApp.Helpers;
 
 namespace WebApp.Controllers
 {
@@ -18,23 +16,23 @@ namespace WebApp.Controllers
             this._webHostEnvironment = webHostEnvironment;
         }
 
-        //Add
-        [HttpPost]
-        public RedirectResult Add(InputModel input)
-        {
-            if (ModelState.IsValid
-                && !string.IsNullOrWhiteSpace(input.Card.Question)
-                && !string.IsNullOrWhiteSpace(input.Card.Answer))
-            {
-                input.Card.Images
-                      .AddRange(new FileHelper(_webHostEnvironment)
-                      .SaveCardImages(input.Images).Select(fn => new CardImage() { FileName = fn }));
+        ////Add
+        //[HttpPost]
+        //public RedirectResult Add(InputModel input)
+        //{
+        //    if (ModelState.IsValid
+        //        && !string.IsNullOrWhiteSpace(input.Card.Question)
+        //        && !string.IsNullOrWhiteSpace(input.Card.Answer))
+        //    {
+        //        input.Card.Images
+        //              .AddRange(new FileHelper(_webHostEnvironment)
+        //              .SaveCardImages(input.Images).Select(fn => new CardImage() { FileName = fn }));
 
-                _cardService.Add(input.Card);
-            }
+        //        _cardService.Add(input.Card);
+        //    }
 
-            return RedirectToReferer();
-        }
+        //    return RedirectToReferer();
+        //}
 
 
         //Delete
@@ -66,10 +64,6 @@ namespace WebApp.Controllers
         private RedirectResult RedirectToReferer() => Redirect(new Uri(Request.Headers["Referer"]).PathAndQuery);
 
 
-        public class InputModel
-        {
-            public Card Card { get; set; }
-            public IFormFile[] Images { get; set; }
-        }
+
     }
 }

@@ -1,4 +1,4 @@
-using Entities;
+using DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services;
@@ -53,7 +53,7 @@ namespace WebApp.Pages.DeckManagment
 
         public class InputModel
         {
-            public Deck Deck { get; set; }
+            public DeckDto Deck { get; set; }
             public IFormFile DeckHeaderImage { get; set; }
         }
     }

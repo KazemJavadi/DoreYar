@@ -1,6 +1,7 @@
-﻿using DataAccess;
+﻿using AutoMapper;
+using DataAccess;
+using DTOs;
 using Entities;
-using Logic;
 using Microsoft.EntityFrameworkCore;
 
 namespace Services
@@ -8,31 +9,30 @@ namespace Services
     public class DeckSerivce
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public DeckSerivce(AppDbContext context)
+        public DeckSerivce(AppDbContext context, IMapper mapper)
         {
             this._context = context;
+            this._mapper = mapper;
         }
 
-        public int Add(Deck deck)
+        public int Add(DeckDto deckDto)
         {
+            var deck = _mapper.Map<Deck>(deckDto);
             _context.Add(deck);
             return _context.SaveChanges();
         }
 
-        public int Delete(Deck deck)
+        public DeckDto Delete(DeckDto deckDto) => Delete(deckDto.Id);
+
+        public DeckDto Delete(long deckId)
         {
-            _context.Remove(deck);
-            return _context.SaveChanges();
+            Deck deck = GetDeck(deckId);
+            return _mapper.Map<DeckDto>(_context.Remove(deck).Entity);
         }
 
-        public int Delete(int deckId)
-        {
-            Deck deck = Get(deckId);
-            return Delete(deck);
-        }
-
-        public Deck Get(long deckId, bool loadCards = false, DeckCardsOptions options = null)
+        private Deck GetDeck(long deckId, bool loadCards = false, DeckCardsOptions options = null)
         {
             if (loadCards)
             {
@@ -54,14 +54,17 @@ namespace Services
                 return _context.Find<Deck>(deckId);
         }
 
-        public ICollection<Deck> GetAll()
-        {
-            return _context.Decks.ToList();
-        }
+        public DeckDto Get(long deckId, bool loadCards = false, DeckCardsOptions options = null) =>
+            _mapper.Map<DeckDto>(GetDeck(deckId, loadCards, options));
 
-        public void Update(Deck deck)
+
+        public ICollection<DeckDto> GetAll() =>
+            _mapper.Map<ICollection<DeckDto>>(_context.Decks.ToList());
+
+        public void Update(DeckDto deckDto)
         {
-            _context.Update(deck);
+            var deck = _mapper.Map<Deck>(deckDto);
+            _context.Update(deckDto);
             _context.SaveChanges();
         }
     }

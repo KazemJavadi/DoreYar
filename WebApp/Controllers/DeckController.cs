@@ -1,4 +1,4 @@
-﻿using Entities;
+﻿using DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
@@ -14,7 +14,7 @@ namespace WebApp.Controllers
         }
 
         private const string DefaultRedirectToPageAddress = "/Index";
-        
+
         //Add
         //[HttpGet]
         //public RedirectToPageResult Add()
@@ -23,7 +23,7 @@ namespace WebApp.Controllers
         //}
 
         [HttpPost]
-        public RedirectToPageResult Add(Deck deck)
+        public RedirectToPageResult Add(DeckDto deck)
         {
             if (ModelState.IsValid)
             {
