@@ -1,5 +1,5 @@
-﻿document.getElementById('Input_Card_Answer').hidden = true;
-
+﻿var input_card_answer_element = document.getElementById('Input_Card_Answer');
+if (input_card_answer_element != null) input_card_answer_element.hidden = true;
 
 import BalloonEditor from '@ckeditor/ckeditor5-editor-balloon/src/ballooneditor';
 import EssentialsPlugin from '@ckeditor/ckeditor5-essentials/src/essentials';
@@ -26,6 +26,7 @@ import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
 import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
 import Clipboard from '@ckeditor/ckeditor5-clipboard/src/clipboard';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
+
 
 BalloonEditor
     .create(document.querySelector('#editor'), {
@@ -140,7 +141,10 @@ BalloonEditor
     //    console.error(error.stack);
     //});
 
-document.querySelector('#submit').addEventListener('click', () => {
-    document.getElementById('Input_Card_Answer').value = document.getElementById('editor').innerHTML;
+var submitButton = document.querySelector('#submit');
+if (submitButton != null) {
+    document.querySelector('#submit').addEventListener('click', () => {
+        document.getElementById('Input_Card_Answer').value = document.getElementById('editor').innerHTML;
+    }
+    );
 }
-);

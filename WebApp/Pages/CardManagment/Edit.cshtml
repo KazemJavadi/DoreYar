@@ -40,8 +40,8 @@ else if (Model.IsEdited is false)
 <div class="border border-dark rounded p-4 pt-2 mt-4 shadow">
 
     <h1 class="display-6">Edit card</h1>
-    <form method="post" enctype="multipart/form-data">
-
+@*    <form method="post" enctype="multipart/form-data">
+*@
         @*<div asp-validation-summary="All" class="text-danger"></div>*@
         @*
             <input asp-for="Input.Card.Id" hidden />
@@ -63,13 +63,8 @@ else if (Model.IsEdited is false)
 
         <partial name="/Pages/CardManagment/Partials/_AddNewEditCardPartialTemplate.cshtml" model="@addNewEditCardPartialViewModel" />
 
-
-        <partial name="/Pages/CardManagment/Partials/_ShowImagesPartial.cshtml" model="@showImagesPartialViewModel" />
-
-        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save changes</button>
-
-    </form>
-</div>
+@*    </form>
+*@</div>
 
 <a asp-page="@Pages.DeckManagment.DetailModel.AbsolutePath" asp-route-DeckId="@Model.Input.Card.DeckId" class="btn btn-outline-primary mt-4 shadow"><i class="fas fa-chevron-left"></i> Back</a>
 

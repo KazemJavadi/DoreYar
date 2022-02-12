@@ -5,6 +5,7 @@
 @if (Model.IsForEdit)
 {
     <form method="post" asp-page="@Pages.CardManagment.EditModel.AbsolutePath" enctype="multipart/form-data">
+        <input hidden asp-for="Input.Card.Id" />
         <input hidden asp-for="Input.Card.DeckId" />
         <partial name="_AddNewEditCardPartial.cshtml" model="Model" />
     </form>
@@ -18,3 +19,4 @@ else
 }
 
 
+<script src="/js/bundle.js" asp-append-version="true"></script>
