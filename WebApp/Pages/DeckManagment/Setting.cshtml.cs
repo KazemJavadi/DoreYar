@@ -38,7 +38,7 @@ namespace WebApp.Pages.DeckManagment
             {
                 if (Input.DeckHeaderImage != null)
                 {
-                    Input.Deck.DeckHeaderImageName =
+                    Input.Deck.HeaderImageName =
                         _fileHelper.SaveDeckHeader(Input.DeckHeaderImage);
                 }
 

@@ -19,29 +19,34 @@
         <input hidden asp-for="Input.Card.Id" value="0" />
         <input hidden asp-for="Input.Card.DeckId" value="@Model.DeckId" />
 
-        <input asp-for="Input.Card.Question" class="form-control rtl mt-2" placeholder="پرسش" value="" />
-        <span asp-validation-for="Input.Card.Question" class="text-danger rtl"></span>
+        <input asp-for="Input.Card.Question" class="form-control rtl mt-4" placeholder="پرسش" value="" />
+        <div class="rtl mt-1">
+            <span asp-validation-for="Input.Card.Question" class="text-danger rtl"></span>
+        </div>
 
-        <div id="editor" class="form-control border rounded-2 mt-2"></div>
+        <div id="editor" class="form-control border rounded-2 mt-3"></div>
         <textarea hidden asp-for="Input.Card.Answer" class="form-control" rows="4" placeholder="پاسخ خود را اینجا بنویسید ..." value=""></textarea>
-        <span asp-validation-for="Input.Card.Answer" class ="mt-2"style="visibility:visible;"></span>
 
-        <input asp-for="Input.Images" class="form-control mt-2 rtl" placeholder="گزینش فایل برای بارگذاری ...">
+        <div class="rtl mt-1">
+            <span asp-validation-for="Input.Card.Answer" class="text-danger rtl"></span>
+        </div>
+
+        <input asp-for="Input.Images" class="form-control mt-3 rtl" placeholder="گزینش فایل برای بارگذاری ...">
 
         <button id="submit" type="submit" class="btn btn-primary mt-4 rtl"><i class="fas fa-save"></i> ذخیره کارت</button>
     </form>
 </div>
 
 <div class="border border-dark rounded p-4 pt-2 mb-4 mt-4 shadow rtl">
-    <h2 class="display-6">کارت ها</h2>
+    <h4 class="pb-4 pt-4 rtl">کارت ها</h4>
 
     @if (@Model.Deck.Cards?.Count <= 0)
     {
-        <p>No cards found for this deck.</p>
+        <p class="mt-4">هیچ کارتی در این دسته یافت نشد</p>
     }
     else
     {
-        <table class="table table-striped">
+        <table class="table table-striped mt-4">
             <thead>
                 <tr>
                     <th>پرسش</th>
@@ -92,4 +97,5 @@
 @section Scripts
 {
 <script src="/js/bundle.js" asp-append-version="true"></script>
+<partial name="_ValidationScriptsPartial"></partial>
 }

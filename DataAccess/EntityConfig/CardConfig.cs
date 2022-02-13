@@ -13,6 +13,7 @@ namespace DataAccess.EntityConfig
             builder.Property(p => p.Repetitions).IsRequired().HasDefaultValue(0);
             builder.Property(p => p.Interval).IsRequired().HasDefaultValue(1);
             builder.Property(p => p.EasinessFactor).IsRequired().HasDefaultValue(0);
+            builder.HasMany(p=>p.Images).WithOne().OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Entities.DbStrLenInfo;
 
 namespace DTOs
 {
@@ -10,10 +11,10 @@ namespace DTOs
         [Required]
         public long DeckId { get; set; }
         [Required(ErrorMessage = "پرسش را بنویسید")]
-        [StringLength(1000)]
+        [StringLength(DbStrMaxLen.CardQuestionLen)]
         public string Question { get; set; }
         [Required(ErrorMessage = "پاسخ را بنویسید")]
-        [StringLength(int.MaxValue)]
+        [StringLength(DbStrMaxLen.CardAnswerLen)]
         public string Answer { get; set; }
 
         public List<CardImageDto> Images { get; set; } = new();

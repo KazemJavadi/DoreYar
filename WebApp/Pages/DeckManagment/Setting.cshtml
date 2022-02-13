@@ -11,7 +11,7 @@
                     Message = "ویرایش انجام شد."
                 };
 
-    <partial name="_SuccessErrorMessagePartial" model="successErrorPartialViewModel"/>
+    <partial name="_SuccessErrorMessagePartial" model="successErrorPartialViewModel" />
 }
 else if (Model.IsEdited is false)
 {
@@ -25,27 +25,27 @@ else if (Model.IsEdited is false)
 }
 
 <div class="border border-dark rounded p-4 pt-2 mt-4 shadow">
-    <h1 class="pb-4 pt-4 rtl">تنظیمات بسته</h1>
+    <h4 class="mt-4 rtl">تنظیمات دسته ی کارت</h4>
     <form method="post" enctype="multipart/form-data">
         <input hidden asp-for="@Model.Input.Deck.Id" />
-        <input hidden asp-for="@Model.Input.Deck.DeckHeaderImageName" />
+        <input hidden asp-for="@Model.Input.Deck.HeaderImageName" />
 
-        <input asp-for="@Model.Input.Deck.Name" placeholder="نام بسته" class="form-control rtl" />
-        <span asp-validation-for="@Model.Input.Deck.Name" class="text-danger"></span>
-        <br />
-
-        <textarea asp-for="@Model.Input.Deck.Description" placeholder="بیشتر ..." class="form-control rtl"></textarea>
-        <br />
-
-        <input asp-for="@Model.Input.DeckHeaderImage" class="form-control rtl" />
-        <br />
+        <input asp-for="@Model.Input.Deck.Name" placeholder="نام دسته ی کارت" class="form-control mt-4 rtl" />
+        <div class="rtl mt-1">
+            <span asp-validation-for="@Model.Input.Deck.Name" class="text-danger"></span>
+        </div>
+        <textarea asp-for="@Model.Input.Deck.Description" placeholder="بیشتر ..." class="form-control mt-3 rtl"></textarea>
+        <div class="rtl mt-1">
+            <span asp-validation-for="@Model.Input.Deck.Description" class="text-danger"></span>
+        </div>
+        <input asp-for="@Model.Input.DeckHeaderImage" class="form-control mt-3 rtl" />
 
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-danger rtl float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <i class="fas fa-trash-alt"></i> پاک کردن بسته
+        <button type="button" class="btn btn-danger mt-4 rtl float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="fas fa-trash-alt"></i> پاک کردن دسته
         </button>
 
-        <button type="submit" class="btn btn-primary rtl"><i class="fas fa-save"></i> ذخیره تغییرات</button>
+        <button type="submit" class="btn btn-primary mt-4 rtl"><i class="fas fa-save"></i> ذخیره تغییرات</button>
 
 
         <!-- Modal -->

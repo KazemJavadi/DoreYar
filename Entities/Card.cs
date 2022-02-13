@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Entities.DbStrLenInfo;
 
 namespace Entities
 {
@@ -15,13 +16,11 @@ namespace Entities
         public DateTime RegDate => _regDate;
 
         [Required(ErrorMessage = "You must enter your qeustion")]
-        [MaxLength(1000)]
-        [StringLength(1000)]
+        [MaxLength(DbStrMaxLen.CardQuestionLen)]
         public string Question { get; set; }
 
         [Required(ErrorMessage = "You must enter your answer")]
         [Column(TypeName = "nvarchar(max)")]
-        [StringLength(int.MaxValue)]
         public string Answer { get; set; }
 
         public long Repetitions { get; set; }

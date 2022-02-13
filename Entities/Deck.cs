@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Entities.DbStrLenInfo;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
@@ -8,17 +9,15 @@ namespace Entities
     {
         public long Id { get; set; }
 
-        [Required(ErrorMessage = "You must enter the deck name")]
-        [MaxLength(500)]
-        [StringLength(200)]
+        [Required]
+        [MaxLength(DbStrMaxLen.DeckNameLen)]
         public string Name { get; set; }
 
-        [MaxLength(1000)]
-        [StringLength(1000)]
+        [MaxLength(DbStrMaxLen.DeckDescriptionLen)]
         public string Description { get; set; }
 
-        [MaxLength(200)]
-        public string DeckHeaderImageName { get; set; }
+        [MaxLength(DbStrMaxLen.DeckHeaderImageNameLen)]
+        public string HeaderImageName { get; set; }
 
         //Relationships
         public ICollection<Card> Cards { get; set; }

@@ -10,7 +10,7 @@ import ItalicPlugin from '@ckeditor/ckeditor5-basic-styles/src/italic';
 import BlockQuotePlugin from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import HeadingPlugin from '@ckeditor/ckeditor5-heading/src/heading';
 import ParagraphPlugin from '@ckeditor/ckeditor5-paragraph/src/paragraph';
-import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment'; 
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import List from '@ckeditor/ckeditor5-list/src/list';
 //import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
 import Highlight from '@ckeditor/ckeditor5-highlight/src/highlight';
@@ -129,20 +129,26 @@ BalloonEditor
         console.error(error);
     });
 
-    //.create(document.querySelector('#editor'), {
-    //    plugins: [Alignment],     // <--- MODIFIED
-    //})
-    //.then(editor => {
-    //    console.log('Editor was initialized', editor);
-    //})
-    //.catch(error => {
-    //    console.error(error.stack);
-    //});
+//.create(document.querySelector('#editor'), {
+//    plugins: [Alignment],     // <--- MODIFIED
+//})
+//.then(editor => {
+//    console.log('Editor was initialized', editor);
+//})
+//.catch(error => {
+//    console.error(error.stack);
+//});
 
 var submitButton = document.querySelector('#submit');
 if (submitButton != null) {
     document.querySelector('#submit').addEventListener('click', () => {
-        document.getElementById('Input_Card_Answer').value = document.getElementById('editor').innerHTML;
+        var innerHtml = document.getElementById('editor').innerHTML;
+        if (innerHtml.includes('<br data-cke-filler="true">')) {
+            document.getElementById('Input_Card_Answer').value = null;
+        }
+        else {
+            document.getElementById('Input_Card_Answer').value = innerHtml;
+        }
     }
     );
 }
