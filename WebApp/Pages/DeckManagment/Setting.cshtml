@@ -3,44 +3,64 @@
 @{
     ViewData["Title"] = $"Deck Setting - {Model.Input.Deck.Name}";
 }
+@if (Model.IsEdited is true)
+{
+    SuccessErrorPartialViewModel successErrorPartialViewModel = new()
+                {
+                    MessageType = MessageType.Success,
+                    Message = "ویرایش انجام شد."
+                };
 
-<div class="border border-dark rounded p-4 pt-2 mb-4 mt-4 shadow">
-    <h1 class="display-6 mb-4">Setting of deck</h1>
+    <partial name="_SuccessErrorMessagePartial" model="successErrorPartialViewModel"/>
+}
+else if (Model.IsEdited is false)
+{
+    SuccessErrorPartialViewModel successErrorPartialViewModel = new()
+                {
+                    MessageType = MessageType.Success,
+                    Message = "ویرایش انجام نشد."
+                };
+
+    <partial name="_SuccessErrorMessagePartial" model="successErrorPartialViewModel" />
+}
+
+<div class="border border-dark rounded p-4 pt-2 mt-4 shadow">
+    <h1 class="pb-4 pt-4 rtl">تنظیمات بسته</h1>
     <form method="post" enctype="multipart/form-data">
         <input hidden asp-for="@Model.Input.Deck.Id" />
         <input hidden asp-for="@Model.Input.Deck.DeckHeaderImageName" />
 
-        <input asp-for="@Model.Input.Deck.Name" placeholder="Deck name" class="form-control" />
+        <input asp-for="@Model.Input.Deck.Name" placeholder="نام بسته" class="form-control rtl" />
         <span asp-validation-for="@Model.Input.Deck.Name" class="text-danger"></span>
         <br />
 
-        <textarea asp-for="@Model.Input.Deck.Description" placeholder="Description..." class="form-control" ></textarea>
+        <textarea asp-for="@Model.Input.Deck.Description" placeholder="بیشتر ..." class="form-control rtl"></textarea>
         <br />
 
-        <input asp-for="@Model.Input.DeckHeaderImage" class="form-control" />
+        <input asp-for="@Model.Input.DeckHeaderImage" class="form-control rtl" />
         <br />
-
-        <button type="submit" class="btn btn-primary mt-4"><i class="fas fa-save"></i> Save changes</button>
 
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-danger mt-4 fa-pull-right" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <i class="fas fa-trash-alt"></i> Delete this deck
+        <button type="button" class="btn btn-danger rtl float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="fas fa-trash-alt"></i> پاک کردن بسته
         </button>
 
+        <button type="submit" class="btn btn-primary rtl"><i class="fas fa-save"></i> ذخیره تغییرات</button>
+
+
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade rtl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog @*modal-dialog-centered*@">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Delete deck</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="exampleModalLabel">پاک کردن بسته</h5>
                     </div>
                     <div class="modal-body">
-                        Are you sure for deleteing <strong>@Model.Input.Deck.Name</strong>?
+                        آیا برای پا کردن بسته ی <strong>@Model.Input.Deck.Name</strong> مطمئن هستید؟
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a asp-controller="Deck" asp-action="Delete" asp-route-DeckId="@Model.Input.Deck.Id" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Yes, delete</a>
+                    <div class="modal-footer float-start">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">نه، پاکش نمی کنم</button>
+                        <a asp-controller="Deck" asp-action="Delete" asp-route-DeckId="@Model.Input.Deck.Id" class="btn btn-danger"><i class="fas fa-trash-alt"></i> بله، پاکش می کنم</a>
                     </div>
                 </div>
             </div>
@@ -48,18 +68,11 @@
     </form>
 </div>
 
-@if (Model.IsEdited is true)
-{
-    <div class="alert alert-success mt-4 shadow">Your deck edited successfuly</div>
-}
-else if (Model.IsEdited is false)
-{
-    <div class="alert alert-danger mt-4">You deck is not edited</div>
-}
 
-<a asp-page="/Index" class="btn btn-outline-primary shadow"><i class="fas fa-chevron-left"></i> Back</a>
 
-@section Scripts 
+<a asp-page="/Index" class="btn btn-outline-primary shadow mt-4"><i class="fas fa-chevron-left"></i> برگشت</a>
+
+@section Scripts
 {
-    <partial name="_ValidationScriptsPartial" />
+<partial name="_ValidationScriptsPartial" />
 }

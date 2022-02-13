@@ -4,20 +4,20 @@
 
 @if (Model.Images != null && Model.Images.Count > 0)
 {
-    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-6">
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-6 float-" style="direction:ltr">
         @foreach (CardImageDto image in Model.Images)
         {
             string imagePath = $"{FileHelper.CardImagePath}/{image.FileName}";
 
             <div class="col mb-4">
-                <div class="card shadow-sm rounded-3" style="position: relative;">
+                <div class="card shadow-sm rounded-3 " style="position: relative;">
 
                     @if (@Model.IsForEdit)
                     {
                         <a asp-controller="Card" asp-action="DeletCardImage" asp-route-ImageId="@image.Id" class="btn btn-danger rounded shadow-lg border-2 border-dark" style="position:absolute; top:2pt; left:2pt; opacity:90%"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     }
 
-                    <a class="card-img-top" href="@imagePath" data-fancybox="gallery" data-caption="Caption Images 1">
+                    <a class="card-img-top" href="@imagePath" data-fancybox="gallery" @*data-caption="Caption Images 1"*@>
                         <img class="card-img-top" src="@imagePath" alt="Image Gallery" asp-append-version="true">
                     </a>
                 </div>

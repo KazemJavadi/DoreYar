@@ -6,11 +6,11 @@
 
     if (Model.IsEdited is true)
     {
-        message = new() { Message = "Your card is <strong>edited succssfully</strong>", MessageType = MessageType.Success };
+        message = new() { Message = "ویرایش انجام شد.", MessageType = MessageType.Success };
     }
     else
     {
-        message = new() { Message = "Your card <strong>is not edited!</strong>", MessageType = MessageType.Error };
+        message = new() { Message = "ویرایش انجام نشد.", MessageType = MessageType.Error };
     }
 
     AddNewEditCardPartialViewModel addNewEditCardPartialViewModel = new()
@@ -37,9 +37,9 @@ else if (Model.IsEdited is false)
 }
 
 
-<div class="border border-dark rounded p-4 pt-2 mt-4 shadow">
+<div class="border border-dark rounded p-4 pt-2 mt-4 shadow rtl">
 
-    <h1 class="display-6">Edit card</h1>
+    <h4 class="pb-4 pt-4">ویرایش کارت</h4>
 @*    <form method="post" enctype="multipart/form-data">
 *@
         @*<div asp-validation-summary="All" class="text-danger"></div>*@
@@ -66,9 +66,11 @@ else if (Model.IsEdited is false)
 @*    </form>
 *@</div>
 
-<a asp-page="@Pages.DeckManagment.DetailModel.AbsolutePath" asp-route-DeckId="@Model.Input.Card.DeckId" class="btn btn-outline-primary mt-4 shadow"><i class="fas fa-chevron-left"></i> Back</a>
+<a asp-page="@Pages.DeckManagment.DetailModel.AbsolutePath" asp-route-DeckId="@Model.Input.Card.DeckId" class="btn btn-outline-primary mt-4 shadow"><i class="fas fa-chevron-left"></i> برگشت</a>
 
 @section Scripts
 {
 <script src="~/lib/fancybox/jquery.fancybox.min.js" asp-append-version="true"></script>
+<partial name="_ValidationScriptsPartial"></partial>
+
 }

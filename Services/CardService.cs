@@ -134,19 +134,19 @@ namespace Services
             string ConvertDaysToAppropriateString(int days)
             {
                 if (days == 0)
-                    return "today";
+                    return "امروز";
 
                 if (days < 30)
-                    return $"{days} {(days <= 1 ? "day" : "days")}";
+                    return $"{days} {(days <= 1 ? "روز دیگه" : "روز دیگه")}";
 
                 if (days < 360)
                 {
                     double numberOfMonths = (double)days / 30;
-                    return $"{numberOfMonths:0.00} {((int)numberOfMonths == 1 ? "month" : "months")}";
+                    return $"{numberOfMonths:0.00} {((int)numberOfMonths == 1 ? "ماه دیگه" : "ماه دیگه")}";
                 }
 
                 double numberOfyears = (double)days / 360;
-                return $"{(double)days / 360:0.00} {((int)numberOfyears == 1 ? "year" : "years")}";
+                return $"{(double)days / 360:0.00} {((int)numberOfyears == 1 ? "سال دیگه" : "سال دیگه")}";
             }
 
             var intervalsResult = GetAnswerIntervals(card.Id);

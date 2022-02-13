@@ -9,17 +9,31 @@
 }
 
 <div class="border border-dark rounded p-4 mb-4 mt-4 shadow">
-    <a asp-page="@Pages.IndexModel.AbsolutePath" class="btn btn-outline-primary"><i class="fas fa-chevron-left"></i> Back</a>
-    <a asp-page="@DeckManagment.ReviewModel.AbsolutePath" asp-route-DeckId="@Model.Deck.Id" class="btn btn-outline-primary "><i class="fas fa-book-reader"></i> Today review</a>
+    <a asp-page="@Pages.IndexModel.AbsolutePath" class="btn btn-outline-primary"><i class="fas fa-chevron-left"></i> برگشت</a>
+    <a asp-page="@DeckManagment.ReviewModel.AbsolutePath" asp-route-DeckId="@Model.Deck.Id" class="btn btn-outline-primary "><i class="fas fa-book-reader"></i> دوره کردن کارت های امروز</a>
 </div>
 
 <div class="border border-dark rounded p-4 pt-2 mb-4 mt-4 shadow">
-    <h2 class="display-6">Add new card</h2>
-    <partial name="/Pages/CardManagment/Partials/_AddNewEditCardPartialTemplate.cshtml" model="@addNewEditCardPartialViewModel" />
+    <h4 class="pb-4 pt-4 rtl">افزودن کارت تازه </h4>
+    <form method="post" asp-page="@Pages.DeckManagment.DetailModel.AbsolutePath" asp-route-deckId="@Model.DeckId" enctype="multipart/form-data">
+        <input hidden asp-for="Input.Card.Id" value="0" />
+        <input hidden asp-for="Input.Card.DeckId" value="@Model.DeckId" />
+
+        <input asp-for="Input.Card.Question" class="form-control rtl mt-2" placeholder="پرسش" value="" />
+        <span asp-validation-for="Input.Card.Question" class="text-danger rtl"></span>
+
+        <div id="editor" class="form-control border rounded-2 mt-2"></div>
+        <textarea hidden asp-for="Input.Card.Answer" class="form-control" rows="4" placeholder="پاسخ خود را اینجا بنویسید ..." value=""></textarea>
+        <span asp-validation-for="Input.Card.Answer" class ="mt-2"style="visibility:visible;"></span>
+
+        <input asp-for="Input.Images" class="form-control mt-2 rtl" placeholder="گزینش فایل برای بارگذاری ...">
+
+        <button id="submit" type="submit" class="btn btn-primary mt-4 rtl"><i class="fas fa-save"></i> ذخیره کارت</button>
+    </form>
 </div>
 
-<div class="border border-dark rounded p-4 pt-2 mb-4 mt-4 shadow">
-    <h2 class="display-6">Deck details</h2>
+<div class="border border-dark rounded p-4 pt-2 mb-4 mt-4 shadow rtl">
+    <h2 class="display-6">کارت ها</h2>
 
     @if (@Model.Deck.Cards?.Count <= 0)
     {
@@ -30,10 +44,10 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Question</th>
-                    <th>Answer</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>پرسش</th>
+                    <th>پاسخ</th>
+                    <th>ویرایش</th>
+                    <th>پاک کردن</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,10 +60,10 @@
                     <tr>
                         <td>@card.Question</td>
                         <td>@answer</td>
-                        <td><a asp-page="@CardManagment.EditModel.AbsolutePath" asp-route-CardId="@card.Id"><i class="fas fa-edit"></i> Edit</a></td>
+                        <td><a asp-page="@CardManagment.EditModel.AbsolutePath" asp-route-CardId="@card.Id"><i class="fas fa-edit"></i> ویرایش</a></td>
                         <td>
                             <a style="color:red" asp-controller="Card" asp-action="Delete" asp-route-CardId="@card.Id">
-                                <i class="fas fa-trash-alt"></i> Delete
+                                <i class="fas fa-trash-alt"></i> پاک کردن
                             </a>
                         </td>
                     </tr>
@@ -74,3 +88,8 @@
     </div>
 
 </div>
+
+@section Scripts
+{
+<script src="/js/bundle.js" asp-append-version="true"></script>
+}

@@ -1,20 +1,46 @@
+@font-face {
+    font-family: IranYekan_Bold;
+    src: url(/font/iranyekanwebbold.woff2);
+}
+
+@font-face {
+    font-family: IranYekan_ExtraBold;
+    src: url(/font/iranyekanwebextrabold.woff);
+}
+
+@font-face {
+    font-family: IranYekan_Medium;
+    src: url(/font/iranyekanwebmedium.woff);
+}
+
+@font-face {
+    font-family: IranYekan_Regular;
+    src: url(/font/iranyekanwebregular.woff2);
+}
+
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    font-family: IranYekan_Regular;
+}
+
+
+.rtl {
+    direction: rtl;
 }
 
 

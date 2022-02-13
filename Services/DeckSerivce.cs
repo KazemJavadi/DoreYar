@@ -29,7 +29,9 @@ namespace Services
         public DeckDto Delete(long deckId)
         {
             Deck deck = GetDeck(deckId);
-            return _mapper.Map<DeckDto>(_context.Remove(deck).Entity);
+            _context.Remove(deck);
+            _context.SaveChanges();
+            return _mapper.Map<DeckDto>(deck);
         }
 
         private Deck GetDeck(long deckId, bool loadCards = false, DeckCardsOptions options = null)
@@ -64,7 +66,7 @@ namespace Services
         public void Update(DeckDto deckDto)
         {
             var deck = _mapper.Map<Deck>(deckDto);
-            _context.Update(deckDto);
+            _context.Update(deck);
             _context.SaveChanges();
         }
     }
