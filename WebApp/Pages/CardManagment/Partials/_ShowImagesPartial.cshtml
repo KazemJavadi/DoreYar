@@ -4,7 +4,7 @@
 
 @if (Model.Images != null && Model.Images.Count > 0)
 {
-    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-6 float-" style="direction:ltr">
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-6 " style="direction:ltr">
         @foreach (CardImageDto image in Model.Images)
         {
             string imagePath = $"{FileHelper.CardImagePath}/{image.FileName}";

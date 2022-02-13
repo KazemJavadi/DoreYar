@@ -37,34 +37,35 @@ else if (Model.IsEdited is false)
 }
 
 
-<div class="border border-dark rounded p-4 pt-2 mt-4 shadow rtl">
+<div class="border border-dark rounded p-4 pt-2 mt-4 shadow">
 
-    <h4 class="pb-4 pt-4">ویرایش کارت</h4>
-@*    <form method="post" enctype="multipart/form-data">
-*@
-        @*<div asp-validation-summary="All" class="text-danger"></div>*@
-        @*
-            <input asp-for="Input.Card.Id" hidden />
-            <input asp-for="Input.Card.DeckId" hidden />*@
+    <h4 class="mt-4 rtl">ویرایش کارت</h4>
 
-        @*<label asp-for="@Model.Card.Question"></label>*@
-        @*        <input asp-for="Input.Card.Question" placeholder="Question" class="form-control" />
-            <span asp-validation-for="Input.Card.Question" class="text-danger"></span>
-            <br />*@
+    <form method="post" enctype="multipart/form-data">
+        <input hidden asp-for="Input.Card.Id" />
+        <input hidden asp-for="Input.Card.DeckId" />
+        <input asp-for="Input.Card.Question" class="form-control rtl mt-4" placeholder="پرسش" />
+        <div class="rtl mt-1">
+            <span asp-validation-for="Input.Card.Question" class="text-danger rtl"></span>
+        </div>
 
-        @* <label asp-for="@Model.Card.Answer"></label>*@
-        @*        <textarea asp-for="Input.Card.Answer" placeholder="Answer" class="form-control" rows="4"></textarea>
-            <span asp-validation-for="Input.Card.Answer" class="text-danger"></span>
-            <br />
+        <div id="editor" class="form-control border rounded-2 mt-3">
+            @Html.Raw(@Model.Input.Card.Answer)
+        </div>
+        <textarea hidden asp-for="Input.Card.Answer" class="form-control" rows="4" placeholder="پاسخ خود را اینجا بنویسید ..."></textarea>
 
-            <input asp-for="Input.Images" class="form-control mb-4">
-            <br />
-        *@
+        <div class="rtl mt-1">
+            <span asp-validation-for="Input.Card.Answer" class="text-danger rtl"></span>
+        </div>
 
-        <partial name="/Pages/CardManagment/Partials/_AddNewEditCardPartialTemplate.cshtml" model="@addNewEditCardPartialViewModel" />
+        <input asp-for="Input.Images" class="form-control mt-3 mb-3 rtl" placeholder="گزینش فایل برای بارگذاری ...">
 
-@*    </form>
-*@</div>
+        <partial name="/Pages/CardManagment/Partials/_ShowImagesPartial.cshtml" model="showImagesPartialViewModel"></partial>
+
+        <button id="submit" type="submit" class="btn btn-primary mt-2 rtl"><i class="fas fa-save"></i> ذخیره تغییرات</button>
+    </form>
+
+</div>
 
 <a asp-page="@Pages.DeckManagment.DetailModel.AbsolutePath" asp-route-DeckId="@Model.Input.Card.DeckId" class="btn btn-outline-primary mt-4 shadow"><i class="fas fa-chevron-left"></i> برگشت</a>
 

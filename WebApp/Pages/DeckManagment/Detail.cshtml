@@ -14,7 +14,7 @@
 </div>
 
 <div class="border border-dark rounded p-4 pt-2 mb-4 mt-4 shadow">
-    <h4 class="pb-4 pt-4 rtl">افزودن کارت تازه </h4>
+    <h4 class="mt-4 rtl">افزودن کارت تازه </h4>
     <form method="post" asp-page="@Pages.DeckManagment.DetailModel.AbsolutePath" asp-route-deckId="@Model.DeckId" enctype="multipart/form-data">
         <input hidden asp-for="Input.Card.Id" value="0" />
         <input hidden asp-for="Input.Card.DeckId" value="@Model.DeckId" />
