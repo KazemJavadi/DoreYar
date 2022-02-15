@@ -16,25 +16,6 @@ namespace WebApp.Controllers
             this._webHostEnvironment = webHostEnvironment;
         }
 
-        ////Add
-        //[HttpPost]
-        //public RedirectResult Add(InputModel input)
-        //{
-        //    if (ModelState.IsValid
-        //        && !string.IsNullOrWhiteSpace(input.Card.Question)
-        //        && !string.IsNullOrWhiteSpace(input.Card.Answer))
-        //    {
-        //        input.Card.Images
-        //              .AddRange(new FileHelper(_webHostEnvironment)
-        //              .SaveCardImages(input.Images).Select(fn => new CardImage() { FileName = fn }));
-
-        //        _cardService.Add(input.Card);
-        //    }
-
-        //    return RedirectToReferer();
-        //}
-
-
         //Delete
         [HttpGet]
         public IActionResult Delete(int cardId)
@@ -62,8 +43,5 @@ namespace WebApp.Controllers
         }
 
         private RedirectResult RedirectToReferer() => Redirect(new Uri(Request.Headers["Referer"]).PathAndQuery);
-
-
-
     }
 }

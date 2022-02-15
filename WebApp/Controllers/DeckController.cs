@@ -15,12 +15,6 @@ namespace WebApp.Controllers
 
         private const string DefaultRedirectToPageAddress = "/Index";
 
-        //Add
-        //[HttpGet]
-        //public RedirectToPageResult Add()
-        //{
-        //    return RedirectToPage(DefaultRedirectToPageAddress);
-        //}
 
         [HttpPost]
         public RedirectToPageResult Add(DeckDto deck)
@@ -33,7 +27,6 @@ namespace WebApp.Controllers
             return RedirectToPage(DefaultRedirectToPageAddress);
         }
 
-        //Delete
         [HttpGet]
         public RedirectToPageResult Delete(int deckId)
         {
