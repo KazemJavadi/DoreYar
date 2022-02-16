@@ -60,7 +60,7 @@ else if (Model.IsEdited is false)
                     </div>
                     <div class="modal-footer float-start">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">نه، پاکش نمی کنم</button>
-                        <a asp-controller="Deck" asp-action="Delete" asp-route-DeckId="@Model.Input.Deck.Id" class="btn btn-danger"><i class="fas fa-trash-alt"></i> بله، پاکش می کنم</a>
+                        <a asp-page="@Pages.DeckManagment.SettingModel.AbsolutePath" asp-page-handler="DeckDelete" asp-route-DeckId="@Model.Input.Deck.Id" class="btn btn-danger"><i class="fas fa-trash-alt"></i> بله، پاکش می کنم</a>
                     </div>
                 </div>
             </div>

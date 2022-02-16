@@ -6,12 +6,14 @@
 
 <div class="border border-dark rounded p-4 pt-2 mb-4 mt-4 shadow rtl">
     <h4 class="mt-4 rtl">افزودن دسته ی تازه</h4>
-    <form method="post" asp-controller="Deck" asp-action="Add" class="">
+    <form method="post">
 
         <div class=" input-group mt-4 rtl">
-            <input type="text" id="Deck_Name" name="Deck.Name" placeholder="نام دسته" class="form-control rounded rtl" />
+            <input asp-for="Input.Deck.Name" placeholder="نام دسته" class="form-control rounded rtl" />
             <button type="submit" class="btn btn-primary rounded rtl me-1"><i class="fas fa-save"></i> انبار کردن</button>
+
         </div>
+        <span asp-validation-for="Input.Deck.Name" class="text-danger mt-1"></span>
     </form>
 </div>
 
@@ -68,17 +70,17 @@
 
                 @*<div class="modal fade" id="@modalId" tabindex="-1" aria-labelledby="@modalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content p-0">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="@modalLabel">Add new card to <strong>@deck.Name</strong></h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <partial name="/Pages/CardManagment/Partials/_AddNewEditCardPartialTemplate.cshtml" model="@addNewEditCardPartialViewModel" />
-                            </div>
-                        </div>
+                    <div class="modal-content p-0">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="@modalLabel">Add new card to <strong>@deck.Name</strong></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </div>*@
+                    <div class="modal-body">
+                    <partial name="/Pages/CardManagment/Partials/_AddNewEditCardPartialTemplate.cshtml" model="@addNewEditCardPartialViewModel" />
+                    </div>
+                    </div>
+                    </div>
+                    </div>*@
 
             }
         </div>

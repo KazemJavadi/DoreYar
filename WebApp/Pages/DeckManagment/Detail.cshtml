@@ -67,7 +67,12 @@
                         <td>@answer</td>
                         <td><a asp-page="@CardManagment.EditModel.AbsolutePath" asp-route-CardId="@card.Id"><i class="fas fa-edit"></i> ویرایش</a></td>
                         <td>
-                            <a style="color:red" asp-controller="Card" asp-action="Delete" asp-route-CardId="@card.Id">
+                            <a style="color:red" 
+                            asp-page="@Pages.DeckManagment.DetailModel.AbsolutePath" 
+                            asp-page-handler="CardDelete" 
+                            asp-route-CardId="@card.Id" 
+                            asp-route-DeckId = "@card.DeckId"
+                            asp-route-PageNumber="@Model.CurrentPageNmber">
                                 <i class="fas fa-trash-alt"></i> پاک کردن
                             </a>
                         </td>
@@ -79,7 +84,7 @@
 
     <hr />
 
-    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-toolbar ltr" role="toolbar" aria-label="Toolbar with button groups">
         <div class="btn-group me-2" role="group" aria-label="First group">
             @for (int i = 1; i <= Model.NumberOfPages; i++)
             {

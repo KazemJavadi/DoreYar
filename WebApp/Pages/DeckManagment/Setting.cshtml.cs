@@ -2,6 +2,7 @@ using DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services;
+using System.ComponentModel.DataAnnotations;
 using WebApp.Helpers;
 
 namespace WebApp.Pages.DeckManagment
@@ -30,6 +31,16 @@ namespace WebApp.Pages.DeckManagment
             {
                 Input.Deck = _deckSerivces.Get(deckId);
             }
+        }
+
+        public ActionResult OnGetDeckDelete([Required]long deckId)
+        {
+            if (ModelState.IsValid)
+            {
+                _deckSerivces.Delete(deckId);
+            }
+
+            return RedirectToPage("index");
         }
 
         public IActionResult OnPost()

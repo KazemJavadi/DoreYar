@@ -9,26 +9,40 @@ namespace WebApp.Pages
     {
         public static readonly string AbsolutePath = $"/{nameof(IndexModel).Replace("Model", "")}";
         private readonly ILogger<IndexModel> _logger;
-        private readonly DeckSerivce deckSerivce;
+        private readonly DeckSerivce _deckSerivce;
 
         public IndexModel(ILogger<IndexModel> logger, DeckSerivce deckSerivce)
         {
             _logger = logger;
-            this.deckSerivce = deckSerivce;
+            this._deckSerivce = deckSerivce;
         }
+
+        [BindProperty]
+        public InputModel Input { get; set; }
 
         public ICollection<DeckDto> Decks { get; private set; }
 
 
         public void OnGet()
         {
-
-
-            string realFilePath = Url.Page("/DeckManagment/Detail", new { DeckId = 2, PaqeNmber = 1 });
-            string physicalPath =
-                $"/{realFilePath.Remove(0, realFilePath.IndexOf("Pages") + 1 + "Pages".Length).Replace('.', '/').Replace("Model", string.Empty)}";
-            Decks = deckSerivce.GetAll();
+            Decks = _deckSerivce.GetAll();
         }
 
+
+        public ActionResult OnPost()
+        {
+            if (ModelState.IsValid)
+            {
+                _deckSerivce.Add(Input.Deck);
+            }
+
+            return RedirectToPage("index");
+        }
+
+
+        public class InputModel
+        {
+            public DeckDto Deck { get; set; }
+        }
     }
 }

@@ -25,10 +25,10 @@
         </div>
 
         <button id="showAnswer" class="btn btn-primary ms-1" onclick="showHideFunc()"><i class="fa fs-3">🙈</i><br />پاسخ رو نشون بده</button>
-        <a id="easyButton" style="display:none" class="btn btn-outline-success" asp-controller="Review" asp-action="Correct" asp-route-cardId="@Model.ReviewCard.Id" asp-route-quality="3"><strong><i class="fa fs-3">🥳</i><br />آسون بود</strong> <i>(@Model.IntervalStrings.Easy)</i></a>
-        <a id="goodButton" style="display:none" class="btn btn-outline-success" asp-controller="Review" asp-action="Correct" asp-route-cardId="@Model.ReviewCard.Id" asp-route-quality="2"><strong><i class="fa fs-3">😏</i><br />بلد بودم</strong> <i>(@Model.IntervalStrings.Good)</i></a>
-        <a id="hardButton" style="display:none" class="btn btn-outline-danger" asp-controller="Review" asp-action="Correct" asp-route-cardId="@Model.ReviewCard.Id" asp-route-quality="1"><strong><i class="fa fs-3">🧐</i><br />سخت بود خدایی</strong> <i>(@Model.IntervalStrings.Hard)</i></a>
-        <a id="againButton" style="display:none" class="btn btn-outline-danger" asp-controller="Review" asp-action="Correct" asp-route-cardId="@Model.ReviewCard.Id" asp-route-quality="0"><strong><i class="fa fs-3">🙄</i><br />بلد نبودم</strong> <i>(@Model.IntervalStrings.IDontKnow)</i></a>
+        <a id="easyButton" style="display:none" class="btn btn-outline-success" asp-page="@Pages.DeckManagment.ReviewModel.AbsolutePath" asp-route-deckId="@Model.ReviewCard.DeckId" asp-route-cardId="@Model.ReviewCard.Id" asp-route-quality="3"><strong><i class="fa fs-3">🥳</i><br />آسون بود</strong> <i>(@Model.IntervalStrings.Easy)</i></a>
+        <a id="goodButton" style="display:none" class="btn btn-outline-success" asp-page="@Pages.DeckManagment.ReviewModel.AbsolutePath" asp-route-deckId="@Model.ReviewCard.DeckId" asp-route-cardId="@Model.ReviewCard.Id" asp-route-quality="2"><strong><i class="fa fs-3">😏</i><br />بلد بودم</strong> <i>(@Model.IntervalStrings.Good)</i></a>
+        <a id="hardButton" style="display:none" class="btn btn-outline-danger" asp-page="@Pages.DeckManagment.ReviewModel.AbsolutePath" asp-route-deckId="@Model.ReviewCard.DeckId" asp-route-cardId="@Model.ReviewCard.Id" asp-route-quality="1"><strong><i class="fa fs-3">🧐</i><br />سخت بود خدایی</strong> <i>(@Model.IntervalStrings.Hard)</i></a>
+        <a id="againButton" style="display:none" class="btn btn-outline-danger" asp-page="@Pages.DeckManagment.ReviewModel.AbsolutePath" asp-route-deckId="@Model.ReviewCard.DeckId" asp-route-cardId="@Model.ReviewCard.Id" asp-route-quality="0"><strong><i class="fa fs-3">🙄</i><br />بلد نبودم</strong> <i>(@Model.IntervalStrings.IDontKnow)</i></a>
 
         <a id="incorrect" style="display:none" class="btn btn-danger"><i class="fa fa-times fa-lg" aria-hidden="true"></i> Incorrect</a>
 

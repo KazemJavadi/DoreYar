@@ -43,6 +43,10 @@ body {
     direction: rtl;
 }
 
+.ltr {
+    direction: ltr;
+}
+
 /** {
     border: 1px solid #000
 }

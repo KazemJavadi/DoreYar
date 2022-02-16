@@ -54,7 +54,7 @@ namespace Services
             return _context.SaveChanges();
         }
 
-        public CardDto GetOneOfTodayReviewCards(long deckId)
+        public CardDto GetNextCardForReview(long deckId)
         {
             var card = _context.Set<Card>()
                 .Include(c => c.Images.OrderBy(i => i.Id))
@@ -63,15 +63,14 @@ namespace Services
             return _mapper.Map<CardDto>(card);
         }
 
-        public CardDto UpdateNextReviewForCorrectAnswer(long cardId, int quality)
+        public CardDto UpdateNextReviewByCorrectAnswer(long cardId, int quality)
         {
-            var card = _context.Set<Card>()
-                .FirstOrDefault(card => card.Id == cardId);
+            var card = _context.Set<Card>().FirstOrDefault(card => card.Id == cardId);
 
             if (card != null)
             {
                 //card.NextReviewDate = _cardLogic.GetNextReviewDate(card);
-                var result = _cardLogic.calculateSuperMemo2Algorithm(card, quality);
+                var result = _cardLogic.CalculateKJAlgorithm(card, quality);
                 card.NextReviewDate = result.NextReviewDate;
                 card.Repetitions = result.Repetitons;
                 card.EasinessFactor = result.EasinessFactor;
@@ -103,10 +102,10 @@ namespace Services
             GetAnswerIntervals(long cardId)
         {
             Card card = GetCard(cardId);
-            int idontknowInterval = _cardLogic.calculateSuperMemo2Algorithm(card, 0).Interval;
-            int hardInterval = _cardLogic.calculateSuperMemo2Algorithm(card, 1).Interval;
-            int goodInterval = _cardLogic.calculateSuperMemo2Algorithm(card, 2).Interval;
-            int easyIntervarl = _cardLogic.calculateSuperMemo2Algorithm(card, 3).Interval;
+            int idontknowInterval = _cardLogic.CalculateKJAlgorithm(card, 0).Interval;
+            int hardInterval = _cardLogic.CalculateKJAlgorithm(card, 1).Interval;
+            int goodInterval = _cardLogic.CalculateKJAlgorithm(card, 2).Interval;
+            int easyIntervarl = _cardLogic.CalculateKJAlgorithm(card, 3).Interval;
             return (idontknowInterval, hardInterval, goodInterval, easyIntervarl);
         }
 

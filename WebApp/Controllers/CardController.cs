@@ -1,47 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DTOs;
+using Microsoft.AspNetCore.Mvc;
 using Services;
 
 namespace WebApp.Controllers
 {
-    public class CardController : Controller
+    [ApiController]
+    public class CardController : BaseController
     {
         private readonly CardService _cardService;
-        private readonly CardImageService _cardImageService;
-        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public CardController(CardService cardService, CardImageService cardImageService, IWebHostEnvironment webHostEnvironment)
+        public CardController(CardService cardService)
         {
             this._cardService = cardService;
-            this._cardImageService = cardImageService;
-            this._webHostEnvironment = webHostEnvironment;
         }
 
-        //Delete
-        [HttpGet]
-        public IActionResult Delete(int cardId)
-        {
-            if (ModelState.IsValid && cardId > 0)
-            {
-                _cardService.Delete(cardId);
-            }
-
-            if (cardId <= 0)
-                return NotFound();
-
-            return RedirectToReferer();
-        }
-
-
-        public IActionResult DeletCardImage(long imageId)
-        {
-            if (ModelState.IsValid)
-            {
-                _cardImageService.Delete(imageId);
-            }
-
-            return RedirectToReferer();
-        }
-
-        private RedirectResult RedirectToReferer() => Redirect(new Uri(Request.Headers["Referer"]).PathAndQuery);
+        //[HttpGet("get/[action]/{deckId}")]
+        //public IEnumerable<CardDto> All(long deckId)
+        //{
+        //    return _cardService.(deckId);
+        //}
     }
 }

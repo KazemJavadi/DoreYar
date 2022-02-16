@@ -1,4 +1,3 @@
-using AutoMapper;
 using DataAccess;
 using Hellang.Middleware.ProblemDetails;
 using Logic;
@@ -11,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages(); //Razor Pages
-
+builder.Services.AddControllersWithViews();
 builder.Services.AddControllers(); //WebAPI
 
 builder.Services.AddEndpointsApiExplorer(); //Swagger
@@ -23,12 +22,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     .UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 }, ServiceLifetime.Scoped); //DbContext 
 
-builder.Services.AddScoped<DeckSerivce, DeckSerivce>();
-builder.Services.AddScoped<CardService, CardService>();
+builder.Services.AddScoped<DeckSerivce>();
+builder.Services.AddScoped<CardService>();
 builder.Services.AddScoped<CardImageService>();
 builder.Services.AddScoped<CardLogic>();
-builder.Services.AddScoped<AppDbContext, AppDbContext>();
-builder.Services.AddScoped<FileHelper, FileHelper>();
+
+builder.Services.AddScoped<FileHelper>();
+
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(DeckSerivce)));
 builder.Services.AddProblemDetails(options =>
 {

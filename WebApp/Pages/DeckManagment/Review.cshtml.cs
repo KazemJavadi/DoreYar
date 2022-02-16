@@ -2,38 +2,53 @@ using DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services;
+using System.ComponentModel.DataAnnotations;
 using WebApp.Helpers;
 
 namespace WebApp.Pages.DeckManagment
 {
     public class ReviewModel : PageModel
     {
-        private readonly CardService cardService;
+        private readonly CardService _cardService;
 
         public static string AbsolutePath => RazorPageHelper.GetMyAbsolutePath();
 
         public ReviewModel(CardService cardService)
         {
-            this.cardService = cardService;
+            this._cardService = cardService;
         }
-
-        [BindProperty(SupportsGet = true)]
-        public long DeckId { get; set; }
 
         public CardDto ReviewCard { get; set; }
 
-        public string IdontKnowIntervarlString { get; set; }
-        public string VeryHardIntervalString { get; set; }
         public (string IDontKnow, string Hard, string Good, string Easy) IntervalStrings { get; set; }
 
 
-        public void OnGet()
+        public ActionResult OnGet([Required] long deckId, long? cardId, int? quality)
         {
-            ReviewCard = cardService.GetOneOfTodayReviewCards(DeckId);
-            if (ReviewCard != null)
+            if (ModelState.IsValid)
             {
-                IntervalStrings = cardService.GetAnswerIntervalStrings(ReviewCard);
+                ProcessAnswerToQuestion(cardId, quality);
+
+                ReviewCard = _cardService.GetNextCardForReview(deckId);
+
+                SetPageModelIntervalStrings(ReviewCard);
+
+                return Page();
             }
+
+            return RedirectToPage("index");
+        }
+
+        public void ProcessAnswerToQuestion(long? cardId, int? quality)
+        {
+            if (cardId is > 0 && quality is >= 0)
+                _cardService.UpdateNextReviewByCorrectAnswer(cardId.Value, quality.Value);
+        }
+
+        public void SetPageModelIntervalStrings(CardDto cardDto)
+        {
+            if (ReviewCard != null)
+                IntervalStrings = _cardService.GetAnswerIntervalStrings(cardDto);
         }
     }
 }

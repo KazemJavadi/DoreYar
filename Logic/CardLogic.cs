@@ -156,9 +156,8 @@ namespace Logic
         //    return (DateTime.Now.AddDays(i), r + 1, ef, i);
         //}
 
-        public
-            (DateTime NextReviewDate, long Repetitons, decimal EasinessFactor, int Interval)
-            calculateSuperMemo2Algorithm(Card card, int quality)
+        public (DateTime NextReviewDate, long Repetitons, decimal EasinessFactor, int Interval)
+            CalculateKJAlgorithm(Card card, int quality)
         {
             if (quality > 3) quality = 3;
             if (quality < 0) quality = 0;
@@ -172,9 +171,13 @@ namespace Logic
             int ceff = 2;
             int cef = 1;
 
+            //main formula
             ef = ((ef * r) + ((q + 1) / 4.0M)) / (r + 1);
+
+            //faster ef movement even if the r is big
             eff = ((ef) + ((q + 1) / 4.0M)) / 2;
             ef = (ef * cef + eff * ceff) / (cef + ceff);
+
 
             if (i == 0) i = 1;
 
@@ -182,17 +185,9 @@ namespace Logic
             {
                 i = 0;
             }
-            else if (q == 1)
+            else //q is 1 or 2 or 3
             {
                 i = (int)Math.Max(1M, Math.Round(i * q * ef));
-            }
-            else if (q == 2)
-            {
-                i = (int)Math.Max(2M, Math.Round(i * q * ef));
-            }
-            else
-            {
-                i = (int)Math.Max(3M, Math.Round(i * q * ef));
             }
 
             if (i > 200_000) i = 200_000;

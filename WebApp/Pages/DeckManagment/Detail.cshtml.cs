@@ -2,6 +2,7 @@ using DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services;
+using System.ComponentModel.DataAnnotations;
 using WebApp.Helpers;
 
 namespace WebApp.Pages.DeckManagment
@@ -24,7 +25,7 @@ namespace WebApp.Pages.DeckManagment
         [BindProperty]
         public InputModel Input { get; set; }
         [BindProperty(SupportsGet = true)]
-        public int DeckId { get; set; }
+        public long DeckId { get; set; }
         [BindProperty(SupportsGet = true)]
         public int PageNumber { get; set; }
 
@@ -42,6 +43,18 @@ namespace WebApp.Pages.DeckManagment
             }
 
             return RedirectToPage(Pages.IndexModel.AbsolutePath);
+        }
+
+        public void OnGetCardDelete([Required]long cardId, [Required] long deckId, [Required] int pageNumber)
+        {
+            if (ModelState.IsValid)
+            {
+                _cardService.Delete(cardId);
+            }
+
+            CurrentPageNmber = pageNumber;
+            DeckId = deckId;
+            LoadDeck();
         }
 
         public void OnPost()
