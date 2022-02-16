@@ -45,7 +45,7 @@ namespace WebApp.Pages.DeckManagment
             return RedirectToPage(Pages.IndexModel.AbsolutePath);
         }
 
-        public void OnGetCardDelete([Required]long cardId, [Required] long deckId, [Required] int pageNumber)
+        public void OnGetCardDelete([Required] long cardId, [Required] long deckId, [Required] int pageNumber)
         {
             if (ModelState.IsValid)
             {

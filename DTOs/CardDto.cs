@@ -1,6 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Entities.DbStrLenInfo;
+﻿using Entities.DbStrLenInfo;
+using System.ComponentModel.DataAnnotations;
 
 namespace DTOs
 {

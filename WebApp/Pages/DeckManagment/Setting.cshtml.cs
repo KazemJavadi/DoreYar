@@ -33,7 +33,7 @@ namespace WebApp.Pages.DeckManagment
             }
         }
 
-        public ActionResult OnGetDeckDelete([Required]long deckId)
+        public ActionResult OnGetDeckDelete([Required] long deckId)
         {
             if (ModelState.IsValid)
             {

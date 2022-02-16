@@ -27,7 +27,7 @@ namespace WebApp.Pages.CardManagment
         public bool? IsEdited { get; set; }
 
 
-        public void OnGet([Required]long cardId)
+        public void OnGet([Required] long cardId)
         {
             if (ModelState.IsValid)
             {

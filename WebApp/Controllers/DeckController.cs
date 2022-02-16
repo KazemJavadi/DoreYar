@@ -22,24 +22,24 @@ namespace WebApp.Controllers
         }
 
         [HttpGet("[action]/{deckId}")]
-        public ActionResult<DeckDto> Get([Required]int deckId)
+        public ActionResult<DeckDto> Get([Required] int deckId)
         {
             var deck = _deckService.Get(deckId);
-            
+
             if (deck == null)
                 return NotFound();
 
             return deck;
         }
 
-        //[HttpPost("[action]")]
-        //public ActionResult Add(DeckDto deck)
-        //{
-        //    if (_deckService.Add(deck) == 1)
-        //        return Ok();
-        //    else
-        //        return StatusCode(500);
-        //}
+        [HttpPost("[action]")]
+        public ActionResult Add(DeckDto deck)
+        {
+            if (_deckService.Add(deck) == 1)
+                return Ok();
+            else
+                return StatusCode(500);
+        }
 
         [HttpDelete("[action]/{deckId}")]
         public ActionResult Delete([Required] long deckId)
