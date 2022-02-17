@@ -8,7 +8,7 @@ namespace DataAccess
         public AppDbContext CreateDbContext(string[] args)
         {
             DbContextOptionsBuilder<AppDbContext> optionBuilder = new();
-            optionBuilder.UseSqlServer("server=.;database=YadYarDb;trusted_connection=true;");
+            optionBuilder.UseSqlServer("server=.;database=DoreYarDb;trusted_connection=true;");
             return new(optionBuilder.Options);
         }
     }

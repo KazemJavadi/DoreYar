@@ -5,29 +5,28 @@
 }
 
 <div class="border border-dark rounded p-4 pt-2 mb-4 mt-4 shadow rtl">
-    <h4 class="mt-4 rtl">افزودن دسته ی تازه</h4>
+
+          
+        <h4 class="mt-4 rtl "> افزودن دسته ی تازه</h4>
     <form method="post">
 
         <div class=" input-group mt-4 rtl">
             <input asp-for="Input.Deck.Name" placeholder="نام دسته" class="form-control rounded rtl" />
-            <button type="submit" class="btn btn-primary rounded rtl me-1"><i class="fas fa-save"></i> انبار کردن</button>
+            <button type="submit" class="btn btn-primary rounded rtl me-1"><i class="fas fa-save"></i> ذخیره کردن</button>
 
         </div>
         <span asp-validation-for="Input.Deck.Name" class="text-danger mt-1"></span>
     </form>
 </div>
 
-<div class="border border-dark rounded p-4 pt-2 shadow rtl">
-    <h4 class="mt-4 rtl">همه ی دسته ها</h4>
 
-    @if (@Model.Decks == null || @Model.Decks.Count <= 0)
-    {
-        <div>
-            <p class="mt-4">Not deck found</p>
-        </div>
-    }
-    else
-    {
+
+@if (Model.Decks != null && Model.Decks.Count > 0)
+{
+    <div class="border border-dark rounded p-4 pt-2 shadow rtl">
+        <h4 class="mt-4 rtl"> همه ی دسته ها</h4>
+
+
         <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 mt-4">
             @foreach (DeckDto deck in Model.Decks)
             {
@@ -84,6 +83,7 @@
 
             }
         </div>
-    }
+    </div>
 
-</div>
+}
+

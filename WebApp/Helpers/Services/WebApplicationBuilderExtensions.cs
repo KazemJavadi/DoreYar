@@ -9,8 +9,8 @@
             builder.Services.AddControllers(); //WebAPI
 
             builder.Services.AddDatabaseLayer(builder);
-            builder.Services.AddServiceLayer();
             builder.Services.AddLogicLayer();
+            builder.Services.AddServiceLayer();
             builder.Services.AddHelpers();
             builder.Services.AddOtherService();
 

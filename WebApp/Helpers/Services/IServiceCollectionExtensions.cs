@@ -50,7 +50,6 @@ namespace WebApp.Helpers.Services
 
             services.AddAutoMapper(Assembly.GetAssembly(typeof(DeckSerivce)));
 
-
             services.AddProblemDetails(options =>
             {
                 options.IsProblem = httpContext => new ProblemDetailsMiddlewareHelper().IsProblem(httpContext);

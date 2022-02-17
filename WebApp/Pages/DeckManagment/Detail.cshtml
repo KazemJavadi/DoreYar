@@ -1,23 +1,23 @@
 ﻿@page "/Deck/Detail"
 @model WebApp.Pages.DeckManagment.DetailModel
 @{
-    ViewData["Title"] = $"Deck Detial - {Model.Deck.Name}";
+    ViewData["Title"] = $"Deck Detial - {Model.CurrentDeck.Name}";
 
     AddNewEditCardPartialViewModel addNewEditCardPartialViewModel = new();
     addNewEditCardPartialViewModel.IsForEdit = false;
-    addNewEditCardPartialViewModel.Input.Card.DeckId = Model.Deck.Id;
+    addNewEditCardPartialViewModel.Input.Card.DeckId = Model.CurrentDeck.Id;
 }
 
-<div class="border border-dark rounded p-4 mb-4 mt-4 shadow">
+@*<div class="border border-dark rounded p-4 mb-4 mt-4 shadow">
     <a asp-page="@Pages.IndexModel.AbsolutePath" class="btn btn-outline-primary"><i class="fas fa-chevron-left"></i> برگشت</a>
-    <a asp-page="@DeckManagment.ReviewModel.AbsolutePath" asp-route-DeckId="@Model.Deck.Id" class="btn btn-outline-primary "><i class="fas fa-book-reader"></i> دوره کردن کارت های امروز</a>
+    <a asp-page="@DeckManagment.ReviewModel.AbsolutePath" asp-route-DeckId="@Model.CurrentDeck.Id" class="btn btn-outline-primary "><i class="fas fa-book-reader"></i> دوره کردن کارت های امروز</a>
 </div>
-
+*@
 <div class="border border-dark rounded p-4 pt-2 mb-4 mt-4 shadow">
-    <h4 class="mt-4 rtl">افزودن کارت تازه </h4>
-    <form method="post" asp-page="@Pages.DeckManagment.DetailModel.AbsolutePath" asp-route-deckId="@Model.DeckId" enctype="multipart/form-data">
+    <h4 class="mt-4 rtl"><i class="fa fa-plus"></i> افزودن کارت تازه </h4>
+    <form method="post" asp-page="@Pages.DeckManagment.DetailModel.AbsolutePath" asp-route-deckId="@Model.CurrentDeck.Id" asp-route-pageNumber="@Model.CurrentPageNmber" enctype="multipart/form-data">
         <input hidden asp-for="Input.Card.Id" value="0" />
-        <input hidden asp-for="Input.Card.DeckId" value="@Model.DeckId" />
+        <input hidden asp-for="Input.Card.DeckId" value="@Model.CurrentDeck.Id" />
 
         <input asp-for="Input.Card.Question" class="form-control rtl mt-4" placeholder="پرسش" value="" />
         <div class="rtl mt-1">
@@ -38,9 +38,9 @@
 </div>
 
 <div class="border border-dark rounded p-4 pt-2 mb-4 mt-4 shadow rtl">
-    <h4 class="pb-4 pt-4 rtl">کارت ها</h4>
+    <h4 class="pb-4 pt-4 rtl"><i class="fa fa-layer-group"></i> کارت ها</h4>
 
-    @if (@Model.Deck.Cards?.Count <= 0)
+    @if (@Model.CurrentDeck.Cards?.Count <= 0)
     {
         <p class="mt-4">هیچ کارتی در این دسته یافت نشد</p>
     }
@@ -56,7 +56,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (CardDto card in Model.Deck.Cards)
+                @foreach (CardDto card in Model.CurrentDeck.Cards)
                 {
                     int maxAnswerLength = 20;
                     string cleanAnsewerText = TextHelper.StripHTML(card.Answer);
@@ -92,7 +92,7 @@
                 string style = "btn-light";
                 if (isCurrentPageNumber) style = "btn-dark";
 
-                <a style=@style asp-page="@DeckManagment.DetailModel.AbsolutePath" asp-route-DeckId="@Model.Deck.Id" asp-route-PageNumber="@i" class="btn @style"><strong>@i</strong></a>
+                <a style=@style asp-page="@DeckManagment.DetailModel.AbsolutePath" asp-route-DeckId="@Model.CurrentDeck.Id" asp-route-PageNumber="@i" class="btn @style"><strong>@i</strong></a>
             }
         </div>
     </div>

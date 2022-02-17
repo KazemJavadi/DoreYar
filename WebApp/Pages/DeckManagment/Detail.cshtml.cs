@@ -24,60 +24,68 @@ namespace WebApp.Pages.DeckManagment
 
         [BindProperty]
         public InputModel Input { get; set; }
-        [BindProperty(SupportsGet = true)]
-        public long DeckId { get; set; }
-        [BindProperty(SupportsGet = true)]
-        public int PageNumber { get; set; }
 
 
-        public DeckDto Deck { get; set; }
+        public DeckDto CurrentDeck { get; set; }
         public int NumberOfPages { get; private set; }
-        public int CurrentPageNmber { get; private set; }
+        public long CurrentPageNmber { get; private set; }
 
-        public IActionResult OnGet()
-        {
-            if (ModelState.IsValid && DeckId > 0)
-            {
-                LoadDeck();
-                return Page();
-            }
-
-            return RedirectToPage(Pages.IndexModel.AbsolutePath);
-        }
-
-        public void OnGetCardDelete([Required] long cardId, [Required] long deckId, [Required] int pageNumber)
+        public ActionResult OnGet(
+            [Required, Range(1, long.MaxValue)] long? deckId,
+            [Required, Range(1, long.MaxValue)] int? pageNumber
+            )
         {
             if (ModelState.IsValid)
             {
-                _cardService.Delete(cardId);
+                LoadCurrentDeck(deckId.Value, pageNumber.Value);
+                return Page();
             }
 
-            CurrentPageNmber = pageNumber;
-            DeckId = deckId;
-            LoadDeck();
+            return RedirectToPage("index");
         }
 
-        public void OnPost()
+        public ActionResult OnGetCardDelete(
+            [Required, Range(1, long.MaxValue)] long? cardId,
+            [Required, Range(1, long.MaxValue)] long? deckId,
+            [Required, Range(1, long.MaxValue)] int? pageNumber)
         {
-            if (ModelState.IsValid
-              && !string.IsNullOrWhiteSpace(Input.Card.Question)
-              && !string.IsNullOrWhiteSpace(Input.Card.Answer))
+            if (ModelState.IsValid)
+            {
+                _cardService.Delete(cardId.Value);
+
+                LoadCurrentDeck(deckId.Value, pageNumber.Value);
+                CurrentPageNmber = pageNumber.Value;
+                return Page();
+            }
+
+            return RedirectToPage("index");
+        }
+
+        public ActionResult OnPost(
+            [Required, Range(1, long.MaxValue)] long? deckId,
+            [Required, Range(1, int.MaxValue)] int? pageNumber
+            )
+        {
+            if (ModelState.IsValid)
             {
                 Input.Card.Images
                       .AddRange(new FileHelper(_webHostEnvironment)
                       .SaveCardImages(Input.Images).Select(fn => new CardImageDto() { FileName = fn }));
 
                 _cardService.Add(Input.Card);
+
+                return RedirectToPage(new { deckId, pageNumber });
             }
 
-            LoadDeck();
+            return RedirectToPage("index");
         }
 
-        private DeckCardsOptions GetDeckCardsOptions(int pageNumber) => new() { PageSize = 5, PageNumber = pageNumber };
-        private void LoadDeck()
+        private DeckCardsOptions GetDeckCardsOptions(int pageNumber) => new() { PageSize = 10, PageNumber = pageNumber };
+
+        private void LoadCurrentDeck(long deckId, int currentPageNumber)
         {
-            var options = GetDeckCardsOptions(PageNumber);
-            Deck = _deckSerivce.Get(DeckId, true, options);
+            var options = GetDeckCardsOptions(currentPageNumber);
+            CurrentDeck = _deckSerivce.Get(deckId, true, options);
             NumberOfPages = options.NumberOfPages;
             CurrentPageNmber = options.PageNumber;
         }
