@@ -85,8 +85,8 @@ namespace WebApp.Pages.DeckManagment
         private void LoadCurrentDeck(long deckId, int currentPageNumber)
         {
             var options = GetDeckCardsOptions(currentPageNumber);
-            CurrentDeck = _deckSerivce.Get(deckId, true, options);
-            NumberOfPages = options.NumberOfPages;
+            CurrentDeck = _deckSerivce.Get(deckId, true, options, out int numberOfPages);
+            NumberOfPages = numberOfPages;
             CurrentPageNmber = options.PageNumber;
         }
 
