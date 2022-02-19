@@ -1,4 +1,6 @@
 ﻿@page "/Deck/Detail"
+@inject TextHelper textHelper
+
 @model WebApp.Pages.DeckManagment.DetailModel
 @{
     ViewData["Title"] = $"Deck Detial - {Model.CurrentDeck.Name}";
@@ -59,7 +61,7 @@
                 @foreach (CardDto card in Model.CurrentDeck.Cards)
                 {
                     int maxAnswerLength = 20;
-                    string cleanAnsewerText = TextHelper.StripHTML(card.Answer);
+                    string cleanAnsewerText = textHelper.StripHTML(card.Answer);
                     string answer = $"{cleanAnsewerText.Substring(0, cleanAnsewerText.Length > maxAnswerLength ? maxAnswerLength : cleanAnsewerText.Length)} ...";
 
                     <tr>
@@ -85,7 +87,7 @@
     <hr />
 
     <div class="btn-toolbar ltr" role="toolbar" aria-label="Toolbar with button groups">
-        <div class="btn-group me-2" role="group" aria-label="First group">
+        <div class="btn-grewrroup me-2" role="group" aria-label="First group">
             @for (int i = 1; i <= Model.NumberOfPages; i++)
             {
                 bool isCurrentPageNumber = i == Model.CurrentPageNmber;

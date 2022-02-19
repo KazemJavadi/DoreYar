@@ -4,7 +4,7 @@ namespace WebApp.Helpers
 {
     public class TextHelper
     {
-        public static string StripHTML(string input)
+        public string StripHTML(string input)
         {
             return Regex.Replace(input, "<.*?>", String.Empty);
         }
