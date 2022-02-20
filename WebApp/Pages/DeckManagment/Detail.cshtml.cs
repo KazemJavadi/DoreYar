@@ -77,7 +77,15 @@ namespace WebApp.Pages.DeckManagment
                 return RedirectToPage(new { deckId, pageNumber });
             }
 
-            return RedirectToPage("index");
+            if (deckId.HasValue && pageNumber.HasValue)
+            {
+                LoadCurrentDeck(deckId.Value, pageNumber.Value);
+                return Page();
+            }
+            else
+            {
+                return RedirectToPage("index"); 
+            }
         }
 
         private DeckCardsOptions GetDeckCardsOptions(int pageNumber) => new() { PageSize = 10, PageNumber = pageNumber };
