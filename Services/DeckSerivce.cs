@@ -43,6 +43,8 @@ namespace Services
             {
                 int total = _context.Set<Card>().Where(c => c.DeckId == deckId).Count();
                 numberOfPages = (total / options.PageSize) + (total % options.PageSize == 0 ? 0 : 1);
+                
+                if(numberOfPages == 0) numberOfPages = 1;
 
                 if (options.PageNumber > numberOfPages)
                     options.PageNumber = numberOfPages;
