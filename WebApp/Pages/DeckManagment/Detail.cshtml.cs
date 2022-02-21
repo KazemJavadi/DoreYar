@@ -28,7 +28,7 @@ namespace WebApp.Pages.DeckManagment
 
         public DeckDto CurrentDeck { get; set; }
         public int NumberOfPages { get; private set; }
-        public long CurrentPageNmber { get; private set; }
+        public long CurrentPageNmber { get; private set; } = 1;
 
         public ActionResult OnGet(
             [Required, Range(1, long.MaxValue)] long? deckId,

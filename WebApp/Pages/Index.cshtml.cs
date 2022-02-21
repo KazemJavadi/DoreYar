@@ -26,7 +26,7 @@ namespace WebApp.Pages
 
 
         public void OnGet()
-        so{
+        {
             Decks = _deckSerivce.GetAll();
         }
 
