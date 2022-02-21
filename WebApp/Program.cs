@@ -9,6 +9,28 @@ using WebApp.Helpers;
 //create new WebApplicationBuilder
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Host.ConfigureHostConfiguration(config =>
+{
+    //config.AddJsonFile(); !!!
+}).ConfigureAppConfiguration(config =>
+{
+    //config.AddJsonFile();
+    //config.AddXmlFile();
+    //config.AddEnvironmentVariables();
+    config.Build();
+}).ConfigureLogging((context, logging) =>
+{
+
+}).UseDefaultServiceProvider((context, options) =>
+{
+    bool isDevEnv = context.HostingEnvironment.IsDevelopment();
+
+    //Will validate scopes in all environments
+    options.ValidateScopes = isDevEnv;
+    //Checks that every registered service has all its dependencies regitered
+    options.ValidateOnBuild = isDevEnv;
+});
+
 //adding services to container
 builder.Services.AddRazorPages(); //Razor Pages
 builder.Services.AddControllers(); //WebAPI
@@ -19,18 +41,19 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     .UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 }, ServiceLifetime.Scoped);
 
-builder.Services.AddScoped<DeckSerivce>();
-builder.Services.AddScoped<CardService>();
-builder.Services.AddScoped<CardImageService>();
+builder.Services.AddScoped<DeckSerivce>()
+    .AddScoped<CardService>()
+    .AddScoped<CardImageService>()
+    .AddScoped<CardLogic>();
 
-builder.Services.AddScoped<CardLogic>();
+builder.Services.AddScoped<FileHelper>()
+    .AddScoped<TextHelper>();
 
-builder.Services.AddScoped<FileHelper>();
-builder.Services.AddScoped<TextHelper>();
+builder.Services.AddEndpointsApiExplorer() //Swagger
+    .AddSwaggerGen(); //Swagger
 
-builder.Services.AddEndpointsApiExplorer(); //Swagger
-builder.Services.AddSwaggerGen(); //Swagger
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(DeckSerivce)));
+
 builder.Services.AddProblemDetails(options =>
 {
     options.IsProblem = httpContext => new ProblemDetailsMiddlewareHelper().IsProblem(httpContext);

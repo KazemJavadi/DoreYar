@@ -10,11 +10,13 @@ namespace WebApp.Pages
         public static readonly string AbsolutePath = $"/{nameof(IndexModel).Replace("Model", "")}";
         private readonly ILogger<IndexModel> _logger;
         private readonly DeckSerivce _deckSerivce;
+        private readonly IConfiguration config;
 
-        public IndexModel(ILogger<IndexModel> logger, DeckSerivce deckSerivce)
+        public IndexModel(ILogger<IndexModel> logger, DeckSerivce deckSerivce, IConfiguration config)
         {
             _logger = logger;
             this._deckSerivce = deckSerivce;
+            this.config = config;
         }
 
         [BindProperty]
@@ -24,7 +26,7 @@ namespace WebApp.Pages
 
 
         public void OnGet()
-        {
+        so{
             Decks = _deckSerivce.GetAll();
         }
 
