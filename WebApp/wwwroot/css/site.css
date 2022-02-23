@@ -51,3 +51,17 @@ body {
 /** {
     border: 1px solid #000
 }*/
+
+.side-bar {
+    width: 20%;
+    height: 100%;
+    border-right: 2px solid black;
+    position: fixed;
+    background-color:yellow;
+}
+
+.main {
+    width: 80%;
+    height: 550px;
+    margin-left: 20%;
+}

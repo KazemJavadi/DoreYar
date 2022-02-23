@@ -6,7 +6,7 @@ namespace DataAccess
     {
         public static IConfiguration GetConfiguration() =>
             new ConfigurationBuilder()
-                .AddUserSecrets<AppDbContext>()
+                .AddUserSecrets<AppDbContext>(optional: false, reloadOnChange: true)
                 .Build();
     }
 }

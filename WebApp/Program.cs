@@ -9,31 +9,20 @@ using WebApp.Helpers;
 //create new WebApplicationBuilder
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Host.ConfigureHostConfiguration(config =>
-{
-    //config.AddJsonFile(); !!!
-}).ConfigureAppConfiguration(config =>
-{
-    //config.AddJsonFile();
-    //config.AddXmlFile();
-    //config.AddEnvironmentVariables();
-    config.Build();
-}).ConfigureLogging((context, logging) =>
-{
+//adding services to container
+builder.Services.AddRazorPages(); //Razor Pages
+builder.Services.AddControllers(); //WebAPI
 
-}).UseDefaultServiceProvider((context, options) =>
+builder.Host.UseDefaultServiceProvider((context, options) =>
 {
     bool isDevEnv = context.HostingEnvironment.IsDevelopment();
-
     //Will validate scopes in all environments
     options.ValidateScopes = isDevEnv;
     //Checks that every registered service has all its dependencies regitered
     options.ValidateOnBuild = isDevEnv;
 });
 
-//adding services to container
-builder.Services.AddRazorPages(); //Razor Pages
-builder.Services.AddControllers(); //WebAPI
+
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {

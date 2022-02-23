@@ -4,30 +4,62 @@
     ViewData["Title"] = "Dore Yar Home";
 }
 
-<div class="border border-dark rounded p-4 pt-2 mb-4 mt-4 shadow rtl">
+<div class="row">
 
-          
-        <h4 class="mt-4 rtl "> افزودن دسته ی تازه</h4>
-    <form method="post">
+    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 ">
 
-        <div class=" input-group mt-4 rtl">
-            <input asp-for="Input.Deck.Name" placeholder="نام دسته" class="form-control rounded rtl" />
-            <button type="submit" class="btn btn-primary rounded rtl me-1"><i class="fas fa-save"></i> ذخیره کردن</button>
+        <div class="border bg-white rounded p-4 pt-2 mt-4 shadow rtl">
+            <h4 class="mt-4 rtl "> افزودن دسته ی تازه</h4>
+            <form method="post">
+                <div class=" input-group mt-4 rtl">
+                    <input asp-for="Input.Deck.Name" placeholder="نام دسته" class="form-control rounded rtl" />
+                    <button type="submit" class="btn btn-primary rounded rtl me-1"><i class="fas fa-save"></i> ذخیره</button>
 
+                </div>
+                <span asp-validation-for="Input.Deck.Name" class="text-danger mt-1"></span>
+            </form>
         </div>
-        <span asp-validation-for="Input.Deck.Name" class="text-danger mt-1"></span>
-    </form>
-</div>
+
+        <div class="border bg-white rounded p-4 pt-2 mt-4 shadow rtl">
+            <h4 class="mt-4 rtl"><i class="fa fa-plus"></i> افزودن کارت تازه </h4>
+            <form method="post" enctype="multipart/form-data">
+
+                <input type="text" class="form-control rtl mt-4" placeholder="پرسش" value="" />
+                <div class="rtl mt-1">
+                    <span class="text-danger rtl"></span>
+                </div>
+
+                <div id="editor" class="form-control border rounded-2 mt-3"></div>
+                <textarea hidden class="form-control" rows="4" placeholder="پاسخ خود را اینجا بنویسید ..." value=""></textarea>
+
+                <div class="rtl mt-1">
+                    <span class="text-danger rtl"></span>
+                </div>
+
+                <input type="file" class="form-control mt-3 rtl" placeholder="گزینش فایل برای بارگذاری ...">
+
+                <button id="submit" type="submit" class="btn btn-primary mt-4 rtl"><i class="fas fa-save"></i> ذخیره کارت</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+
+
+        @if (Model.Decks.Count == 0)
+        {
+            <div class="border bg-white rounded p-4 pt-2 mt-4 shadow rtl">
+
+                <p class="mt-4">هنوز هیچ دسته ای نساخته اید.</p>
+                <p> برای ساختن دسته، نام دسته را در بخش افزودن دسته بنویسید و بر روی دکمه ی ذخیره را کلیک کنید.</p>
+            </div>
+        }
+
+        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-1 row-cols-xl-2 row-cols-xxl-2 mt-4">
 
 
 
-@if (Model.Decks != null && Model.Decks.Count > 0)
-{
-    <div class="border border-dark rounded p-4 pt-2 shadow rtl">
-        <h4 class="mt-4 rtl"> همه ی دسته ها</h4>
-
-
-        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 mt-4">
             @foreach (DeckDto deck in Model.Decks)
             {
                 string imagePath = string.Empty;
@@ -41,7 +73,7 @@
                 addNewEditCardPartialViewModel.Input.Card.DeckId = deck.Id;
 
                 <div class="col mb-4" dir:"ltr">
-                    <div class="card shadow-sm rounded-3">
+                    <div class="card shadow rounded-3">
                         <img class="card-img-top" src="@imagePath" alt="Card image cap" asp-append-version="true">
                         <div class="card-body">
                             <h5 class="card-title">@deck.Name</h5>
@@ -65,25 +97,8 @@
                         </div>
                     </div>
                 </div>
-
-
-                @*<div class="modal fade" id="@modalId" tabindex="-1" aria-labelledby="@modalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content p-0">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="@modalLabel">Add new card to <strong>@deck.Name</strong></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                    <partial name="/Pages/CardManagment/Partials/_AddNewEditCardPartialTemplate.cshtml" model="@addNewEditCardPartialViewModel" />
-                    </div>
-                    </div>
-                    </div>
-                    </div>*@
-
             }
         </div>
+
     </div>
-
-}
-
+</div>

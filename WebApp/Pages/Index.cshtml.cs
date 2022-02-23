@@ -10,7 +10,7 @@ namespace WebApp.Pages
         public static readonly string AbsolutePath = $"/{nameof(IndexModel).Replace("Model", "")}";
         private readonly ILogger<IndexModel> _logger;
         private readonly DeckSerivce _deckSerivce;
-        private readonly IConfiguration config;
+        public readonly IConfiguration config;
 
         public IndexModel(ILogger<IndexModel> logger, DeckSerivce deckSerivce, IConfiguration config)
         {

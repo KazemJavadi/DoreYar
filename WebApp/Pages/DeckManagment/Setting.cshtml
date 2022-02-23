@@ -24,7 +24,7 @@ else if (Model.IsEdited is false)
     <partial name="_SuccessErrorMessagePartial" model="successErrorPartialViewModel" />
 }
 
-<div class="border border-dark rounded p-4 pt-2 mt-4 shadow">
+<div class="border rounded p-4 pt-2 mt-4 shadow bg-white">
     <h4 class="mt-4 rtl">تنظیمات دسته ی کارت</h4>
     <form method="post" enctype="multipart/form-data">
         <input hidden asp-for="@Model.Input.Deck.Id" />

@@ -9,9 +9,9 @@
     <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/lib/fancybox/jquery.fancybox.min.css" rel="stylesheet" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/ckeditor-content-styles.css" type="text/css" asp-append-version="true" />
-
 </head>
-<body dir:rtl>
+@*style="background-image:url('/img/patterns/pipe.png');background-repeat:repeat;background-attachment: fixed;"*@
+<body dir:rtl class="bg-light" >
     <header>
         <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
@@ -50,11 +50,17 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="side-bar">
+
+    </div>
+    <div class="main">
+          <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
+    </div>
+  
 
     @*  <footer class="border-top footer text-muted">
         <div class="container">
