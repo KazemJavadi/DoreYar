@@ -9,58 +9,50 @@
     <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/lib/fancybox/jquery.fancybox.min.css" rel="stylesheet" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/ckeditor-content-styles.css" type="text/css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/StyleSheet.css" type="text/css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 @*style="background-image:url('/img/patterns/pipe.png');background-repeat:repeat;background-attachment: fixed;"*@
-<body dir:rtl class="bg-light" >
+<body dir:rtl class="bg-light">
+
+
+
+
     <header>
-        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-muted shadow rtl">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <a class="btn-circle btn-l btn btn-outline-primary" asp-page="index"><i class="fa fa-home"></i></a>
+               @* <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsupportedcontent" aria-controls="navbarsupportedcontent" aria-expanded="false" aria-label="toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                </button>*@
+                <div class="ltr" id="navbarsupportedcontent">
+                    <button class="btn-circle btn-l btn btn-outline-primary"><i class="fa fa-user"></i></button>
+                    <button class="btn-circle btn-l btn btn-outline-primary"><i class="fa fa-search"></i></button>
+
+
+                    @*<button class="btn btn-primary" data-bs-toggle="collapse" href="#collapsedecksection" role="button" aria-expanded="false" aria-controls="collapsedecksection">
+                        افزودن دسته تازه
+                    </button>
+                    <button class="btn btn-primary" data-bs-toggle="collapse" href="#collapsecardsection" role="button" aria-expanded="false" aria-controls="collapsecardsection">
+                        افزودن کارت تازه
+                    </button>*@
+                   @* <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="جستجوی دسته های دیگر" aria-label="search" style="width:500px;">
+                        <button class="btn btn-outline-success me-1" type="submit">جستجو</button>
+                    </form>*@
                 </div>
             </div>
         </nav>
     </header>
-    <div class="side-bar">
 
-    </div>
-    <div class="main">
-          <div class="container">
+    <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-    </div>
-  
+
+
 
     @*  <footer class="border-top footer text-muted">
         <div class="container">

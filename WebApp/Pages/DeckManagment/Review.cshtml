@@ -9,7 +9,7 @@
             };
 }
 
-<div class="border border-dark rounded p-4 mt-4 mb-4 shadow rtl">
+<div class="border border-dark rounded p-4 mt-4 mb-4 shadow rtl bg-white">
 
     @if (Model.ReviewCard == null)
     {
@@ -19,7 +19,7 @@
     {
         <div class="card border-primary mb-2">
             <div class="card-header bg-primary text-white"><strong><i class="far fa-question-circle"></i> پرسش @*- @Model.ReviewCard.EasinessFactor - @Model.ReviewCard.NextReviewDate - (@Model.ReviewCard.Repetitions)*@</strong></div>
-            <div class="card-body bg-light">
+            <div class="card-body bg-white">
                 <p class="card-text fs-2">@Model.ReviewCard.Question</p>
             </div>
         </div>
@@ -34,7 +34,7 @@
 
         <div id="answerDiv" style="display:none" class="card border-success mt-2">
             <div class="card-header bg-success text-white"><strong><i class="far fa-lightbulb"></i> پاسخ</strong></div>
-            <div class="card-body bg-light">
+            <div class="card-body bg-white">
 
                 <div class="ck-content" style="direction:rtl">
                     @Html.Raw(Model.ReviewCard.Answer)
