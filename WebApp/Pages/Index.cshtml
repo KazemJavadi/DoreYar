@@ -82,53 +82,31 @@
         addNewEditCardPartialViewModel.IsForEdit = false;
         addNewEditCardPartialViewModel.Input.Card.DeckId = deck.Id;
 
-        <div class="w-60 p-2 bg-white rounded-2xl shadow-xl" dir:"ltr">
-            <img class="h-40 object-cover rounded-xl" src="@imagePath" alt="Card image cap" asp-append-version="true">
-            <div class="p-2">
-                <h5 class="font-bold text-lg">@deck.Name</h5>
-                <p class="text-sm text-gray-600">@deck.Description</p>
+        <div class="col mb-4" dir:"ltr">
+            <div class="card shadow rounded-3 rtl">
+                <img class="card-img-top" src="@imagePath" alt="Card image cap" asp-append-version="true">
+                <div class="card-body">
+                    <h5 class="card-title">@deck.Name</h5>
+                    <p class="card-text">@deck.Description</p>
 
-                <a asp-page="@DeckManagment.ReviewModel.AbsolutePath" asp-route-DeckId="@deck.Id" class="btn btn-primary float-end"><i class="fas fa-book-reader"></i> کارت های امروز</a>
-                <div class="">
-                    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </button>
-                    <ul class="" aria-labelledby="dropdownMenuButton1">
-                        @{
-                            string modalId = $"AndNewCard{deck.Id}";
-                            string modalLabel = $"{modalId}Label";
-                        }
-                        <li class=""><a asp-page="@DeckManagment.DetailModel.AbsolutePath" asp-route-DeckId="@deck.Id" asp-route-PageNumber="1" class="dropdown-item rtl"><i class="fas fa-eye"></i> جزئیات </a></li>
-                        <li class=""><a asp-page="@DeckManagment.SettingModel.AbsolutePath" asp-route-DeckId="@deck.Id" class="dropdown-item rtl"><i class="fas fa-cog"></i> تنظیمات </a></li>
-                    </ul>
+                    <a asp-page="@DeckManagment.ReviewModel.AbsolutePath" asp-route-DeckId="@deck.Id" class="btn btn-primary float-end"><i class="fas fa-book-reader"></i> کارت های امروز</a>
+                    <div class="dropdown fa-pull-right float-start">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                        <ul class="dropdown-menu rtl" aria-labelledby="dropdownMenuButton1">
+                            @{
+                                string modalId = $"AndNewCard{deck.Id}";
+                                string modalLabel = $"{modalId}Label";
+                            }
+                            @*<li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#@modalId"><i class="fas fa-plus"></i> Add new card</button></li>*@
+                            <li class="float-end rounded"><a asp-page="@DeckManagment.DetailModel.AbsolutePath" asp-route-DeckId="@deck.Id" asp-route-PageNumber="1" class="dropdown-item rtl"><i class="fas fa-eye"></i> جزئیات </a></li>
+                            <li class="float-end rounded"><a asp-page="@DeckManagment.SettingModel.AbsolutePath" asp-route-DeckId="@deck.Id" class="dropdown-item rtl"><i class="fas fa-cog"></i> تنظیمات </a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-
-        @*<div class="col mb-4" dir:"ltr">
-            <div class="card shadow rounded-3 rtl">
-            <img class="card-img-top" src="@imagePath" alt="Card image cap" asp-append-version="true">
-            <div class="card-body">
-            <h5 class="card-title">@deck.Name</h5>
-            <p class="card-text">@deck.Description</p>
-
-            <a asp-page="@DeckManagment.ReviewModel.AbsolutePath" asp-route-DeckId="@deck.Id" class="btn btn-primary float-end"><i class="fas fa-book-reader"></i> کارت های امروز</a>
-            <div class="dropdown fa-pull-right float-start">
-            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-ellipsis-h"></i>
-            </button>
-            <ul class="dropdown-menu rtl" aria-labelledby="dropdownMenuButton1">
-            @{
-            string modalId = $"AndNewCard{deck.Id}";
-            string modalLabel = $"{modalId}Label";
-            }
-            <li class="float-end rounded"><a asp-page="@DeckManagment.DetailModel.AbsolutePath" asp-route-DeckId="@deck.Id" asp-route-PageNumber="1" class="dropdown-item rtl"><i class="fas fa-eye"></i> جزئیات </a></li>
-            <li class="float-end rounded"><a asp-page="@DeckManagment.SettingModel.AbsolutePath" asp-route-DeckId="@deck.Id" class="dropdown-item rtl"><i class="fas fa-cog"></i> تنظیمات </a></li>
-            </ul>
-            </div>
-            </div>
-            </div>
-            </div>*@
     }
 </div>
 

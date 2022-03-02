@@ -4,13 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />*@
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/lib/fancybox/jquery.fancybox.min.css" rel="stylesheet" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/ckeditor-content-styles.css" type="text/css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/StyleSheet.css" type="text/css" asp-append-version="true" />
-    @*<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">*@
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="~/css/main-style.css" rel="stylesheet" asp-append-version="true" />
 
 </head>
@@ -20,17 +20,32 @@
 
 
 
- @*   <header>
+    <header>
         <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-muted shadow rtl">
             <div class="container-fluid">
                 <a class="btn-circle btn-l btn btn-outline-primary" asp-page="index"><i class="fa fa-home"></i></a>
+               @* <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsupportedcontent" aria-controls="navbarsupportedcontent" aria-expanded="false" aria-label="toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>*@
                 <div class="ltr" id="navbarsupportedcontent">
                     <button class="btn-circle btn-l btn btn-outline-primary"><i class="fa fa-user"></i></button>
                     <button class="btn-circle btn-l btn btn-outline-primary"><i class="fa fa-search"></i></button>
+
+
+                    @*<button class="btn btn-primary" data-bs-toggle="collapse" href="#collapsedecksection" role="button" aria-expanded="false" aria-controls="collapsedecksection">
+                        افزودن دسته تازه
+                    </button>
+                    <button class="btn btn-primary" data-bs-toggle="collapse" href="#collapsecardsection" role="button" aria-expanded="false" aria-controls="collapsecardsection">
+                        افزودن کارت تازه
+                    </button>*@
+                   @* <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="جستجوی دسته های دیگر" aria-label="search" style="width:500px;">
+                        <button class="btn btn-outline-success me-1" type="submit">جستجو</button>
+                    </form>*@
                 </div>
             </div>
         </nav>
-    </header>*@
+    </header>
 
     <div class="container">
         <main role="main" class="pb-3">
@@ -48,7 +63,7 @@
 
 
     <script src="~/js/bundle.js" asp-append-version="true"></script>
-    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>*@
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
