@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using DataAccess;
-using DTOs;
-using Entities;
+using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
+using Services.DTOs;
 
 namespace Services
 {

@@ -1,4 +1,4 @@
-﻿using DTOs;
+﻿using Services.DTOs;
 
 namespace WebApp.ViewModels
 {

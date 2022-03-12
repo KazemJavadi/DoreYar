@@ -1,6 +1,6 @@
-﻿using DTOs;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Services;
+using Services.DTOs;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebApp.Controllers

@@ -1,10 +1,11 @@
-﻿using DataAccess.EntityConfig;
-using Entities;
+﻿using DataAccess.Entities;
+using DataAccess.EntityConfig;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<User>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         { }
@@ -18,6 +19,8 @@ namespace DataAccess
         {
             modelBuilder.ApplyConfiguration<Deck>(new DeckConfig());
             modelBuilder.ApplyConfiguration<Card>(new CardConfig());
+
+            base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Deck> Decks { get; set; }

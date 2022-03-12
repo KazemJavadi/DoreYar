@@ -1,4 +1,4 @@
-﻿using Entities;
+﻿using DataAccess.Entities;
 
 namespace Logic
 {

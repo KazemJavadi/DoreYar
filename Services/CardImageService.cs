@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using DataAccess;
-using DTOs;
-using Entities;
+using Services.DTOs;
+using DataAccess.Entities;
 
 namespace Services
 {

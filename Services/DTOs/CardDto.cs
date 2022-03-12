@@ -1,7 +1,7 @@
 ﻿using DataAccess.Entities.DbStrLenInfo;
 using System.ComponentModel.DataAnnotations;
 
-namespace DTOs
+namespace Services.DTOs
 {
     public class CardDto
     {

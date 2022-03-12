@@ -1,4 +1,5 @@
 using DataAccess;
+using DataAccess.Entities;
 using Hellang.Middleware.ProblemDetails;
 using Logic;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,10 @@ builder.Host.UseDefaultServiceProvider((context, options) =>
 });
 
 
+builder.Services.AddDefaultIdentity<User>(options =>
+{
+    options.SignIn.RequireConfirmedEmail = false;
+}).AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
