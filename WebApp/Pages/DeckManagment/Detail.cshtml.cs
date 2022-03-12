@@ -1,7 +1,7 @@
-using Services.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services;
+using Services.DTOs;
 using System.ComponentModel.DataAnnotations;
 using WebApp.Helpers;
 
@@ -84,7 +84,7 @@ namespace WebApp.Pages.DeckManagment
             }
             else
             {
-                return RedirectToPage("index"); 
+                return RedirectToPage("index");
             }
         }
 

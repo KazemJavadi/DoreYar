@@ -17,9 +17,11 @@ namespace Services
             this._mapper = mapper;
         }
 
-        public int Add(DeckDto deckDto)
+        public int Add(string userId, DeckDto deckDto)
         {
             var deck = _mapper.Map<Deck>(deckDto);
+            deck.UserId = userId;
+
             _context.Add(deck);
             return _context.SaveChanges();
         }
@@ -43,8 +45,8 @@ namespace Services
             {
                 int total = _context.Set<Card>().Where(c => c.DeckId == deckId).Count();
                 numberOfPages = (total / options.PageSize) + (total % options.PageSize == 0 ? 0 : 1);
-                
-                if(numberOfPages == 0) numberOfPages = 1;
+
+                if (numberOfPages == 0) numberOfPages = 1;
 
                 if (options.PageNumber > numberOfPages)
                     options.PageNumber = numberOfPages;
@@ -65,13 +67,13 @@ namespace Services
                 return _context.Find<Deck>(deckId);
         }
 
-        public DeckDto Get(long deckId, bool loadCards , DeckCardsOptions options, out int numberOfPages) =>
+        public DeckDto Get(long deckId, bool loadCards, DeckCardsOptions options, out int numberOfPages) =>
             _mapper.Map<DeckDto>(GetDeck(deckId, loadCards, options, out numberOfPages));
 
         public DeckDto Get(long deckId, bool loadCards) =>
             _mapper.Map<DeckDto>(GetDeck(deckId, loadCards, null, out _));
 
-        public DeckDto Get(long deckId)=>
+        public DeckDto Get(long deckId) =>
             _mapper.Map<DeckDto>(GetDeck(deckId, false, null, out _));
 
         public ICollection<DeckDto> GetAll() =>

@@ -2,7 +2,9 @@
 
 namespace DataAccess.Entities
 {
-    public class User: IdentityUser
+    public class User : IdentityUser
     {
+        //Relationships
+        public List<Deck> Decks { get; set; }
     }
 }

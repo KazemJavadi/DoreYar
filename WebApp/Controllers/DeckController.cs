@@ -35,7 +35,8 @@ namespace WebApp.Controllers
         [HttpPost("[action]")]
         public ActionResult Add(DeckDto deck)
         {
-            if (_deckService.Add(deck) == 1)
+
+            if (_deckService.Add("", deck) == 1)
                 return Ok();
             else
                 return StatusCode(500);

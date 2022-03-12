@@ -1,10 +1,11 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" /> *@
+     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" /> 
     <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/lib/fancybox/jquery.fancybox.min.css" rel="stylesheet" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/ckeditor-content-styles.css" type="text/css" asp-append-version="true" />
@@ -15,26 +16,46 @@
 
 </head>
 @*style="background-image:url('/img/patterns/pipe.png');background-repeat:repeat;background-attachment: fixed;"*@
+
 <body class="bg-slate-50">
     @* <header>
         <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-muted shadow rtl">
-            <div class="container-fluid">
-                <a class="btn-circle btn-l btn btn-outline-primary" asp-page="index"><i class="fa fa-home"></i></a>
-                <div class="ltr" id="navbarsupportedcontent">
-                    <button class="btn-circle btn-l btn btn-outline-primary"><i class="fa fa-user"></i></button>
-                    <button class="btn-circle btn-l btn btn-outline-primary"><i class="fa fa-search"></i></button>
-                </div>
-            </div>
+        <div class="container-fluid">
+        <a class="btn-circle btn-l btn btn-outline-primary" asp-page="index"><i class="fa fa-home"></i></a>
+        <div class="ltr" id="navbarsupportedcontent">
+        <button class="btn-circle btn-l btn btn-outline-primary"><i class="fa fa-user"></i></button>
+        <button class="btn-circle btn-l btn btn-outline-primary"><i class="fa fa-search"></i></button>
+        </div>
+        </div>
         </nav>
-    </header>*@
-
-    <div class="container mx-auto">
-            @RenderBody()
-    </div> 
+        </header>*@
 
 
+    <nav class="bg-indigo-600 sticky top-0 p-4 rtl shadow-2xl rounded-lg mt-1 ml-2 mr-2">
+        <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
+            <ul class="flex flex-row">
+                <li>
+                    <a asp-page="/" class="block py-2 pl-4 pr-3 text-white" aria-current="page">خانه</a>
+                </li>
+                <li>
+                    <a asp-page="/" class="block py-2 pl-4 pr-3 text-white" aria-current="page">دسته های همگانی</a>
+                </li>
 
-    @*  <footer class="border-top footer text-muted">
+                <partial name="_LoginPartial" />
+
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <div class="container mx-auto mt-4">
+        @RenderBody()
+    </div>
+
+
+
+    @* <footer class="border-top footer text-muted">
         <div class="container">
         &copy; 2021 - _0010__ModelBinding - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
@@ -43,16 +64,18 @@
 
     <script src="~/js/bundle.js" asp-append-version="true"></script>
 
-    @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script> *@
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
+        asp-append-version="true"></script>
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

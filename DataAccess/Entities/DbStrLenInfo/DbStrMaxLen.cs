@@ -14,5 +14,8 @@
         //CardImage
         public const int CardImageFileNameLen = DeckHeaderImageNameLen;
 
+        //User
+        public const int UserUserIdLen = 450;
+
     }
 }

@@ -10,6 +10,10 @@ namespace DataAccess.Entities
         public long Id { get; set; }
 
         [Required]
+        //[MaxLength(DbStrMaxLen.UserUserIdLen)]
+        public string UserId { get; set; }
+
+        [Required]
         [MaxLength(DbStrMaxLen.DeckNameLen)]
         public string Name { get; set; }
 
@@ -21,5 +25,7 @@ namespace DataAccess.Entities
 
         //Relationships
         public ICollection<Card> Cards { get; set; }
+
+        public User User { get; set; }
     }
 }

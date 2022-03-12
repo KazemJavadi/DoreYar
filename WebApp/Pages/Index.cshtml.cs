@@ -1,7 +1,8 @@
-﻿using Services.DTOs;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services;
+using Services.DTOs;
+using System.Security.Claims;
 
 namespace WebApp.Pages
 {
@@ -33,9 +34,11 @@ namespace WebApp.Pages
 
         public ActionResult OnPost()
         {
+            string userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             if (ModelState.IsValid)
             {
-                _deckSerivce.Add(Input.Deck);
+                _deckSerivce.Add(userId, Input.Deck);
             }
 
             return RedirectToPage("index");

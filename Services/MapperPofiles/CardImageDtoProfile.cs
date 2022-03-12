@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Services.DTOs;
 using DataAccess.Entities;
+using Services.DTOs;
 
 namespace Services.MapperPofiles
 {
