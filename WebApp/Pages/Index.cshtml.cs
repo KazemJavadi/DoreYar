@@ -23,12 +23,17 @@ namespace WebApp.Pages
         [BindProperty]
         public InputModel Input { get; set; }
 
-        public ICollection<DeckDto> Decks { get; private set; }
+        public ICollection<DeckDto> Decks { get; private set; } = new List<DeckDto>();
 
 
         public void OnGet()
         {
-            Decks = _deckSerivce.GetAll();
+            string userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (!string.IsNullOrEmpty(userId))
+            {
+                Decks = _deckSerivce.GetAllByUserId(userId);
+            }
         }
 
 

@@ -1,6 +1,6 @@
 module.exports = {
   mode: 'jit',
-  content: ['./Pages/**/*.{cshtml,js}'],
+  content: ['./Pages/**/*.{cshtml,js}', './Areas/**/*.{cshtml,js}'],
   theme: {
     extend: {},
   },
@@ -9,5 +9,7 @@ module.exports = {
 
     }
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/line-clamp')
+  ],
 }

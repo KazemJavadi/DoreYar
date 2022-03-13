@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services;
 using Services.DTOs;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 using WebApp.Helpers;
 
 namespace WebApp.Pages.DeckManagment
@@ -18,6 +19,7 @@ namespace WebApp.Pages.DeckManagment
         {
             this._deckSerivces = deckSerivces;
             this._fileHelper = fileHelper;
+
         }
 
         [BindProperty]
@@ -53,7 +55,9 @@ namespace WebApp.Pages.DeckManagment
                         _fileHelper.SaveDeckHeader(Input.DeckHeaderImage);
                 }
 
-                _deckSerivces.Update(Input.Deck);
+                string userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                _deckSerivces.Update(userId, Input.Deck);
+
                 IsEdited = true;
             }
             else

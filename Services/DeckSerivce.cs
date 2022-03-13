@@ -79,9 +79,14 @@ namespace Services
         public ICollection<DeckDto> GetAll() =>
             _mapper.Map<ICollection<DeckDto>>(_context.Decks.ToList());
 
-        public void Update(DeckDto deckDto)
+        public ICollection<DeckDto> GetAllByUserId(string userId) =>
+            _mapper.Map<ICollection<DeckDto>>(_context.Decks.Where(d=>d.UserId == userId).ToList());
+
+        public void Update(string userId, DeckDto deckDto)
         {
             var deck = _mapper.Map<Deck>(deckDto);
+            deck.UserId = userId;
+
             _context.Update(deck);
             _context.SaveChanges();
         }

@@ -16,12 +16,13 @@
 </div>
 *@
 <div class="border rounded p-4 pt-2 mb-4 mt-4 shadow bg-white">
-    <h4 class="mt-4 rtl"><i class="fa fa-plus"></i> افزودن کارت تازه </h4>
+    <h4 class="text-header mt-4 rtl"><i class="fa fa-plus"></i> افزودن کارت تازه </h4>
+
     <form method="post" asp-page="@Pages.DeckManagment.DetailModel.AbsolutePath" asp-route-deckId="@Model.CurrentDeck.Id" asp-route-pageNumber="@Model.CurrentPageNmber" enctype="multipart/form-data">
         <input hidden asp-for="Input.Card.Id" value="0" />
         <input hidden asp-for="Input.Card.DeckId" value="@Model.CurrentDeck.Id" />
 
-        <input asp-for="Input.Card.Question" class="form-control rtl mt-4" placeholder="پرسش" value="" />
+        <input asp-for="Input.Card.Question" class="text-input mt-4" placeholder="پرسش" value="" />
         <div class="rtl mt-1">
             <span asp-validation-for="Input.Card.Question" class="text-danger rtl"></span>
         </div>
@@ -34,6 +35,8 @@
         </div>
 
         <input asp-for="Input.Images" class="form-control mt-3 rtl" placeholder="گزینش فایل برای بارگذاری ...">
+        
+        <br />
 
         <button id="submit" type="submit" class="btn btn-primary mt-4 rtl"><i class="fas fa-save"></i> ذخیره کارت</button>
     </form>
